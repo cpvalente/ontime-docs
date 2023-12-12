@@ -1,0 +1,43 @@
+---
+title: Views
+description: Ontime offers different views as ways of interacting with the data
+---
+
+
+Ontime provides different screens which allow for different types of interactions with the data. These are called views. \
+Any device with a browser in the same network can access Ontime's views.
+
+## Available views
+
+There are two main types of views available to be used, **Production Views** and **Public Views**. \
+Most views are configurable using the [URL Parameter Editor](add-link)
+
+:::note
+Ontime is available to any device in the network by navigating in the browser to the IP address of the computer running Ontime.
+
+In the examples below **MY-IP-ADDRESS** should be replaced by the relevant address. \
+Mind that we use the **default port 4001** in the examples, this can be changed by the user.
+:::
+
+### Production views
+These refer to all views which would be typically used in a backstage context.
+
+| URL                                   | See the docs                                     |
+| :------------------------------------ | :----------------------------------------------- |
+| `http://MY-IP-ADDRESS:4001/editor`    | [Editor](views/editor)                           |
+| `http://MY-IP-ADDRESS:4001/cuesheet`  | [Cuesheet](views/cuesheet)                       |
+| `http://MY-IP-ADDRESS:4001/operator`  | [Operator](views/operator)                       |
+| `http://MY-IP-ADDRESS:4001/timer`     | [Timer](views/timer)                             |
+| `http://MY-IP-ADDRESS:4001/minimal`   | [Minimal Timer](views/minimal)                   |
+| `http://MY-IP-ADDRESS:4001/clock`     | [Clock](views/clock)                             |
+| `http://MY-IP-ADDRESS:4001/backstage` | [Backstage View](views/backstage)                |
+| `http://MY-IP-ADDRESS:4001/countdown` | [Countdown](views/countdown)                     |
+| `http://MY-IP-ADDRESS:4001/studio`    | [Studio Clock](views/studio-clock)               |
+
+### Public views
+These refer to all views which would be typically used in a audience context.
+
+| URL                                   | See the docs                                     |
+| :------------------------------------ | :----------------------------------------------- |
+| `http://MY-IP-ADDRESS:4001/public`    | [Public / Foyer View](views/public)              |
+| `http://MY-IP-ADDRESS:4001/lower`     | [Lower Thirds](views/lower-thirds)               |

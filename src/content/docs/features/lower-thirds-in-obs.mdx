@@ -1,0 +1,24 @@
+---
+title: Lower thirds in OBS
+description: Using the lower thirds in OBS Studio
+---
+
+It is possible to render the lower thirds feature (or any Ontime view) in OBS in any networked machine using the Browser Renderer.
+
+## IMAGE
+
+* [ ] The options **Shutdown source when not visible** and **Refresh browser when scene becomes active** ensure that the lower third animation play on load / unload
+* [ ] Remember to clear the CSS properties to ensure a transparent background (see below)
+
+```css
+/* You will need to clear the browser options in OBS */
+body { 
+    background-color: rgba(0, 0, 0, 0); 
+    margin: 0px auto; 
+    overflow: hidden; 
+}
+```
+
+:::note
+This technique of rendering the browser in a video engine will be common to other devices and software such as disguise.
+:::

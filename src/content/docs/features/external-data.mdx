@@ -1,0 +1,30 @@
+---
+title: External data
+description: Inject external data to the Ontime presenter view
+---
+
+You can inject data into Ontime's presenter view. 
+This is useful in cases where you would like another software to push some data to Ontime, ie: a running time from your video playback software.
+
+## IMAGE
+
+## Setting external data
+
+Using the compatible APIs, you can set the external fields using the **OSC** or **WebSocket API**.
+For more about the API [see the docs](api/osc-and-ws)
+
+### OSC
+```ts
+| Message                                | Payload        |
+| -------------------------------------- | -------------- |
+| `/ontime/set-external-message-text`    | `string`       |
+| `/ontime/set-external-message-visible` | `true | false` |
+```
+
+### WebSocket
+```ts
+| Message                                | Payload        |
+| -------------------------------------- | -------------- |
+| `set-external-message-text`            | `string`       |
+| `set-external-message-visible`         | `true | false` |
+```

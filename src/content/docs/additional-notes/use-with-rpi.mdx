@@ -1,0 +1,28 @@
+---
+title: Use with Raspberry Pi
+description: Use a Docker image to run Ontime in a Raspberry Pi
+---
+
+Ontime is available as a [Docker image](https://hub.Docker.com/r/getontime/ontime), targeting Arm v6 and v7 devices meant explicitly for Raspberry Pis.
+
+This method leverages a lightweight image that runs Ontime server in a headless Raspberry Pi without UI.\
+Ontime will be available in the network as usual.
+
+## Getting started
+
+* [ ] Install Docker on your Raspberry Pi. Please refer to [Docker](https://docs.docker.com/engine/install/debian/) or Raspberry Pi guides for this step
+* [ ] Once Docker is installed, pull the [Ontime image from Dockerhub](https://hub.docker.com/r/getontime/ontime) with the command
+
+```bash title="Pull Ontime image"
+Docker pull getontime/ontime
+```
+
+* [ ] You can now start the image by using the provided Docker compose file or creating your own
+
+```bash title="Start the container"
+Docker-compose up -d
+```
+
+Ontime is now running in the Pi and accessible through the local network on the port indicated in the docker-compose.
+
+Documentation for the Docker process can be [found with the image in Dockerhub](https://hub.Docker.com/r/getontime/ontime).

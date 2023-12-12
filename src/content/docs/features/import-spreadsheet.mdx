@@ -1,0 +1,73 @@
+---
+title: Import from spreadsheets
+description: Import data from spreadsheets
+---
+
+
+Ontime allows importing rundown and project data from a spreadsheet written elsewhere (eg. Excel or Google-Sheets).\
+For a successful import, there are a few conventions to follow.
+
+1. Ontime reads a single worksheet
+2. The name of the worksheet and columns are given in the app on import
+3. Ontime creates an event for every row on the table
+4. All fields in an event (row) are optional. Missing data will be defaulted or calculated as needed
+5. The times can be either an Excel time field or a short text entry as described [in the docs](features/smart-time-entry) eg: `00:10:15` or `10h15`
+6. Any text under a field named **Is Public** will make the event public. We show this as a toggle for simplicity
+7. See below the expected data types of the rundown data
+
+## IMAGE
+See [the template from the screenshot](https://docs.google.com/spreadsheets/d/1TYZhAELRFQa\_2QBO8Q651fMHdem6AXmFLjEDoksJd8Y/edit?usp=sharing).
+
+## Project data
+
+The Project data can also be defined in the sheet. These fields must have their data on the cell to its right (see screenshot or template).
+
+| Field Name          | Data type |
+| :------------------ | :-------- |
+| Project name        | Text      |
+| Project description | Text      |
+| Public URL          | Text      |
+| Backstage URL       | Text      |
+| Public Info         | Text      |
+| Backstage Info      | Text      |
+
+## Rundown
+
+Field names are not case-sensitive. Meaning: both **Event Title** and **event title** would be recognised on import.
+
+| Event Field | Data Type                                               | Notes                                    |
+| :---------- | :------------------------------------------------------ | :--------------------------------------- |
+| Cue         | Text                                                    |                                          |
+| Time start  | Excel time \| Text                                      |                                          |
+| Time End    | Excel time \| Text                                      |                                          |
+| Duration    | Excel time \| Text                                      |                                          |
+| Title       | Text                                                    |                                          |
+| Subtitle    | Text                                                    |                                          |
+| Presenter   | Text                                                    |                                          |
+| Note        | Text                                                    |                                          |
+| Timer Type  | `'count-down' \| 'count-up' \| 'time-to-end \| 'clock'` |                                          |
+| End Action  | `'none' \| 'stop' \| 'load-next' \| 'play-next'`        |                                          |
+| Colour      | Text                                                    |                                          |
+| Public      | Text                                                    | any text means the event is public       |
+| Skip        | Text                                                    | any text means the event will be skipped |
+
+
+
+## User Fields
+
+There are ten custom fields available.
+
+These can have any name, the names are given to Ontime on import.
+
+|       |      |
+| :---- | :--- |
+| user0 | Text |
+| user1 | Text |
+| user2 | Text |
+| user3 | Text |
+| user4 | Text |
+| user5 | Text |
+| user6 | Text |
+| user7 | Text |
+| user8 | Text |
+| user9 | Text |

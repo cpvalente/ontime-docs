@@ -1,0 +1,48 @@
+---
+title: Headless mode (Docker)
+description: Running ontime with Docker
+---
+
+You can leverage the Docker install to have an Ontime instance in a headless machine. \
+This could be in a local machine part of the venue's installation, a small Raspberry Pi or even a server running in the cloud.
+
+The Docker image is the most lightweight to distribute and install Ontime.
+
+## Getting started
+
+Ontime Docker image is hosted [in Docker hub](https://hub.docker.com/r/getontime/ontime). \
+You can find an example of docker-compose in the Docker repository to help you get started.
+
+## Notes on Docker-compose
+
+Considering the example docker-compose below
+
+```yaml
+version: "3"
+
+services:
+  ontime:
+    container_name: ontime
+    image: getontime/ontime:latest
+    ports:
+      - "4001:4001/tcp"
+      - "127.0.0.1:8888:8888/udp"
+    volumes:
+      - "./ontime-db:/server/preloaded-db"
+    environment:
+      - TZ=Asia/Singapore
+    restart: unless-stopped
+```
+
+* `4001:4001/tcp` binds local port 4001 to the same container port. You could use port 80 here to reach Ontime as `http://host` instead of `http://host:4001`.
+* `127.0.0.1:8888:8888/udp` binds the localhost port 8888 (default for OSC input into the app) to the same in the container, so that it can receive data from the host machine targeted to the loopback interface.
+* `TZ=Asia/Singapore` overrides the container timezone. 
+
+The variations in the network setup will widely depend on your setup.
+
+:::note[Set time in Docker]
+Docker containers default to UTC timezone, which you can modify using the `TZ` environment variable.
+
+Setting time in a Docker container is not an operation specific to Ontime. \
+See as an example the [following blog post](https://docs.diladele.com/docker/timezones.html), which contains a list of timezones to use in Docker.
+:::

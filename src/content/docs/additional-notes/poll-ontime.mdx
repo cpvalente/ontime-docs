@@ -1,0 +1,21 @@
+---
+title: Poll Ontime
+description: Poll Ontime status
+---
+
+We offer a poll API which will return the current state of Ontime.
+This API is available in all APIs: [HTTP](add-link), [WebSocket and OSC](add-link) and will return an example formatted roughly like the below.
+
+:::tip[Show me the code]
+This documentation can get out of sync as we add new features to Ontime, [see it directly in the code](https://github.com/cpvalente/ontime/blob/master/packages/types/src/definitions/runtime/RuntimeStore.type.ts).
+:::
+
+```ts
+    "clock": 39981051,                  // clock in milliseconds
+    "running": 1792,                    // current timer in milliseconds
+    "durationSeconds": 1800,            // duration of current event
+    "playback": "start",                // playback status
+    "title": "Welcome to Ontime",       // current event title
+    "presenter": "cpvalente",           // current event presenter 
+    "timetag": "00:29:51"               // current timer string
+```
