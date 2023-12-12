@@ -7,10 +7,17 @@ export default defineConfig({
   integrations: [
     starlightLinksValidator(),
     starlight({
-      title: "the-docs",
+      title: "Ontime documentation",
+      logo: {
+        src: "./src/assets/images/icon.png",
+        replacesTitle: true,
+      },
       customCss: ["./src/styles/custom.css"],
       social: {
         github: "https://github.com/cpvalente/ontime",
+      },
+      editLink: {
+        baseUrl: "https://github.com/cpvalente/ontime-docs/edit/main",
       },
       sidebar: [
         {
@@ -27,7 +34,7 @@ export default defineConfig({
         },
         {
           label: "Views",
-          autogenerate: { directory: "views",  },
+          autogenerate: { directory: "views" },
         },
         {
           label: "API - Feedback and control",
