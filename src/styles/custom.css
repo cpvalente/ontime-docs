@@ -1,0 +1,21 @@
+:root {
+        --ontime-bg-colour: #0d0f14;
+        --ontime-bg-detailing: #23262d;
+        --ontime-text-primary: #fffffa;
+        --ontime-text-high: #eaeaea;
+        --ontime-text-secondary: #a9adc1;
+        --ontime-action-blue: #2b5abc;
+        --ontime-accent: #578af4;
+        --ontime-accent-dark: #0d1b36;
+        --ontime-accent-gradient: linear-gradient(45deg, var(--bg-colour), var(--bg-colour) 40%, var(--action-blue) 100%);
+        --ontime-spacing-mobile: 5vw;
+        --ontime-spacing-desktop: 10vw
+}
+:root[data-theme='dark'],
+::backdrop {
+    --sl-color-bg: var(--ontime-bg-colour);
+    --sl-color-bg-nav: var(--ontime-bg-detailing);
+    --sl-color-bg-sidebar: var(--ontime-bg-detailing);
+    --sl-color-text: var(--ontime-text-secondary);
+    --sl-color-text-accent: var(--ontime-accent)
+}

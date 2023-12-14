@@ -1,0 +1,55 @@
+---
+title: OSC and WebSocket APIs
+description: OSC and WebSocket APIs
+---
+
+Ontime has a strong focus on integrations. We want ontime to play well into your workflow.
+
+:::tip[Help us improve]
+How could this be better? Let's chat!\
+Get in touch on email [mail@getontime.no](mailto:mail@getontime.no) or [open an issue in GitHub](https://github.com/cpvalente/ontime/issues).
+:::
+
+The OSC and Websocket API allow for low latency communication to Ontime server.\
+Both APIs are identical, so it is up to you to choose the most convenient protocol.
+
+The [HTTP API ](api/http)has access to a smaller subset of features.
+
+### OSC and WebSocket API
+
+:::tip[Show me the code]
+Follow [the code](https://github.com/cpvalente/ontime/blob/master/apps/server/src/controllers/integrationController.ts) for Ontime's integration controller.
+:::
+
+
+| Message                    | Payload                        | Description                                                 | Return                                                           |
+| -------------------------- | ------------------------------ | ----------------------------------------------------------- | ---------------------------------------------------------------- |
+| test-ontime                |                                |                                                             | "hello"                                                          |
+| ontime-poll                |                                | Returns the entire runtime state                            | topic: "poll", payload: |
+| set-onair                  | "false" \| "true" \| undefined | Sets on air to given value, toggle if none is given         |                                                                  |
+| onair                      |                                | Set on air to **true**                                      |                                                                  |
+| offair                     |                                | Set on air to **false**                                     |                                                                  |
+| set-timer-message-text     | string                         | Sets text of timer message                                  |                                                                  |
+| set-timer-message-visible  | "false" \| "true" \| undefined | Sets visibility to given value, toggle if none is given     |                                                                  |
+| set-public-message-text    | string                         | Sets text of public message                                 |                                                                  |
+| set-public-message-visible | "false" \| "true" \| undefined | Sets visibility to given value, toggle if none is given     |                                                                  |
+| set-lower-message-text     | string                         | Sets text of lower message                                  |                                                                  |
+| set-lower-message-visible  | "false" \| "true" \| undefined | Sets visibility to given value, toggle if none is given     |                                                                  |
+| start                      |                                | Starts selected timer                                       |                                                                  |
+| start-next                 |                                | Loads and starts next timer in rundown                      |                                                                  |
+| startindex                 | number                         | Loads and starts event at index (first event is 1)          |                                                                  |
+| startid                    | string                         | Loads and starts event with given ID                        |                                                                  |
+| startcue                   | string                         | Loads and starts event with given cue                       |                                                                  |
+| pause                      |                                | Pauses playback                                             |                                                                  |
+| previous                   |                                | Loads previous event                                        |                                                                  |
+| next                       |                                | Loads next event                                            |                                                                  |
+| stop                       |                                | Stops playback                                              |                                                                  |
+| reload                     |                                | Reloads selected event                                      |                                                                  |
+| roll                       |                                | Sets playback mode to roll                                  |                                                                  |
+| delay                      | number                         | Adds a delay of given time to a playing event               |                                                                  |
+| loadindex                  | number                         | Loads event at given index (first event is 1)               |                                                                  |
+| loadid                     | number                         | Loads event at given ID                                     |                                                                  |
+| loadcue                    | string                         | Loads event with given cue                                  |                                                                  |
+| get-playback               |                                | Returns playback portion  | topic: "playback", payload:            |
+| get-timer                  |                                | Returns timer portion     | topic: "timer", payload:              |
+

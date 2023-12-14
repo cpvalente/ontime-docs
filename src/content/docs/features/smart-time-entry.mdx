@@ -1,0 +1,21 @@
+---
+title: Smart time entry
+description: Smart time entry
+---
+
+Ontime allows shortcuts to speed and simplify the time entry.
+
+| Note                                                                                                                                   | Entry                                   | Result                                                      |
+| :------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------- | :---------------------------------------------------------- |
+| `.` `,` `:` and `spaces` can be used as separators between `hh:mm:ss`                                                                  | `0.1` `0 1` `0:1` `0,1`                 | `00:00:01`                                                  |
+| The keyword `p` returns the end time of the previous event                                                                             | `p`                                     | `09:00:00` (if previous event finishes at 09:00:00)         |
+| Starting a time entry with a + sign, adds the time to the previous event                                                               | `+10:10`                                | `09:10:10` (if previous event finishes at 09:00:00)         |
+| Any time overflow is considered                                                                                                        | `120`                                   | `02:00:00` (120 minutes)                                    |
+| Any time overflow is considered                                                                                                        | `0.120`                                 | `00:02:00` (120 seconds)                                    |
+| 0 append is not necessary                                                                                                              | `2.2.2` `2 2 2` `2:2:2` `2,2,2`         | `02:02:02                                                   |
+| Any time input without separators is interpreted in minutes                                                                            | `120`                                   | `02:00:00` (120 minutes)                                    |
+| Enter a full time-tag without separators. Note that you need 6 digits for this `hhmmss`, otherwise it will be considered as minutes    | `123456`                                | `12:34:56`                                                  |
+| Use a separator as short for 0                                                                                                         | `10:` or `:10`                          | `10:00:00` or `00:10:00`                                    |
+| A single numeric field is read as `minutes`                                                                                            | `10`                                    | `00:10:00`                                                  |
+| Two numeric fields are read as `minutes:seconds`                                                                                       | `1.2`                                   | `00:01:02`                                                  |
+| Tree numeric fields are read as `hours:minutes:seconds`                                                                                | `1.2.3` `1 2 3` `1:2:3` `1,2,3`         | `01:02:03`                                                  |

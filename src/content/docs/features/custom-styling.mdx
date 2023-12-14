@@ -1,0 +1,75 @@
+---
+title: Custom styling REVISE LINK
+description: Use a custom stylesheet to define viewer styles
+---
+
+You can override the app-defined styles for some views by changing a supplied CSS override file. \
+There are a few **CSS variables** which allow for quick customisation of the viewers.
+
+You can toggle this feature on / off at **Settings -> Viewers**.
+
+:::tip[Where is the file?]
+The CSS file location is dependent on both the operating system and installation. 
+You can find the path to the file in the [Application Settings](add-link) where you activate the CSS override.
+
+**For PC users:**\
+`AppData/Roaming/Ontime/styles/override.css`
+
+**For Mac users:**\
+`Library/Application Support/Ontime/styles/override.css`
+
+**For Linux users:**\
+`Home/Ontime/styles/override.css`
+:::
+
+## Notes on style overriding
+
+![Configure Ontime view styles](../../../assets/screenshots/feature/view-style.png)
+
+We simplify the customisation of the views by exposing a few CSS style variables. 
+
+Alternatively, you can **define your style sheets** to fully customise any page.
+You would need to inspect the page manually to find the relevant selectors.
+
+:::tip[Show me the code]
+The documentation here will likely become out of sync as we add more features to Ontime.
+See the definition directly in the [example override file here](https://github.com/cpvalente/ontime/blob/master/apps/server/src/external/styles/override.css).
+:::
+
+```css
+/* COMMENTS FOR CONVENIENCE, REMEMBER THAT COMMENTS ARE NOT ALLOWED IN CSS */
+:root {
+  --background-color-override: #ececec;             --> page background
+  --color-override: #101010;                        --> text colour
+  --secondary-color-override: #404040;              --> text colour for secondary fields such as clocks
+  --accent-color-override: #fa5656;                 --> accent colour
+  --label-color-override: #6c6c6c;                  --> text colour for labels such as "Time now"
+  --timer-color-override: #202020;                  --> timer colour
+  --card-background-color-override: #fff;           --> background colour for cards
+  --font-family-override: "Open Sans";              --> default font for all views
+  --font-family-bold-override: "Arial Black";       --> default font for clocks in Minimal and Clock views
+  --timer-progress-bg-override: #fff;               --> default colour for progress bar background
+  --timer-progress-override: #202020;               --> default colour for progress bar progress section
+
+  /* View specific: timer */
+  --external-color-override: #161616;               --> text colour of external data field
+
+  /* View specific: backstage */
+  --card-background-color-blink-override: #339e4e;  --> modified the card with a blink behaviour when a timer changes
+
+
+  /* View specific: cuesheet */
+  --cuesheet-running-bg-override: #D20300;          --> background colour of running event
+
+  /* View specific: operator */
+  --operator-running-bg-override: #D20300;          --> background colour of running event
+  --operator-highlight-override: #FFAB33;           --> background colour of highlighted user field
+
+  /* View specific: studio clock */
+  --studio-active: #101010;                         --> colour for active indicators
+  --studio-idle: #cfcfcf;                           --> colour for idle indicators
+  --studio-active-label: #101010;                   --> colour for active labels
+  --studio-idle-label: #595959;                     --> colour for idle labels
+}
+```
+

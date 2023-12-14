@@ -1,0 +1,32 @@
+---
+title: HTTP API
+description: Documentation for HTTP API
+---
+
+:::danger
+This documentation is being updated
+:::
+
+You can control most of the playback functions of ontime over HTTP protocol.\
+This could be handy for integration with third party software, [including vMix](/additional-notes/control-from-vmix).
+
+:::note[Notes on requests]
+Any request which successfully changes the Ontime playback is responded with a `Status Message 202`.
+:::
+
+| Address                      | Payload                                       | Return                                                      | Description                                                      |
+| :--------------------------- | :-------------------------------------------- | :---------------------------------------------------------- | :--------------------------------------------------------------- |
+| `/playback/`                 |                                               | `roll` `play` `pause` `stop` `armed`                        | Get current playback state                                                          |
+| `/playback/start`            | `{eventId: string}` \| `{eventIndex: number}` |                                                             | Start playing given event                                                         |
+| `/playback/pause`            |                                               |                                                             | Pause a running event                                                          |
+| `/playback/roll`             |                                               |                                                             | Start [Roll Mode](/features/roll)                                                          |
+| `/playback/previous`         |                                               |                                                             | Load previous event in rundown                                                   |
+| `/playback/next`             |                                               |                                                             | Load next event in rundown                                                         |
+| `/playback/load`             | `{eventId: string}` \| `{eventIndex: number}` |                                                             | Load given event                                                         |
+| `/playback/unload`           |                                               |                                                             | Unload (stop) currently loaded event                                                          |
+| `/playback/reload`           |                                               |                                                             | Reload currently loaded event                                                          |
+
+:::tip[Show me the code]
+Follow the code for Ontime's playback control [here](https://github.com/cpvalente/ontime/blob/master/apps/server/src/routes/playbackRouter.ts).\
+You can also see documentation in [PostMan](https://documenter.getpostman.com/view/15782331/UzJEULEp).
+:::

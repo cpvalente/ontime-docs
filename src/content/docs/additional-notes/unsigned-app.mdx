@@ -1,0 +1,49 @@
+---
+title: Unsigned App
+description: Unsigned App
+---
+
+:::note
+Signing the app means a recurring cost, which, we cannot support.\
+If you have tips on how to improve this or would like to sponsor the code signing, get in touch [by email](mailto:mail@getontime.no) or open a [ticket in Github](https://github.com/cpvalente/ontime/issues).
+:::
+
+Ontime is unsigned.\
+This doesn't affect the quality or reliability of the code, but it does trigger some warnings in the operating system, discouraging you from running the app.
+
+
+## Windows
+
+In Windows you could see a message like:
+```
+Microsoft Defender SmartScreen prevented an unrecognised app from starting. Running this app might put your PC at risk.
+```
+
+To circumvent, click `more` and select `Run Anyway`
+
+## MacOS
+
+In MacOS you could see a message like:
+
+```
+Ontime can't be opened because it is from an unidentified developer
+```
+
+The solution in macOS is different across version. Please refer to the [Apple documentation](https://support.apple.com/en-gb/guide/mac-help/mh40616/mac)
+
+
+or in newer versions
+
+```
+App Is Damaged and Can't Be Opened
+```
+
+To circumvent you would need to disable gatekeeper using the `xattr` command in terminal [as discussed here](https://github.com/cpvalente/ontime/issues/469#issuecomment-1679127804)
+
+## Linux
+
+In Linux you could see a message like:
+```
+Could Not Display "ontime-linux.AppImage"
+```
+To circumvent, right-click the AppImage file: `Properties` -> `Permissions` -> `Allow Executing File as a Program`

@@ -1,0 +1,38 @@
+---
+title: URL Presets REVISE LINK
+description: Define URL presets to ease onsite setup
+---
+
+URL presets allow providing a short name for any Ontime URL.
+
+It serves two primary purposes:
+
+* **Providing dynamic URLs for automation or unattended screens**
+* **Simplifying complex URLs**
+
+See more in the [URL Presets Settings](add-link).
+
+### URL Automation
+
+This is useful for cases where we would like a URL to change from Ontime without it being necessary to change the view consumers.
+
+Consider the case of fixed devices, unattended screens or hardware integrations, where access to change the browser URL may be impractical.
+
+:::tip[URL Automation]
+We could for create an alias for a specific screen that relates to its role, position or type\
+eg: `192.168.10.10:4001/room51`
+
+In Ontime editor we would configure `room51` to be a preset to a view such as `public` or `backstage`. \ 
+We could also change the view `room51` represents during the runtime, and all screens in that URL will update accordingly.
+:::
+
+
+### Simplifying complex or lengthy URLs
+
+With the view customisations through URL parameters, the URL can become complex.
+
+Leveraging URL Presets, you can create a simple URL that can encode a view with given styles or configuration.
+
+:::tip[Simple URL]
+The custom url `lower?bg=ff2&text=f00&size=0.6&transition=5` could be simply called `mylower` for quickly recalling.
+:::

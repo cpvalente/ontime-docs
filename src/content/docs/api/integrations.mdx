@@ -1,0 +1,74 @@
+---
+title: Integrations REVISE LINK
+description: Control and feedback from Ontime
+---
+
+**Integrations** is a feature that allows Ontime to share its data or control other software and hardware in your system. \
+The feature can be configured in the [Integration Settings modal](add-link)
+
+### The Ontime lifecycle
+
+While running your event, Ontime will go through a few lifecycle events.\
+The integration feature allows you to request a message once that happens.
+
+| Event                 | Description                                                        | 
+| :-------------------- | :----------------------------------------------------------------- |
+| `On Load`             | Triggered when an event is loaded                                  |
+| `On Start`            | Triggered when an event starts                                     |
+| `On Pause`            | Triggered when an event is paused                                  |
+| `On Stop`             | Triggered when playback is stopped                                 |
+| `On Every Second`     | Triggered once a second (great for sending your timer data out)    |
+| `On Finish`           | Triggered when a timer passes the 0 mark and becomes in overtime   |
+
+
+:::tip[Example]
+If you add a message to the `On Load` lifecycle, eg: `/ontime/loaded-event`,\
+a message will be sent to the OSC Port you have configured in OSC Settings every time an event is loaded.
+:::
+
+### Using variables in integrations
+
+You can embed data from the application runtime in the message using templates `/your-message/{{ontime-data}} {{ontime-more-data}}`
+
+This means that any of the data described in the [Runtime Data](/api/runtime-data) can be sent as part of the message payload.
+
+When the lifecycle event is triggered, Ontime places the updated piece of data in place of the template.
+
+:::tip[Example]
+
+Extending the example above, you could compose a message that sends the index of the loaded event
+
+```
+/send-this/loaded-event-{{loaded.selectedEventIndex}}
+```
+
+:::note
+Inside the template (double brackets), you can add any of the keys described in [Runtime Data](api/runtime-data). Use the  `.` when referencing a subkey
+
+`{{titlesPublic.noteNext}}` \
+`{{playback}}` \
+`{{timer.current}}`
+:::
+
+### Human readable data
+
+The above data defined in runtime data will give you the data from Ontime as consumed in-app.\
+For example, all times are in milliseconds.
+
+This is great for software-to-software communications, but it might not be ideal if you want to consume the data yourself.
+
+For these use cases, we have defined a small list of human-readable timer values you can use in your integration messages.\
+The usage would look like
+
+| Variable             | Usage                      | Result                                                                |
+| :------------------- | :------------------------- | :-------------------------------------------------------------------- |
+| `human.clock`        | `{{human.clock}}`          | Current clock in `hh:mm:ss`                                           |
+| `human.duration`     | `{{human.duration}}`       | Duration of current timer in  `hh:mm:ss`\*                            |
+| `human.expectedEnd`  | `{{human.expectedEnd}}`    | Time at which the current event is expected to finish in `hh:mm:ss`\* |
+| `human.runningTimer` | `{{human.runningTimer}}`   | Current running timer in `hh:mm:ss`\*                                 |
+| `human.elapsedTime`  | `{{human.elapsedTime}}`    | Elapsed time of current timer in `hh:mm:ss`\*                         |
+| `human.startedAt`    | `{{human.startedAt}}`      | Time when the current time started `hh:mm:ss`\*                       |
+
+:::note
+\* Timer values will return "null" if no event is loaded
+:::

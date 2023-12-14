@@ -1,0 +1,17 @@
+---
+title: Edit anywhere
+description: Control from any device in the network
+---
+
+:::note[TLDR]
+Navigate to `IP_ADDRESS:4001/editor` to manage the app data from any device on the network.
+:::
+
+Like all the other viewers in Ontime, the editor interface (used in the app) is available on the local network at the URL `/editor`.
+
+## Security
+Note that Ontime discourages you from exposing the application in a public network. 
+
+You can add a thin layer of protection over some views such as `/editor` and `/cuesheet` using the **Pin Code** defined in the App Settings.
+
+However, any device in your network is able to send commands to ontime, which can alter its runtime. We recommend that **the most significant security control should happen at the network access level**.
