@@ -19,6 +19,10 @@ Follow [the code](https://github.com/cpvalente/ontime/blob/master/apps/server/sr
 Follow [the code](https://github.com/cpvalente/ontime/blob/master/apps/server/src/adapter/OscAdapter.ts) for Ontime's Osc adapter.
 :::
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+<TabItem label="OSC">
 | Adresse                                               | Arguments | Description                                                 | Return                            |
 | ----------------------------------------------------- | --------- | ----------------------------------------------------------- | --------------------------------- |
 | /ontime/version                                       |           |                                                             | v3.xx.xx                          |
@@ -35,9 +39,11 @@ Follow [the code](https://github.com/cpvalente/ontime/blob/master/apps/server/sr
 | /ontime/load                                          |           | Starts the first event                                      |
 | /ontime/load/index                                    | `value`   | Loades the event at index `value`                           |
 | /ontime/load/id                                       | `value`   | Loades the event with id `value`                            |
-| /ontime/load/cue                                      | `value`   | Loades the event with cue name `value`                      |
+| /ontime/load/cue                                      | `value`   | Loades the event with cue name `value`                     |
 | /ontime/addtime                                       | `value`   | Adds `value` seconds to the running event                   |
 | /ontime/pause                                         |           | Pauses the playback                                         |
 | /ontime/stop                                          |           | Stops the playback                                          |
 | /ontime/reload                                        |           | Reloads selected event                                      |
 | /ontime/roll                                          |           | Sets playback mode to roll                                  |
+</TabItem>
+</Tabs>
