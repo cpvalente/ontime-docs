@@ -1,0 +1,78 @@
+---
+title: Runtime offset
+description: Runtime offset
+---
+
+Ontime has two mechanisms for managing and communicating runtime delays.
+The delay workflow and offsets.
+
+The `offset` calculates our capacity to finish the current schedule ontime at the present time.\
+In combination with `actual start` and `expected end` datasets it gives a good overview over the rundown schedule.
+
+:::note
+The offset value can be negative or positive
+
+__Positive__ offset is time delayed\
+__Negative__ offset is time ahead
+
+:::
+
+
+## See the following examples
+
+### We start late and there are no gaps to recover
+
+:::tip
+In this case, the offset will indicate a 10 minute deviation.
+
+```
+| Runtime                       | Result offset                 |
+| ----------------------------- | ----------------------------- |
+| Time Now: 09:10               | Scheduled start: 09:00        |
+| Event A start time: 09:10     | Scheduled end: 10:00          |
+| Rundown:                      | Actual start: 09:10           |
+| - Event A 9:00 -> 10:00       | Expected end: 10:10           |
+| - Event B 10:00 -> 11:00      | Offset: +00:10:00             |
+```
+:::
+
+### In combination with time-to-end timers
+
+:::tip
+Time to end timers always finish ontime by definition, since they count to their finish time regardless of when they were started.
+An offset will only be added if the event is in overtime or has user added time.
+
+
+```
+# We started late, but the event is time-to-end
+
+| Runtime                       | Result offset                 |
+| ----------------------------- | ----------------------------- |
+| Time Now: 09:10               | Scheduled start: 09:00        |
+| Event A start time: 09:10     | Scheduled end: 10:00          |
+| Rundown:                      | Actual start: 09:10           |
+| - Event A                     | Expected end: 10:00           |
+|   schedule: 9:00 -> 10:00     | Offset: 00:00:00              |
+|   type: time-to-end           |                               |
+| - Event B                     |                               |
+|   schedule: 9:00 -> 10:00     |                               |
+|   type: count-down            |                               |
+```
+
+
+```
+# The event is time-to-end and we are in overtime
+
+| Runtime                       | Result offset                 |
+| ----------------------------- | ----------------------------- |
+| Time Now: 10:10               | Scheduled start: 09:00        |
+| Event A start time: 09:10     | Scheduled end: 10:00          |
+| Rundown:                      | Actual start: 09:10           |
+| - Event A                     | Expected end: 10:10           |
+|   schedule: 9:00 -> 10:00     | Offset: +00:10:00             |
+|   type: time-to-end           |                               |
+| - Event B                     |                               |
+|   schedule: 9:00 -> 10:00     |                               |
+|   type: count-down            |                               |
+```
+:::
