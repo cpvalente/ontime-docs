@@ -1,23 +1,39 @@
 ---
 title: The delay workflow REVISE
-description: The delay workflow allows adding and controlling running delays in realtime
+description: Visibility and control over your runtime delays
 ---
 
 The delay workflow allows control and communication of schedule delays at runtime. 
 
 :::note[Production data only]
-The delay information is only available in production / backstage screens such as [Backstage](/views/backstage), [Cuesheet](/views/cuesheet) and [Operator](/views/operator). \
-Allowing you to communicate delays to the production team without it affecting views visible to the public.
+The delay information is only available in production / backstage screens such as [Backstage](/views/backstage), [Cuesheet](/views/cuesheet) and [Operator](/views/operator).
 
 No delay information is show in the Public views.
 ::::
 
-![Delays](../../../assets/screenshots/feature/editor-delay.png)
+There are two layers for delay management
+- Scheduled delays
+- Runtime delays
 
-Looking at the image above, we see that a delay event with a value of 15 minutes causes events 6 and 7 to have a delay. The delay is stopped by a block event and event 8 runs as normal.
+### Scheduled delays
+In Ontime, you are able to schedule delays into your rundown. \
+This can be a useful way to communicate to the production team that a certain part of the event is running behind / ahead.
 
-As shown in the image above, event 6 has been delayed by 15 minutes. This is visible with the _+15_ indication on the left.
+:::note[Delay propagation]
+A scheduled delay will propagate through the rundown until it finds a break that cancels it out, or a negative delay (time ahead).
 
-The timer also has two indications now, _09:55_ and _10:10_ (for the start time): meaning the original time of 09:55 has been delayed and is now 10:10. The delayed times have a light orange outline
+```
+1. 12:00 - 18:00 -> Stage setup
++ Delay 5 minutes
+2. 18:00 - 18:10 -> Doors open
+3. 18:10 - 18:15 -> Stage welcoming
+```
+::::
 
-Using **Apply Delay** function (orange button with double chevrons down), we can apply the change in times permanently
+A schedule delay is only shown in production views, and can be applied permanently to become part of the schedule by clicking the **Apply Delay** button.
+
+### Runtime delays
+Unless your rundown is completely automated, either externally or using the automations built-in with Ontime, there will be a deviation between your schedule the runtime.
+
+Ontime communicates this offset so that you can decide to manipulate the rundown if necessary. \
+You could choose to combine this with other features such as skipping events or adding / removing time to ensure the schedule says on track.
