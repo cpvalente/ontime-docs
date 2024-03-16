@@ -1,0 +1,27 @@
+---
+title: Offset
+description: Offset
+---
+
+Ontime has two mechanisms for managing and communicating runtime delays.
+The delay workflow and offsets.
+
+The `offset` is calculated as a deviation between the schedule and the runtime so far.\
+In combination with `actual start` and `expected end` datasets it gives a good overview over the rundown schedule.
+
+See the following examples:
+
+:::note[We start late and there are no gaps to recover]
+The offset calculates our capacity to finish Ontime with the current schedule.\
+In this case, the offset will indicate a 10 minute deviation.
+
+```
+| Runtime                       | Result offset                 |
+| ----------------------------- | ----------------------------- |
+| Time Now: 09:10               | Scheduled start: 09:00        |
+| Event A start time: 09:10     | Scheduled end: 10:00          |
+| Rundown:                      | Actual start: 09:10           |
+| - Event A 9:00 -> 10:00       | Expected end: 10:10           |
+| - Event B 10:00 -> 11:00      | Offset: 00:10:00              |
+```
+:::
