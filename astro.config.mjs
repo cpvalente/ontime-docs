@@ -29,31 +29,55 @@ export default defineConfig({
         },
         {
           label: "Interface",
-          autogenerate: { directory: "interface" },
+          items: [
+            {
+              label: "Interface overview",
+              link: "/interface/",
+            },
+            {
+              label: "Production views",
+              autogenerate: { directory: "interface/production" },
+            },
+            {
+              label: "Backstage views",
+              autogenerate: { directory: "interface/backstage" },
+            },
+            {
+              label: "Public views",
+              autogenerate: { directory: "interface/public" },
+            },
+          ],
         },
         {
           label: "Features",
           autogenerate: { directory: "features" },
         },
         {
-          label: "Views",
-          autogenerate: { directory: "views" },
-        },
-        {
           label: "API - Feedback and control",
           autogenerate: { directory: "api" },
         },
         {
-          label: "Additional Notes",
+          label: "Quick tips",
+          autogenerate: { directory: "quick-tips" },
+        },
+        {
+          label: "Additional notes",
           autogenerate: { directory: "additional-notes" },
         },
         {
           label: "External links",
           items: [
-            { label: "Ontime website", link: "https://www.getontime.no" },
+            {
+              label: "Ontime website",
+              link: "https://www.getontime.no",
+              badge: "Link",
+              attrs: { target: "_blank" },
+            },
             {
               label: "Github Repo",
               link: "https://www.github.com/cpvalente/ontime",
+              badge: "Link",
+              attrs: { target: "_blank" },
             },
           ],
         },
