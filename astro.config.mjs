@@ -11,6 +11,7 @@ export default defineConfig({
     //starlightLinksValidator(),
     starlight({
       title: "Ontime documentation",
+      favicon: "./favicon.ico",
       logo: {
         src: "./src/assets/images/icon.png",
         replacesTitle: true,
