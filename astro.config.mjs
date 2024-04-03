@@ -7,6 +7,7 @@ import vercelStatic from "@astrojs/vercel/static";
 export default defineConfig({
   output: "static",
   adapter: vercelStatic(),
+  site: "https://docs.getontime.no",
   integrations: [
     //starlightLinksValidator(),
     starlight({
