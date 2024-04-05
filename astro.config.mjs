@@ -9,7 +9,7 @@ export default defineConfig({
   adapter: vercelStatic(),
   site: "https://docs.getontime.no",
   integrations: [
-    //starlightLinksValidator(),
+    starlightLinksValidator(),
     starlight({
       title: "Ontime documentation",
       favicon: "./favicon.ico",
