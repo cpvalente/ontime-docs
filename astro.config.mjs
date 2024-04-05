@@ -8,7 +8,7 @@ export default defineConfig({
   output: "static",
   adapter: vercelStatic(),
   integrations: [
-    //starlightLinksValidator(),
+    starlightLinksValidator(),
     starlight({
       title: "Ontime documentation",
       logo: {
