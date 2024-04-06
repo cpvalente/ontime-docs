@@ -1,16 +1,16 @@
 ---
-title: Custom styling REVISE LINK
-description: Use a custom stylesheet to define viewer styles
+title: Custom styling
+description: Use a custom stylesheet to define your own styles
 ---
 
 You can override the app-defined styles for some views by changing a supplied CSS override file. \
 There are a few **CSS variables** which allow for quick customisation of the viewers.
 
-You can toggle this feature on / off at **Settings -> Viewers**.
+You can toggle this feature on / off at `Editor -> Settings -> App settings -> View settings`.
 
 :::tip[Where is the file?]
-The CSS file location is dependent on both the operating system and installation. 
-You can find the path to the file in the [Application Settings](add-link) where you activate the CSS override.
+The CSS file location is dependent on both the operating system and installation. \
+You can find the path to the file in the `Editor -> Settings -> App settings -> View settings` where you activate the CSS override.
 
 **For PC users:**\
 `AppData/Roaming/Ontime/styles/override.css`
@@ -26,10 +26,10 @@ You can find the path to the file in the [Application Settings](add-link) where 
 
 ![Configure Ontime view styles](../../../assets/screenshots/feature/view-style.png)
 
-We simplify the customisation of the views by exposing a few CSS style variables. 
+The provided CSS will be loaded along with the page. 
 
-Alternatively, you can **define your style sheets** to fully customise any page.
-You would need to inspect the page manually to find the relevant selectors.
+We simplify the customisation of the views by exposing a few CSS custom propertries (see below). \
+Alternatively, can inspect the page manually and override any styles relevant.
 
 :::tip[Show me the code]
 The documentation here will likely become out of sync as we add more features to Ontime.
@@ -37,7 +37,6 @@ See the definition directly in the [example override file here](https://github.c
 :::
 
 ```css
-/* COMMENTS FOR CONVENIENCE, REMEMBER THAT COMMENTS ARE NOT ALLOWED IN CSS */
 :root {
   --background-color-override: #ececec;             --> page background
   --color-override: #101010;                        --> text colour
