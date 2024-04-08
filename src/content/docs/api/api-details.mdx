@@ -1,6 +1,7 @@
 ---
 title: API Details
 description: ??
+tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 3 }
 ---
 
 :::tip[Help us improve]
@@ -8,8 +9,35 @@ How could this be better? Let's chat!\
 Get in touch on email [mail@getontime.no](mailto:mail@getontime.no) or [open an issue in GitHub](https://github.com/cpvalente/ontime/issues).
 :::
 
-#### Event Properties
+# Event Properties
 
-describe allowed Properties
+the allowed event properties are
 
-#### Message Destination
+| property | value type                                                                                                  |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| title    | string                                                                                                      |
+| note     | string (including new line)                                                                                 |
+| cue      | string (try to keep this small)                                                                             |
+| duration | number (in seconds)                                                                                         |
+| isPublic | boolean                                                                                                     |
+| skip     | boolean                                                                                                     |
+| colour   | string (# hex colours or [named css colours](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color)) |
+| custom   | target the specific custom field with 'custom:fieldname'                                                    |
+
+# Message Destination
+
+the allowed message destinations are
+
+| destinations |                                          |
+| ------------ | ---------------------------------------- |
+| timer        | the will be overlaid on the stage timer  |
+| public       | the will be displayed on public displays |
+| lower        | for use with the lower third generator   |
+
+# TimerState
+
+| property | value type                               |
+| -------- | ---------------------------------------- |
+| timer    | the will be overlaid on the stage timer  |
+| public   | the will be displayed on public displays |
+| lower    | for use with the lower third generator   |
