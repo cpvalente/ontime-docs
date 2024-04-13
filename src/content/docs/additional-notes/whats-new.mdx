@@ -10,15 +10,22 @@ We have learned about the App and what users have been doing with it.
 
 The newest release (v3) focuses on improving the quality of life in the code base, user interfaces, and APIs.
 
-This will be a good step forward in making Ontime friendlier and more powerful and allow us to move forward faster.
-
 Some highlights of the user-facing work:
 
 * [x] Project manager to simplify handling many Ontime project files
 * [x] Improvements in delay management and a new offset data point
+* [x] Comprehensive timer types and end actions for allowing complex interactions
 * [x] Ability to link event times
 * [x] User-definable custom fields
 * [x] Re-write of the APIs to simplify interacting with Ontime
+* [x] Auxiliar timers
 * [x] Several UI design changes and improvements
 
 ... and many more
+
+### Removals and breaking changes
+
+- `Removed` __subtitle__ and __presenter__ fields in event
+- `Removed` __user fields__ in favour of fully customisable __custom fields__
+- `Removed` __On Air__ data is not user controlled, but indicates whether the playback is loaded
+- `Breaking` restructure of all user facing APIs
