@@ -50,11 +50,11 @@ All OSC requests must start with `/ontime`
 | /reload                        |                            | Reloads selected event                                                                 |
 | /roll                          |                            | Sets playback mode to roll                                                             |
 | /addtime                       | number                     | Adds time to a playing event (in seconds)                                              |
-| /extratimer/1/start            |                            | Starts extratimer1                                                                     |
-| /extratimer/1/stop             |                            | Stops extratimer1                                                                      |
-| /extratimer/1/pause            |                            | Pauses extratimer1                                                                     |
-| /extratimer/1/duration         | number                     | Sets duration of extratimer1                                                           |
-| /extratimer/1/direction        | "count-up" \| "count-down" | Sets direction of extratimer1                                                          |
+| /auxtimer/1/start            |                            | Starts auxtimer1                                                                     |
+| /auxtimer/1/stop             |                            | Stops auxtimer1                                                                      |
+| /auxtimer/1/pause            |                            | Pauses auxtimer1                                                                     |
+| /auxtimer/1/duration         | number                     | Sets duration of auxtimer1                                                           |
+| /auxtimer/1/direction        | "count-up" \| "count-down" | Sets direction of auxtimer1                                                          |
 
 #### HTTP
 
@@ -86,10 +86,10 @@ A sucessfule call will result in a `202` responds and a body with a \{payload\} 
 | /reload                |                                                            | "success"                       | Reloads selected event                                                                   |
 | /roll                  |                                                            | "success"                       | Sets playback mode to roll                                                               |
 | /addtime               | ?add=[number] or ?remove=[number]                          | "success"                       | Adds time to a playing event (in seconds)                                                |
-| /extratimer/1/start    |                                                            | [TimerState](../)               | Starts extratimer1                                                                       |
-| /extratimer/1/stop     |                                                            | [TimerState](../)               | Stops extratimer1                                                                        |
-| /extratimer/1/pause    |                                                            | [TimerState](../)               | Pauses extratimer1                                                                       |
-| /extratimer/1          | ?duration=[number]&direction=["count-up" \| "count-down" ] | [TimerState](../)               | Sets duration and/or direction of extratimer1                                            |
+| /auxtimer/1/start    |                                                            | [TimerState](../)               | Starts auxtimer1                                                                       |
+| /auxtimer/1/stop     |                                                            | [TimerState](../)               | Stops auxtimer1                                                                        |
+| /auxtimer/1/pause    |                                                            | [TimerState](../)               | Pauses auxtimer1                                                                       |
+| /auxtimer/1          | ?duration=[number]&direction=["count-up" \| "count-down" ] | [TimerState](../)               | Sets duration and/or direction of auxtimer1                                            |
 
 #### WS
 
@@ -118,7 +118,7 @@ A sucessfule call will result in a `202` responds and a body with a \{payload\} 
 | /reload                | "success"                       | Reloads selected event                                               |
 | /roll                  | "success"                       | Sets playback mode to roll                                           |
 | /addtime               | "success"                       | Adds time to a playing event (in seconds)                            |
-| /extratimer/1/start    | [TimerState](../)               | Starts extratimer1                                                   |
-| /extratimer/1/stop     | [TimerState](../)               | Stops extratimer1                                                    |
-| /extratimer/1/pause    | [TimerState](../)               | Pauses extratimer1                                                   |
-| /extratimer/1          | [TimerState](../)               | Sets duration and/or direction of extratimer1                        |
+| /auxtimer/1/start    | [TimerState](../)               | Starts auxtimer1                                                   |
+| /auxtimer/1/stop     | [TimerState](../)               | Stops auxtimer1                                                    |
+| /auxtimer/1/pause    | [TimerState](../)               | Pauses auxtimer1                                                   |
+| /auxtimer/1          | [TimerState](../)               | Sets duration and/or direction of auxtimer1                        |
