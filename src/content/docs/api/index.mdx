@@ -1,24 +1,20 @@
 ---
-title: Control and feedback
-description: Control and feedback
+title: Feedback and control
+description: Feedback and control
 ---
 
-Ontime has a strong focus on integrations.\
-We want Ontime to play well into your workflow.
-
-:::tip[Help us improve]
-How could this be better? Let's chat!\
-Get in touch on email [mail@getontime.no](mailto:mail@getontime.no) or [open an issue in GitHub](https://github.com/cpvalente/ontime/issues)
-:::
-
+You can leverage one of the available protocols (OSC, WebSocket and HTTP) to automate your worflows with Ontime.\
+With possibility for both [controlling Ontime](/api/#control-ontime) or letting [Ontime control third party applications](/api/#get-data-from-ontime).
 
 ## Control Ontime
+The OSC, Websocket and HTTP API allow for low latency communication to Ontime. \
+The APIs for the difference protocols are mostly feature compatible, so it is up to you to choose the most convenient protocol.
 
-The OSC and Websocket API allow for low latency communication to ontime server. Both APIs are identical, so it is up to you to choose the most convenient protocol.
+You can find the documentation for the individual protocols by following the links
+- [OSC](protocols/osc)
+- [WebSockets](protocols/websockets)
+- [HTTP](protocols/http)
 
-The [HTTP API](/api/http) has access to a smaller subset of features, but it can be handy for integration with software such as vMix.
-
-## Control and feedback from Ontime
-
-You can leverage the integrations feature to **distribute Ontime's rundown data** or **control third party applications** on timer events.
-[Read the docs](/api/integrations) for more information.
+## Get data from Ontime
+You can also leverage the **integrations feature** to distribute the runtime data from Ontime or control other software. \
+More information is available [in the documentation for integrations](/api/integrations/).

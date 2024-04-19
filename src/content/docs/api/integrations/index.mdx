@@ -17,13 +17,14 @@ The integration feature allows you to request a message once that happens.
 | `On Start`            | Triggered when an event starts                                     |
 | `On Pause`            | Triggered when an event is paused                                  |
 | `On Stop`             | Triggered when playback is stopped                                 |
-| `On Every Second`     | Triggered once a second (great for sending your timer data out)    |
-| `On Finish`           | Triggered when a timer passes the 0 mark and becomes in overtime   |
+| `On Every Second`     | Triggered once a second                                            |
+| `On Update`           | Triggered once a second, as long as a timer is running             |
+| `On Finish`           | Triggered when a timer passes the 0 mark                           |
 
 
 :::tip[Example]
 If you add a message to the `On Load` lifecycle, eg: `/ontime/loaded-event`,\
-a message will be sent to the OSC Port you have configured in OSC Settings every time an event is loaded.
+a message will be sent to the device configured in OSC settings every time an event is loaded.
 :::
 
 ### Using variables in integrations
@@ -43,7 +44,8 @@ Extending the example above, you could compose a message that sends the index of
 ```
 
 :::note
-Inside the template (double brackets), you can add any of the keys described in [Runtime Data](api/runtime-data). Use the  `.` when referencing a subkey
+The template inside the brackets need to reference the same shape as the nesting of the runtime data as described in [Runtime Data](/api/runtime-data). \
+Use the  `.` when referencing a subkey
 
 `{{titlesPublic.noteNext}}` \
 `{{playback}}` \

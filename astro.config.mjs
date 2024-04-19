@@ -55,8 +55,26 @@ export default defineConfig({
           autogenerate: { directory: "features" },
         },
         {
-          label: "API - Feedback and control",
-          autogenerate: { directory: "api" },
+          label: "Feedback and control",
+          items: [
+            {
+              label: "API overview",
+              link: "/api/",
+            },
+
+            {
+              label: "Data",
+              autogenerate: { directory: "api/data" },
+            },
+            {
+              label: "Integrations",
+              autogenerate: { directory: "api/integrations" },
+            },
+            {
+              label: "Protocol API",
+              autogenerate: { directory: "api/protocols" },
+            },
+          ],
         },
         {
           label: "Quick tips",

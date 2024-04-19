@@ -1,0 +1,366 @@
+---
+title: HTTP API
+description: Documentation for the HTTP API
+---
+
+You can control most of the playback functions of Ontime over HTTP protocol. \
+This could be handy for integration with third party software, [including vMix](/additional-notes/control-from-vmix).
+
+:::note[Notes on requests]
+All HTTP requests are **GET** requests. \
+Please mind the correct configuration for IP and Port will depend on your setup.
+
+Any request which successfully changes the Ontime playback will have a status code in the 200 range.
+:::
+
+
+:::tip[Show me the code]
+This documentation is generally simplified. In truth, the HTTP API is more complex. \
+As Ontime uses the HTTP API to manage its data, this changes often.
+
+You can follow the code for a more up-to-date reference:
+[Get data from Ontime](https://github.com/cpvalente/ontime/tree/master/apps/server/src/api-data)
+[Control Ontime](https://github.com/cpvalente/ontime/tree/master/apps/server/src/api-integration)
+:::
+
+
+## State
+The following endpoints allow querying Ontime for its current state
+
+### Get Ontime version
+**Request** 
+```bash
+<localhost:4001>/api/version
+```
+
+**Response**
+```ts
+{"payload":"3.0.0"}
+```
+
+### Get Ontime runtime state
+**Request** 
+```bash
+<localhost:4001>/api/poll
+```
+
+**Response** \
+The response of a poll request is a [runtime data object](/api/data/runtime-data)
+```ts
+{"payload": <runtime-data>}
+```
+
+### Data from Ontime
+
+With the HTTP API, in addition to controlling the application, you can also retrieve its data. \
+There is no expected payload for these GET requests
+
+| Address                | Description                                                  |
+| :--------------------- | :----------------------------------------------------------- |
+| `/data/custom-fields`  | Get registered [custom fields](/features/custom-fields)      |
+| `/data/db`             | Get currently loaded project file                            |
+| `/data/http`           | Get HTTP integration settings                                |
+| `/data/osc`            | Get OSC integration settings                                 |
+| `/data/project`        | Get current project data                                     |
+| `/data/rundown`        | Get current rundown                                          |
+| `/data/settings`       | Get current application settings                             |
+| `/data/url-presets`    | Get currently defined [URL Presets](/features/url-presets)   |
+| `/data/view-settings`  | Get currentluy defined settings for views                    |
+
+
+## Change event
+```bash
+<localhost:4001>/api/change/<event-id>/<property>/<value>
+```
+
+The change endpoint allows changing some of the properties of a given event (below). \
+The request should contain a patch of the event to be changed, along with the ID of the event to change.
+
+:::note
+See the table below for a list of fields that can be changed using this endpoint. \
+[See the whitelisted properties in the code](https://github.com/cpvalente/ontime/blob/master/apps/server/src/api-integration/integration.utils.ts#L8)
+
+| Property   | Value type                                                                                                  |
+| :--------- | :---------------------------------------------------------------------------------------------------------- |
+| `title`    | string                                                                                                      |
+| `note`     | string                                                                                                      |
+| `cue`      | string (value should be kept under 8 characters)                                                            |
+| `duration` | number (in seconds)                                                                                         |
+| `isPublic` | boolean                                                                                                     |
+| `skip`     | boolean                                                                                                     |
+| `colour`   | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color))   |
+| `custom`   | target the specific custom field with `custom:<fieldname>`                                                    |
+:::
+
+### Example: change title of event
+**Request**
+```bash
+<localhost:4001>/api/change/<my-event-id>/title/new-title
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Example: change a custom field
+The custom field must exist in the project to be accepted by the API. \
+See more on [custom fields](/features/custom-fields)
+
+**Request**
+```bash
+<localhost:4001>/api/change/<my-event-id>/custom:<field-name>/new-value
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+## Message
+The following endpoints allow controlling the messages Ontime sends to the views. \
+The payload response is the current state of the message data
+
+### Example: change the external text
+**Request**
+```bash
+<localhost:4001>/api/message/external/text/new-text
+```
+
+**Response**
+```ts
+{
+    "payload": {
+        "timer": {
+            "text":"",
+            "visible":true,
+            "blink":false,
+            "blackout":false
+        },
+        "external": {
+            "text":"new-text",
+            "visible":false
+        }
+    }
+}
+```
+## Playback
+The following endpoints allow controlling the Ontime's playback. \
+The payload response is the current state of the message data
+
+## Start event
+
+### Start loaded event
+**Request**
+```bash
+<localhost:4001>/api/start
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Start event at index
+**Request**
+```bash
+<localhost:4001>/api/start/index/<event-index>
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Start event with ID
+**Request**
+```bash
+<localhost:4001>/api/start/id/<event-id>
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Start event with cue
+**Request**
+```bash
+<localhost:4001>/api/start/cue/<event-cue>
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Start next event
+**Request**
+```bash
+<localhost:4001>/api/start/next
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Start previous event
+**Request**
+```bash
+<localhost:4001>/api/start/previous
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+## Pause running timer
+**Request**
+```bash
+<localhost:4001>/api/pause
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+## Load event
+
+### Load event at index
+**Request**
+```bash
+<localhost:4001>/api/load/index/<event-index>
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Load event with ID
+**Request**
+```bash
+<localhost:4001>/api/load/index/<event-id>
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Load event with cue
+**Request**
+```bash
+<localhost:4001>/api/load/index/<event-cue>
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Load next event
+**Request**
+```bash
+<localhost:4001>/api/load/next
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Load previous event
+**Request**
+```bash
+<localhost:4001>/api/load/previous
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+## Reload current event
+**Request**
+```bash
+<localhost:4001>/api/reload
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+## Stop playback
+**Request**
+```bash
+<localhost:4001>/api/stop
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+## Activate Roll mode
+**Request**
+```bash
+<localhost:4001>/api/roll
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+## User added time
+### Add time
+**Request**
+```bash
+<localhost:4001>/api/addtime/add/<value-in-seconds>
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Remove time
+**Request**
+```bash
+<localhost:4001>/api/addtime/remove/<value-in-seconds>
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+## Auxiliary timer
+
+Ontime provides an [auxiliary timer](/features/aux-timer) which does not affect the current playback. \
+This can be controlled using the API as shown below
+
+### Set auxiliary timer duration
+**Request**
+```bash
+<localhost:4001>/api/auxtimer/1/duration/<value-in-seconds>
+```
+
+### Set auxiliary timer direction
+Auxiliary timer can count up or count down.
+
+#### Set auxiliary timer to count up
+**Request**
+```bash
+<localhost:4001>/api/auxtimer/1/direction/count-up
+```
+
+#### Set auxiliary timer to count down
+**Request**
+```bash
+<localhost:4001>/api/auxtimer/1/direction/count-down
+```
+
+### Start auxiliary timer
+**Request**
+```bash
+<localhost:4001>/api/auxtimer/1/start
+```
+
+### Pause auxiliary timer
+**Request**
+```bash
+<localhost:4001>/api/auxtimer/1/pause
+```
+
+### Stop auxiliary timer
+**Request**
+```bash
+<localhost:4001>/api/auxtimer/1/stop
+```

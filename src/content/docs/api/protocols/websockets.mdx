@@ -1,0 +1,355 @@
+---
+title: WebSockets API
+description: Documentation for the WebSockets API
+---
+
+The OSC and WebSocket APIs allow for low latency communication to Ontime server. 
+
+Since the WebSocket API is used by Ontime, this cannot be configured by the user other than changing its port.
+
+The WebSocket server is at the same IP address and port as the main application at 
+```bash
+ws://<ip-address>:<port>/ws
+```
+
+:::note
+Any WebSocket client that connects to ontime, will receive a snapshot of the application state as defined in the [Runtime data](/api/data/runtime-data).
+:::
+
+## State
+
+### Get Ontime version
+**Request** 
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {"type": "version"}
+```
+
+**Response**
+```ts
+{"type":"version","payload":"3.0.0"}
+```
+
+### Get Ontime runtime state
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {"type": "poll"}
+```
+
+**Response** \
+The response of a poll request is a [runtime data object](/api/data/runtime-data)
+```ts
+{
+    "type": "poll", 
+    "payload": <runtime-data>
+}
+```
+
+## Message
+The following endpoints allow controlling the messages Ontime sends to the views. \
+The payload response is the current state of the message data
+
+### Example: change the external text
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "message", 
+    "payload": {
+        "external": {
+            "text": "new-text"
+        }
+    }
+}
+```
+
+**Response**
+```ts
+{
+    "type":"message",
+    "payload": {
+        "timer": {
+            "text":"",
+            "visible":false,
+            "blink":false,
+            "blackout":false
+            },
+        "external":{
+            "text":"new-text",
+            "visible":false
+        }
+    }
+}
+```
+
+## Playback
+The following endpoints allow controlling the Ontime's playback. \
+The payload response is the current state of the message data
+
+## Start event
+
+### Start loaded event
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {"type": "start"}
+```
+
+### Start event at index
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "start", 
+    "payload": {
+        "index": 1
+    }
+}
+```
+
+### Start event with ID
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "start", 
+    "payload": {
+        "id": "<event-id>"
+    }
+}
+```
+
+### Start event with cue
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "start", 
+    "payload": {
+        "cue": "<event-cue>"
+    }
+}
+```
+
+### Start next event
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+  "type": "start",    
+  "payload": "next"
+}
+```
+
+### Start previous event
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+  "type": "start",    
+  "payload": "previous"
+}
+```
+
+## Pause running timer
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: { "type": "pause" }
+```
+
+## Load event
+
+### Load event at index
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "load", 
+    "payload": {
+        "index": 1
+    }
+}
+```
+
+### Load event with ID
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "load", 
+    "payload": {
+        "index": "<event-id>"
+    }
+}
+```
+
+### Load event with cue
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "load", 
+    "payload": {
+        "index": "<event-cue>"
+    }
+}
+```
+
+### Load next event
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+  "type": "load",    
+  "payload": "next"
+}
+```
+
+### Load previous event
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+  "type": "load",    
+  "payload": "previous"
+}
+```
+
+## Reload current event
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+  "type": "reload"  
+}
+```
+
+## Stop playback
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+  "type": "stop"  
+}
+```
+
+## Activate Roll mode
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+  "type": "roll"  
+}
+```
+
+## User added time
+### Add time
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "addtime",
+    "payload": {
+        "add": <value-in-seconds>
+    }
+}
+```
+
+### Remove time
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "addtime",
+    "payload": {
+        "remove": <value-in-seconds>
+    }
+}
+```
+
+## Auxiliary timer
+
+Ontime provides an [auxiliary timer](/features/aux-timer) which does not affect the current playback. \
+This can be controlled using the API as shown below
+
+### Set auxiliary timer duration
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "auxtimer",
+    "payload": {
+        "1": {
+            "duration": <value-in-seconds>
+        }
+    }
+}
+```
+
+### Set auxiliary timer direction
+Auxiliary timer can count up or count down.
+
+#### Set auxiliary timer to count up
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "auxtimer",
+    "payload": {
+        "1": {
+            "duration": "count-up"
+        }
+    }
+}
+```
+
+#### Set auxiliary timer to count down
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "auxtimer",
+    "payload": {
+        "1": {
+            "duration": "count-up"
+        }
+    }
+}
+```
+
+### Start auxiliary timer
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "auxtimer",
+    "payload": {
+        "1": "start"
+    }
+}
+```
+
+### Pause auxiliary timer
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "auxtimer",
+    "payload": {
+        "1": "pause"
+    }
+}
+```
+
+### Stop auxiliary timer
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "auxtimer",
+    "payload": {
+        "1": "stop"
+    }
+}
+```

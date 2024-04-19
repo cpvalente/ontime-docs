@@ -9,7 +9,8 @@
         --ontime-accent-dark: #0d1b36;
         --ontime-accent-gradient: linear-gradient(45deg, var(--bg-colour), var(--bg-colour) 40%, var(--action-blue) 100%);
         --ontime-spacing-mobile: 5vw;
-        --ontime-spacing-desktop: 10vw
+        --ontime-spacing-desktop: 10vw;
+        --sl-content-width: 70rem;
 }
 :root[data-theme='dark'],
 ::backdrop {
