@@ -1,0 +1,180 @@
+---
+title: OSC API
+description: Documentation for the OSC API
+---
+
+The OSC and WebSocket APIs allow for low latency communication to Ontime server.
+
+
+:::note[Using OSC]
+To use the OSC API, you will need to configure the feature in `Editor` -> `Settings` -> `Integrations`.
+
+Due to the nature of the protocol, for getting feedback from OSC you will need to configure a feedback loop in both Ontime and your other software/devices.
+
+You can monitor the messages received using the **Network log** in  `Editor` -> `Settings` -> `Log`.
+:::
+
+## Message
+The following endpoints allow controlling the messages Ontime sends to the views. \
+The payload response is the current state of the message data
+
+### Example: change the external text
+**OSC Message**
+```bash
+/ontime/message/external/text <new-text>
+```
+
+## Playback
+The following endpoints allow controlling the Ontime's playback.
+
+## Start event
+
+### Start loaded event
+**OSC Message**
+```bash
+/ontime/start
+```
+
+### Start event at index
+**OSC Message**
+```bash
+/ontime/start/index <event-index>
+```
+
+### Start event with ID
+**OSC Message**
+```bash
+/ontime/start/id <event-id>
+```
+
+### Start event with cue
+**OSC Message**
+```bash
+/ontime/start/cue <event-cue>
+```
+
+### Start next event
+**OSC Message**
+```bash
+/ontime/start/next
+```
+
+### Start previous event
+**OSC Message**
+```bash
+/ontime/start/previous
+```
+
+## Pause running timer
+**OSC Message**
+```bash
+/ontime/pause
+```
+
+## Load event
+
+### Load event at index
+**OSC Message**
+```bash
+/ontime/load/index <event-index>
+```
+
+### Load event with ID
+**OSC Message**
+```bash
+/ontime/load/id <event-id>
+```
+
+
+### Load event with cue
+**OSC Message**
+```bash
+/ontime/load/cue <event-cue>
+```
+
+### Load next event
+**OSC Message**
+```bash
+/ontime/load/next
+```
+
+### Load previous event
+**OSC Message**
+```bash
+/ontime/load/previous
+```
+
+## Reload current event
+**OSC Message**
+```bash
+/ontime/reload
+```
+
+## Stop playback
+**OSC Message**
+```bash
+/ontime/stop
+```
+
+## Activate Roll mode
+**OSC Message**
+```bash
+/ontime/roll
+```
+
+## User added time
+### Add time
+**OSC Message**
+```bash
+/ontime/addtime/add <value-in-seconds>
+```
+
+### Remove time
+**OSC Message**
+```bash
+/ontime/addtime/remove <value-in-seconds>
+```
+
+## Auxiliary timer
+
+Ontime provides an [auxiliary timer](/features/aux-timer) which does not affect the current playback. \
+This can be controlled using the API as shown below
+
+### Set auxiliary timer duration
+**OSC Message**
+```bash
+/ontime/auxtimer/1/duration <value-in-seconds>
+```
+
+### Set auxiliary timer direction
+Auxiliary timer can count up or count down.
+
+#### Set auxiliary timer to count up
+**OSC Message**
+```bash
+/ontime/auxtimer/1/direction count-up
+```
+
+#### Set auxiliary timer to count down
+**OSC Message**
+```bash
+/ontime/auxtimer/1/direction count-down
+```
+
+### Start auxiliary timer
+**OSC Message**
+```bash
+/ontime/auxtimer/1/start
+```
+
+### Pause auxiliary timer
+**OSC Message**
+```bash
+/ontime/auxtimer/1/pause
+```
+
+### Stop auxiliary timer
+**OSC Message**
+```bash
+/ontime/auxtimer/1/stop
+```

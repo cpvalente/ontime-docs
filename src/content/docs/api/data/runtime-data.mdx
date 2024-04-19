@@ -1,0 +1,75 @@
+---
+title: Runtime data
+description: Runtime data
+---
+
+Ontime broadcasts its state over WebSockets.\
+This allows for integrations to sync to the state of the application.
+
+See below a full definition of the data that Ontime holds. \
+This data should be used in conjunction with the [Integrations feature](/api/integrations#using-variables-in-integrations).
+
+:::tip[Show me the code]
+This documentation can get out of sync as we add new features to Ontime, \
+[see the type definition in the code here](https://github.com/cpvalente/ontime/blob/master/packages/types/src/definitions/runtime/RuntimeStore.type.ts) \
+and the instantiation of the ["empty state" here](https://github.com/cpvalente/ontime/blob/master/apps/client/src/common/stores/runtime.ts)
+:::
+
+:::note
+Ontime broadcasts messages formatted as below. \
+Where the type `Ontime` indicates the type of message, and the payload is a portion of the [Runtime data object](/api/runtime-data/#runtime-data-object)
+
+```ts
+// example broadcast message from Ontime
+{ type: "ontime", payload: "<runtime-data-object>"}
+```
+
+To keep things efficient, Ontime also broadcasts the individual objects in state as they change. \
+This allows for smaller payloads and granular updates.
+```ts
+// ontime sends smaller messages to update subsets of the object
+{ type: "ontime-timer", payload: "<runtime-data-object>.timer"}
+{ type: "ontime-playback", payload: "<runtime-data-object>.playback"}
+{ type: "ontime-eventNow", payload: "<runtime-data-object>.eventNow"}
+...
+```
+:::
+
+## Runtime data object
+| Key                      | Property              | Description                                              | Type                                             | 
+| :----------------------- | :-------------------- | :------------------------------------------------------- | :----------------------------------------------- | 
+| `clock`                  |                       | **Current time from wall clock**                         | `number`                                         | 
+| `timer`                  |                       | **Information related to running timer**                 |                                                  | 
+|                          | `addedTime`           | Time added by user                                 | `number \| null`                                 | 
+|                          | `current`             | Running countdown                                        | `number \| null`                                 | 
+|                          | `duration`            | Duration of loaded event                                 | `number \| null`                                 | 
+|                          | `elapsed`             | Elapsed time in current timer                            | `number \| null`                                 | 
+|                          | `expectedFinish`      | Expected finish for current timer                        | `number \| null`                                 | 
+|                          | `finishedAt`          | When did the timer go past 0                             | `number \| null`                                 | 
+|                          | `playback`            | Playback state                                           | `'roll' \| 'play' \| 'pause' \| 'stop' \| 'armed'`                                 | 
+|                          | `secondaryTimer`      | User in roll mode                                        | `number \| null`                                 | 
+|                          | `startedAt`           | ID of loaded event                                       | `string \| null`                                 | 
+| `onAir`                  |                       | Whether onAir is active                                  | `boolean`                                        | 
+| `message.timer`          |                       | **Information related to Message shown in timer**        |                                                  | 
+|                          | `text`                | Text of message                                          | `string`                                         | 
+|                          | `visible`             | Whether the message is visible                           | `boolean`                                        | 
+|                          | `blink`               | Whether the message is blinking                          | `boolean`                                        | 
+|                          | `blackout`            | Whether to blackout the timer views                      | `boolean`                                        | 
+| `message.external`       |                       | **Exteral data injected into Ontime**                    |                                                  | 
+|                          | `text`                | Text of message                                          | `string`                                         | 
+|                          | `visible`             | Whether the message is visible                           | `boolean`                                        | 
+| `runtime`                |                       | **Information related to the current runtime**           |                                                  | 
+|                          | `selectedEventIndex`  | Index of selected event                                  | `number \| null`                                 | 
+|                          | `numEvents`           | Number of non-skipped events in rundown                  | `number`                                         | 
+|                          | `offset`              | Difference between current runtime and schedule          | `number`                                         | 
+|                          | `plannedStart`        | Schedule planned start time                              | `number`                                         | 
+|                          | `plannedEnd`          | Schedule planned end time                                | `number`                                         | 
+|                          | `actualStart`         | Actual start time of rundown                             | `number`                                         | 
+|                          | `expectedEnd`         | Time for expected end                                    | `number`                                         | 
+| `eventNow` `eventNext`   |                       | **currently loaded event / upcoming event**, [see event data](/api/event-data)              |               | 
+| `publicEventNow` `publicEventNext` |             | **currently public loaded event / upcoming event**, [see event data](/api/event-data)       |               | 
+| `custom`                 |                       | User added data to the event [see custom fields](/features/custom-fields)  |                                | 
+
+:::note
+All times are in milliseconds from midnight
+:::
