@@ -1,0 +1,66 @@
+---
+title: Event data
+description: Event data
+---
+
+Any scheduled event in Ontime (called an event in the app) will contain the following information. \
+All times are in milliseconds.
+
+| Data                       | Note                                                                        |
+|:---------------------------|:----------------------------------------------------------------------------|
+| ID                         | Event ID, cannot be changed                                                 |
+| Title                      |                                                                             |
+| Cue                        |                                                                             |
+| Colour                     |                                                                             |
+| Note                       | User defined note, available in some views                                  |
+| Time Start                 | Scheduled start time                                                        |
+| Time End                   | Scheduled end time                                                          |
+| Duration                   | Scheduled duration time                                                     |
+| Delay                      | Whether there is a delay associated to the event                            |
+| Is Public                  | Whether the event is visible in public screens                              |
+| Skip                       | Skipped events are ignored by the runtime playback                          |
+| Link Start                 | `Internal` whether the start of the event is associated with the previous   |
+| Time Danger                | `Internal` second threshold from time end                                   |
+| Time Warning               | `Internal` second threshold from time end                                   |
+| End Action                 | `Internal` defines potential automation for when an event ends              |
+| Timer Type                 | `Internal` defines a method for the counting of the running timer           |
+| Time Strategy              | `Internal` defines the significant dataset for event duration               |
+| Type                       | `Internal`, this will always be `Event`                                     |
+| Custom                     | This is an object of user given custom fields associated to the event       |
+
+```ts
+// example event data
+{
+  "title": "Albania",
+  "note": "SF1.01",
+  "endAction": "none",
+  "timerType": "count-down",
+  "timeStart": 36000000,
+  "timeEnd": 37200000,
+  "duration": 1200000,
+  "isPublic": true,
+  "skip": false,
+  "colour": "",
+  "type": "event",
+  "revision": 0,
+  "id": "32d31",
+  "cue": "SF1.01",
+  "custom": {
+    "song": "Sekret",
+    "artist": "Ronela Hajati"
+  }
+}
+````
+
+
+### Timer type
+An event timer-type informs Ontime on how the event duration should be calculated
+
+### End action
+An event timer-type informs Ontime on how the event duration should be calculated
+
+### End action
+An event timer-type informs Ontime on how the event duration should be calculated
+
+### Time strategy
+An event timer-type informs Ontime on how the event duration should be calculated
