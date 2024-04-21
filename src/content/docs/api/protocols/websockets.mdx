@@ -46,6 +46,84 @@ The response of a poll request is a [runtime data object](/api/data/runtime-data
 }
 ```
 
+## Change event
+```bash
+<localhost:4001>/api/change/<event-id>/<property>/<value>
+```
+
+The change endpoint allows changing some of the properties of a given event (below). \
+The request should contain a patch of the event to be changed, along with the ID of the event to change.
+
+:::note
+See the table below for a list of fields that can be changed using this endpoint. \
+[See the whitelisted properties in the code](https://github.com/cpvalente/ontime/blob/master/apps/server/src/api-integration/integration.utils.ts#L8)
+
+| Property   | Value type                                                                                                  |
+| :--------- | :---------------------------------------------------------------------------------------------------------- |
+| `title`    | string                                                                                                      |
+| `note`     | string                                                                                                      |
+| `cue`      | string (value should be kept under 8 characters)                                                            |
+| `duration` | number (in seconds)                                                                                         |
+| `isPublic` | boolean                                                                                                     |
+| `skip`     | boolean                                                                                                     |
+| `colour`   | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color))   |
+| `custom`   | target the specific custom field with `custom:<fieldname>`                                                    |
+:::
+
+### Example: change title of event
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "change", 
+    "payload": {
+        "<event-id>": {
+            "title": "new-text"
+        }
+    }
+}
+```
+
+**Response**
+```ts
+{
+  "type": "change",
+  "payload": {
+    "<event-id>": {
+      "title": "new-text"
+    }
+  }
+}
+```
+
+### Example: change a custom field
+The custom field must exist in the project to be accepted by the API. \
+See more on [custom fields](/features/custom-fields)
+
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "change", 
+    "payload": {
+        "<event-id>": {
+            "custom:<field-name>": "new-text"
+        }
+    }
+}
+```
+**Response**
+```ts
+{
+  "type": "change",
+  "payload": {
+    "<event-id>": {
+      "custom:<field-name>": "new-text"
+    }
+  }
+}
+```
+
 ## Message
 The following endpoints allow controlling the messages Ontime sends to the views. \
 The payload response is the current state of the message data

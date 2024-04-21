@@ -95,7 +95,7 @@ See the table below for a list of fields that can be changed using this endpoint
 ### Example: change title of event
 **Request**
 ```bash
-<localhost:4001>/api/change/<my-event-id>/title/new-title
+<localhost:4001>/api/change/<my-event-id>?title=new-title
 ```
 **Response**
 ```ts
@@ -108,7 +108,19 @@ See more on [custom fields](/features/custom-fields)
 
 **Request**
 ```bash
-<localhost:4001>/api/change/<my-event-id>/custom:<field-name>/new-value
+<localhost:4001>/api/change/<my-event-id>?custom:<field-name>=new-value
+```
+**Response**
+```ts
+{"payload":"success"}
+```
+
+### Example: change multiple fields
+You can change multiple fields in a single request by using adding on more query parameters. \
+
+**Request**
+```bash
+<localhost:4001>/api/change/<my-event-id>?title=new-title&cue=new-cue
 ```
 **Response**
 ```ts
