@@ -25,7 +25,15 @@ Some highlights of the user-facing work:
 
 ### Removals and breaking changes
 
-- `Removed` __subtitle__ and __presenter__ fields in event
+- `Removed` __subtitle__ and __presenter__ fields in event in favour of fully customisable __custom fields__
 - `Removed` __user fields__ in favour of fully customisable __custom fields__
 - `Removed` __On Air__ data is not user controlled, but indicates whether the playback is loaded
-- `Breaking` restructure of all user facing APIs
+- `Breaking` __Roll mode__ needs ordered events*
+- `Breaking` restructure of all __APIs__
+
+:::note[*Roll mode]
+Previously you could have events in any order and __Roll Mode__ would figure out what should be playing.
+With v3, we expect that the events are in the correct order as Ontime will look for the __first event with matching time__.
+
+We promise we will make it worth it.
+:::
