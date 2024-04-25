@@ -3,63 +3,53 @@ title: Import from Google Sheets
 description: Import data from Google Sheets
 ---
 
-:::danger
-This documentation is being updated
-:::
+[spreadsheet-link]: https://docs.google.com/spreadsheets/d/1Ft5czgMtXAuwdU5X4sxXoNQKan-dR4n1AU3vIN8TSCg
 
 You can synchronise Ontime to a Google Sheet. \
 This is ideal for collaboration or extensive data manipulation.
 
 ![Spreadsheet template](../../../assets/screenshots/features/spreadsheet-template.png)
-Follow [here](https://www.google.com/url?q=https://docs.google.com/spreadsheets/d/1Ft5czgMtXAuwdU5X4sxXoNQKan-dR4n1AU3vIN8TSCg/edit?usp%3Dsharing&source=gmail-imap&ust=1713612121000000&usg=AOvVaw3hFUgmiTbeN9-J6KUBmmVa) to see the Google Sheet from the screenshot
+Follow [here][spreadsheet-link] to see the Google Sheet from the screenshot
 
-To enable this feature, you will need provide Ontime with the necessary permissions.\ 
+To enable this feature, you will to need provide Ontime with the necessary permissions.\ 
 From there, we can read and write to the Google Sheet spreadsheet.
 
-### Step 1 - Upload client secret
+### Generate Client Secret in Google
 
-You will need to create a token in your Google Account and upload it to Ontime
-https://console.cloud.google.com \
-This process is similar to the one used by the Companion app
+You will need to create a token in your Google Account and upload it to Ontime.
 
 :::tip[Create token in Google Cloud Console]
-This guide is copied from the Google documentation at https://console.cloud.google.com
-- On the __Google Cloud Console__, __Create a Project__, and in the `APIs and services > Enabled APIs and servers`, make sure you enable the __Google Sheets API__.
-- Go to https://console.cloud.google.com/apis/credentials, click `Create Credentials`, and select `OAuth client ID`.
-- Select `Web Application` as the `Application Type`, and give the app a name.
-- In the `Authorised redirect URIs` section, add a redirect to the localhost URL `http://localhost`.
-- Download the file with the Client ID and upload it in the Ontime interface.
+This guide follow the Google documentation at https://console.cloud.google.com
+- On the __Google Cloud Console__, __Create a Project__ for the integration.
+- In the left menu click `Create Credentials` (or use the link https://console.cloud.google.com/apis/credentials), and select `OAuth client ID`.  \
+_NOTE: You may need to configure a consent screen at this point. This is a Google requirement. Follow the instructions on the page._
+- Select `TV and Limited Input devices` as the `Application Type`, and give the app a name.
+- In the popup modal presented, click `Download JSON` button to download the Client ID secrets. You can also do this later from the interface.
 :::
 
-### Step 2 - Authenticate
+### 2. Authenticate Ontime
+With Client ID Ontime can request Google permission to access the data in the spreadsheet.  
 
-Once we have the Client ID token Ontime can request Google permission to access the data in the spreadsheet.  
+- Start the synchronisation process in `Editor` -> `Settings` -> `Data Sources` by clicking the `Synchronise with Google` button
+- Upload the client secret downloaded from Google and provide the ID of the sheet to synchronise
+- Click the `Connect` button to request the authentication in Google services.
 
-For your security, the authentication is kept in memory and wiped when Ontime quits.\
-This means that you would need to re-authenticate every time you start Ontime.
+You will be provided a 6 digit code and a link to the Google Authentication page. \
+Please follow the link and insert the provided 6 digit code.
 
+:::note[Spreadsheet ID]
+The Spreadsheet ID is available in the URL after the `d` attribute:
+`https://docs.google.com/spreadsheets/d/<Spreadsheet ID>/`
+:::
 
-### Step 3 - Add Document ID
+### 3. Read and write data
+Now Ontime is connected to your Google Sheet.
 
-You will need to provide Ontime with the ID of the document to import.
+You can now read and write to and from the spreadsheet in this interface.
+Keep in mind that these operations will override the data in the other location
 
-The Document ID is available in the URL after the `d`, such as 
-`https://docs.google.com/spreadsheets/d/<Document ID>/edit#gid=0`
-
-Click the `Connect` button to establish a connection and get the worksheet options.
-
-
-### Step 4 - Select the worksheet
-
-Once connected, the dropdown will populate with a list of worksheets available in the document.
-
-Select the one with your rundown.
-
-
-### Step 5 - Upload / Download at will
-
-Now Ontime is connected to your Google Sheet document.
-
-You can get the data from your Google Sheet into Ontime by pressing the `Download` button anytime.
-
-You can also push your local data from Ontime to the Google Sheet by clicking the `Upload` button.
+:::note[Client Secret] 
+The authentication is kept in memory and wiped when Ontime quits. This means: 
+1. We do not keep any sensitive data where others can find it 
+2. You will need to provide this file and authenticate every time you restart Ontime
+:::
