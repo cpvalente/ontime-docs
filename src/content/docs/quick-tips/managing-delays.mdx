@@ -33,15 +33,15 @@ In combination with `actual start` and `expected end` datasets, it provides a go
 
 :::note
 The offset value can be negative or positive \
-__Positive__ -> offset indicates time delayed \
-__Negative__ -> offset indicates time ahead
+__Positive__ -> offset indicates time ahead \
+__Negative__ -> offset indicates time delayed
 :::
 
 
 #### See the following examples
 
 :::tip[We start late and there are no gaps to recover]
-In this case, the offset will indicate a 10 minute `+00:10:00` deviation.
+In this case, the offset will indicate a 10 minute `-00:10:00` deviation.
 
 ```
 | Runtime                       | Result offset                 |
@@ -50,7 +50,7 @@ In this case, the offset will indicate a 10 minute `+00:10:00` deviation.
 | Event A start time: 09:10     | Scheduled end: 10:00          |
 | Rundown:                      | Actual start: 09:10           |
 | - Event A 9:00 -> 10:00       | Expected end: 10:10           |
-| - Event B 10:00 -> 11:00      | Offset: +00:10:00             |
+| - Event B 10:00 -> 11:00      | Offset: -00:10:00             |
 ```
 :::
 
@@ -83,7 +83,7 @@ An offset will only be added if the event is in overtime or the user has added t
 | Event A start time: 09:10     | Scheduled end: 10:00          |
 | Rundown:                      | Actual start: 09:10           |
 | - Event A                     | Expected end: 10:10           |
-|   schedule: 9:00 -> 10:00     | Offset: +00:10:00             |
+|   schedule: 9:00 -> 10:00     | Offset: -00:10:00             |
 |   type: time-to-end           |                               |
 | - Event B                     |                               |
 |   schedule: 9:00 -> 10:00     |                               |
