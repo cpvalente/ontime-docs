@@ -8,23 +8,13 @@ This is useful in cases where you would like another software to push some data 
 
 ![Timer with external data](../../../assets/screenshots/features/timer-external.png)
 
+
 ## Setting external data
 
-Using the compatible APIs, you can set the external fields using the **OSC** or **WebSocket API**.
-For more about the API [see the docs](/api/osc-and-ws)
+The External data is meant for other applications to share data with Ontime. \
+As such it cannot be set within Ontime, you will need to use one of the APIs to do so.
 
-### OSC
-```ts
-| Message                                | Payload        |
-| -------------------------------------- | -------------- |
-| `/ontime/set-external-message-text`    | `string`       |
-| `/ontime/set-external-message-visible` | `true | false` |
-```
+See the documentation on setting the external data using the [OSC](/api/protocols/osc/#example-change-the-external-text) or [WebSocket API](/api/protocols/websockets/#example-change-the-external-text).
 
-### WebSocket
-```ts
-| Message                                | Payload        |
-| -------------------------------------- | -------------- |
-| `set-external-message-text`            | `string`       |
-| `set-external-message-visible`         | `true | false` |
-```
+## Data preview
+In the `editor` view, you can see the current value and visibility of the external data in the message panel, along with the `Timer message`.

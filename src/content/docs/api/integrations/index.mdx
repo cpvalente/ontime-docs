@@ -31,7 +31,7 @@ a message will be sent to the device configured in OSC settings every time an ev
 
 You can embed data from the application runtime in the message using templates `/your-message/{{ontime-data}} {{ontime-more-data}}`
 
-This means that any of the data described in the [Runtime Data](/api/runtime-data) can be sent as part of the message payload.
+This means that any of the data described in the [Runtime Data](/api/data/runtime-data) can be sent as part of the message payload.
 
 When the lifecycle event is triggered, Ontime places the updated piece of data in place of the template.
 
@@ -44,7 +44,7 @@ Extending the example above, you could compose a message that sends the index of
 ```
 
 :::note
-The template inside the brackets need to reference the same shape as the nesting of the runtime data as described in [Runtime Data](/api/runtime-data). \
+The template inside the brackets need to reference the same shape as the nesting of the runtime data as described in [Runtime Data](/api/data/runtime-data). \
 Use the  `.` when referencing a subkey
 
 `{{titlesPublic.noteNext}}` \

@@ -17,7 +17,7 @@ and the instantiation of the ["empty state" here](https://github.com/cpvalente/o
 
 :::note
 Ontime broadcasts messages formatted as below. \
-Where the type `Ontime` indicates the type of message, and the payload is a portion of the [Runtime data object](/api/runtime-data/#runtime-data-object)
+Where the type `Ontime` indicates the type of message, and the payload is a portion of the [Runtime data object](#runtime-data-object)
 
 ```ts
 // example broadcast message from Ontime
@@ -66,8 +66,8 @@ This allows for smaller payloads and granular updates.
 |                          | `plannedEnd`          | Schedule planned end time                                | `number`                                         | 
 |                          | `actualStart`         | Actual start time of rundown                             | `number`                                         | 
 |                          | `expectedEnd`         | Time for expected end                                    | `number`                                         | 
-| `eventNow` `eventNext`   |                       | **currently loaded event / upcoming event**, [see event data](/api/event-data)              |               | 
-| `publicEventNow` `publicEventNext` |             | **currently public loaded event / upcoming event**, [see event data](/api/event-data)       |               | 
+| `eventNow` `eventNext`   |                       | **currently loaded event / upcoming event**, [see event data](/api/data/event-data)              |          | 
+| `publicEventNow` `publicEventNext` |             | **currently public loaded event / upcoming event**, [see event data](/api/data/event-data)       |          | 
 | `custom`                 |                       | User added data to the event [see custom fields](/features/custom-fields)  |                                | 
 
 :::note
