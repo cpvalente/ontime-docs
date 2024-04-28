@@ -3,13 +3,9 @@ title: Auxiliary timer
 description: Small utility timer
 ---
 
-Ontime provides a Auxiliary Timer.
-
-
-This currently does not affect the rundown playback, but it means to facilitate users that want to keep track of secondary timers.
-
-ie: 
+The Auxiliary timer is a feature that allows parallel, free-running clocks alongside the rundown playback. \
+These timers do not affect the rundown but serve as an interface for tracking arbitrary events. For example: 
 - how long is this section
 - countdown to a media playback end time
 
-The Auxiliary timer is fully controllable using the API, so you could also have other software sync their timers with Ontime.
+The Auxiliary timer can be controlled in the [Editor interface](/interface/production/app-editor/) or through one of the APIs (follow docs for [HTTP](/api/protocols/http/#auxiliary-timer), [OSC](/api/protocols/osc/#auxiliary-timer) or [WebSockets](/api/protocols/websockets/#auxiliary-timer)). 
