@@ -1,5 +1,5 @@
 ---
-title: Docker image
+title: Using the Docker image
 description: Running ontime with Docker
 ---
 
@@ -10,10 +10,22 @@ The Docker image is the most lightweight to distribute and install Ontime.
 
 ## Getting started
 
-* [ ] Install Docker on your machine. Please refer to [Docker](https://docs.docker.com/engine/install/debian/) or Raspberry Pi guides for this step
-* [ ] Once Docker is installed, pull the [Ontime image from Dockerhub](https://hub.docker.com/r/getontime/ontime) with the command
+Install Docker on your machine. \
+Please refer to [Docker](https://docs.docker.com/engine/install/debian/) or Raspberry Pi guides for this step
 
-You can find an example of docker-compose in the Docker repository to help you get started.
+Once Docker is installed, pull the Ontime [image from Dockerhub](https://hub.docker.com/r/getontime/ontime) using the command:
+
+```bash
+docker pull getontime/ontime
+```
+
+You can find an example of docker-compose in the Docker repository to help you get started. \
+To start ontime with the example docker compose file use the command:
+
+```bash
+docker-compose up -d
+```
+
 
 ## Notes on Docker-compose
 
@@ -28,23 +40,53 @@ services:
     image: getontime/ontime:latest
     ports:
       - "4001:4001/tcp"
-      - "127.0.0.1:8888:8888/udp"
+      - "8888:8888/udp"
+      - "9999:9999/udp"
     volumes:
-      - "./ontime-db:/server/preloaded-db"
+      - "./ontime-db:/external/projects/"
+      - "./ontime-styles:/external/styles/"
+      - "./ontime-external:/external/external/"
     environment:
       - TZ=Asia/Singapore
     restart: unless-stopped
 ```
 
-* `4001:4001/tcp` binds local port 4001 to the same container port. You could use port 80 here to reach Ontime as `http://host` instead of `http://host:4001`.
-* `127.0.0.1:8888:8888/udp` binds the localhost port 8888 (default for OSC input into the app) to the same in the container, so that it can receive data from the host machine targeted to the loopback interface.
-* `TZ=Asia/Singapore` overrides the container timezone. 
+* `4001:4001/tcp` binds local port 4001 to the same container port. Port 4001 is the default for the UI and is necessary to expose the app. 
+* `8888:8888/udp` binds the localhost port 8888 (default for OSC input into the app) to the same in the container, so that it can receive data from the host machine targeted to the loopback interface.
+* `8888:8888/udp` binds the localhost port 9999 (default for OSC output from the app) to the same in the container, this allows Ontime to send data out of the container.
+* `"./ontime-db:/external/projects/"`, `"./ontime-styles:/external/styles/"` and `"./ontime-external:/external/external/"` expose the internal container directories.
+* `TZ=Asia/Singapore` overrides the container timezone.
 
 The variations in the network setup will widely depend on your setup.
 
-:::note[Set time in Docker]
+### Common questions 🚨
+
+#### Ontime default port
+Ontime serves its web pages on port 4001. 
+In the docker compose example `4001:4001/tcp` exposes this port to the outside so it can be accessed at `http://<ip-address>:4001`. 
+Instead, you could use `80:4001/tcp` to expose the internal container port 4001 to the outside port 80 (the default for http).
+That means your URLs would be slightly simpler since you wouldnt need to provide a port, (eg: `http://<ip-address>/editor` instead og `http://<ip-address>:4001/editor`)
+
+### Volumes
+The app interacts with some directories that the user can interact with.
+In a docker instance, we need to expose this manually to the container host.
+Namely:
+- `/external/projects/` contains all of Ontime's project files
+- `/external/styles/` contains the user provided CSS Override
+- `/external/external/` is a placeholder directory that users can leverage to distribute data through Ontime 
+
+These three paths can be bound to individual host directories as in the sample docker-compose file, or you can bind a single host directory to /external/ for Ontime to store all its files in.
+
+#### Setting the time in the container
 Docker containers default to UTC timezone, which you can modify using the `TZ` environment variable.
 
 Setting time in a Docker container is not an operation specific to Ontime. \
 See as an example the [following blog post](https://docs.diladele.com/docker/timezones.html), which contains a list of timezones to use in Docker.
-:::
+
+#### I can see the UI but no timers will start
+
+Ontime uses WebSockets to transport the time data from the server to the UI. \
+It can be the case that you are leveraging the Docker image to run Ontime in a cloud server or a server behind a reverse proxy.
+
+In those cases, it is common that the WebSocket transport needs some additional configuration in the server side. \
+See documentation for [NGINX](https://nginx.org/en/docs/http/websocket.html) and [this example guide for Synology](https://mariushosting.com/synology-some-docker-containers-need-websocket/).
