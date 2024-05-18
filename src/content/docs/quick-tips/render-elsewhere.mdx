@@ -1,0 +1,26 @@
+---
+title: Render views in third party apps
+description: Render Ontime views in third party apps
+---
+
+It is possible to render the any view of Ontime in a third party software that is currently networked with Ontime. \
+This flow would be in any software which can render a HTML page, such as OBS (Open Broadcaster Software), disguise or Touchdesigner.
+
+:::note[Keying views]
+In some views, you will have a key parameter which allows you to configure the background colour.\
+See [view configuration](/quick-tips/configuring-views).
+
+In all other cases you can make use of the [CSS variables](/features/custom-styling) which provide overrides for the background colour:
+
+```css
+:root {
+    --background-color-override: #00FF00;
+}
+```
+:::
+
+## Rendering lower thirds in OBS
+![Lower thirds in OBS](../../../assets/screenshots/features/obs-lower-thirds.png)
+
+* The options **Shutdown source when not visible** and **Refresh browser when scene becomes active** ensure that the lower third animation play on load / unload
+* Remember to clear the CSS to ensure a keyable background (see above)
