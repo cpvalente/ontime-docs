@@ -36,40 +36,80 @@ This allows for smaller payloads and granular updates.
 :::
 
 ## Runtime data object
-| Key                      | Property              | Description                                              | Type                                             | 
-| :----------------------- | :-------------------- | :------------------------------------------------------- | :----------------------------------------------- | 
-| `clock`                  |                       | **Current time from wall clock**                         | `number`                                         | 
-| `timer`                  |                       | **Information related to running timer**                 |                                                  | 
-|                          | `addedTime`           | Time added by user                                 | `number \| null`                                 | 
-|                          | `current`             | Running countdown                                        | `number \| null`                                 | 
-|                          | `duration`            | Duration of loaded event                                 | `number \| null`                                 | 
-|                          | `elapsed`             | Elapsed time in current timer                            | `number \| null`                                 | 
-|                          | `expectedFinish`      | Expected finish for current timer                        | `number \| null`                                 | 
-|                          | `finishedAt`          | When did the timer go past 0                             | `number \| null`                                 | 
-|                          | `playback`            | Playback state                                           | `'roll' \| 'play' \| 'pause' \| 'stop' \| 'armed'`                                 | 
-|                          | `secondaryTimer`      | User in roll mode                                        | `number \| null`                                 | 
-|                          | `startedAt`           | ID of loaded event                                       | `string \| null`                                 | 
-| `onAir`                  |                       | Whether onAir is active                                  | `boolean`                                        | 
-| `message.timer`          |                       | **Information related to Message shown in timer**        |                                                  | 
-|                          | `text`                | Text of message                                          | `string`                                         | 
-|                          | `visible`             | Whether the message is visible                           | `boolean`                                        | 
-|                          | `blink`               | Whether the message is blinking                          | `boolean`                                        | 
-|                          | `blackout`            | Whether to blackout the timer views                      | `boolean`                                        | 
-| `message.external`       |                       | **Exteral data injected into Ontime**                    |                                                  | 
-|                          | `text`                | Text of message                                          | `string`                                         | 
-|                          | `visible`             | Whether the message is visible                           | `boolean`                                        | 
-| `runtime`                |                       | **Information related to the current runtime**           |                                                  | 
-|                          | `selectedEventIndex`  | Index of selected event                                  | `number \| null`                                 | 
-|                          | `numEvents`           | Number of non-skipped events in rundown                  | `number`                                         | 
-|                          | `offset`              | Difference between current runtime and schedule          | `number`                                         | 
-|                          | `plannedStart`        | Schedule planned start time                              | `number`                                         | 
-|                          | `plannedEnd`          | Schedule planned end time                                | `number`                                         | 
-|                          | `actualStart`         | Actual start time of rundown                             | `number`                                         | 
-|                          | `expectedEnd`         | Time for expected end                                    | `number`                                         | 
-| `eventNow` `eventNext`   |                       | **currently loaded event / upcoming event**, [see event data](/api/data/event-data)              |          | 
-| `publicEventNow` `publicEventNext` |             | **currently public loaded event / upcoming event**, [see event data](/api/data/event-data)       |          | 
-| `custom`                 |                       | User added data to the event [see custom fields](/features/custom-fields)  |                                | 
-
 :::note
-All times are in milliseconds from midnight
+All times are in milliseconds from midnight.
 :::
+
+### ontime-clock
+Contains the server wall clock time.
+```ts
+{
+  clock: number
+}
+````
+
+### ontime-timer
+Contains data related to the application timer
+```ts
+{
+  addedTime: number                                         // time added / removed by user
+  current: number | null                                    // running countdown
+  duration: null                                            // duration of loaded event
+  elapsed: null                                             // elapsed time in current timer
+  playback: 'play' | 'pause' | 'armed' | 'stop' | 'roll'    // playback state
+  startedAt: number | null                                  // time when current timer was started
+  expectedFinish: number | null                             // time when current timer is expected to finish
+  finishedAt: number | null                                 // time when current timer reached 0
+}
+````
+
+### ontime-message
+Data related to message feature. It contains two message objects:
+
+#### Timer object
+Corresponding to the visibility of messages to the [stage timer view](/interface/backstage/stage-timer).
+
+```ts
+timer: {
+  text: string
+  visible: boolean
+  blink: boolean
+  blackout: boolean
+}
+````
+
+#### Message object
+Corresponding to visibility of [external messages](/features/external-message) (also displayed in the stage timer view).
+
+```ts
+external: {
+  text: string
+  visible: boolean
+}
+````
+
+### ontime-runtime
+Contains data related to the application runtime.
+```ts
+{
+  numEvents: number                                             // number of non-skipped events in rundown
+  selectedEventIndex: number | null                             // index of selected event
+  offset: number | null                                         // difference between current runtime and schedule
+  plannedStart: number                                          // schedule planned start time
+  plannedEnd: number | null                                     // schedule planned end time
+  actualStart: number | null                                    // actual start time of rundown
+  expectedEnd: number | null                                    // time for expected end
+}
+````
+
+
+### ontime-auxtimer1
+Contains data related to the [auxiliary timer](/features/aux-timer).
+```ts
+{
+  duration: number                                              // total duration of auxiliary timer
+  current: number                                               // current value
+  playback: 'play' | 'pause' | 'stop'                           // playback state
+  direction: 'count-down' | 'count-up'                          // counting direction
+}
+````
