@@ -1,0 +1,46 @@
+---
+title: Sending OSC
+description: Sending OSC (Open Sound Control) from Ontime
+---
+
+You can leverage the [integrations feature](/api/integrations) to send Ontime data to other applications via OSC (Open Sound Control).
+
+
+## OSC Payload examples
+When sending an OSC message, the argument type is not explicitly given by the user but inferred by Ontime.
+
+
+```
+| OSC Payload                   | Parsed type                   |
+| ----------------------------- | ----------------------------- |
+| 1111                          | Int                           |
+| 0.1111                        | Float                         |
+| test                          | String                        |
+| "1111"                        | String                        |
+| true                          | True                          |
+| false                         | False                         |
+```
+
+You can also send multiple, space separated arguments which will be parsed individually.
+
+```bash title="Multiple arguments"
+"with space" 1111 0.1111 TRUE FALSE
+```
+
+Which would be sent as a single message with the payload
+
+```
+| Payload value                 | Parsed type                   |
+| ----------------------------- | ----------------------------- |
+| 'with space'                  | String                        |
+| 1111                          | Int                           |
+| 0.1111                        | Float                         |
+| true                          | True                          |
+| false                         | False                         |
+```
+
+:::note
+Keep in mind that these rules will also affect [template variables](/api/integrations#using-variables-in-integrations).
+
+We advise wrapping template variables that you want to remain as strings in quotes to avoid unintended payloads of strings being split by their spaces or interpreted as numbers.
+:::
