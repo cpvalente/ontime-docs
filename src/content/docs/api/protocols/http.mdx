@@ -131,7 +131,7 @@ You can change multiple fields in a single request by using adding on more query
 The following endpoints allow controlling the messages Ontime sends to the views. \
 The payload response is the current state of the message data
 
-### Example: change the external message
+### Example: change the external message text
 **Request**
 ```bash
 <localhost:4001>/api/message/external?text=new text
@@ -154,6 +154,31 @@ The payload response is the current state of the message data
     }
 }
 ```
+
+### Example: change the external message visibility
+**Request**
+```bash
+<localhost:4001>/api/message/external?visible=true
+```
+
+**Response**
+```ts
+{
+    "payload": {
+        "timer": {
+            "text":"",
+            "visible":true,
+            "blink":false,
+            "blackout":false
+        },
+        "external": {
+            "text":"new text",
+            "visible":true
+        }
+    }
+}
+```
+
 ## Playback
 The following endpoints allow controlling the Ontime's playback. \
 The payload response is the current state of the message data
