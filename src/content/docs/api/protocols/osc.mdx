@@ -57,10 +57,16 @@ See more on [custom fields](/features/custom-fields)
 The following endpoints allow controlling the messages Ontime sends to the views. \
 The payload response is the current state of the message data
 
-### Example: change the external message
+### Example: change the external message text
 **OSC Message**
 ```bash
 /ontime/message/external/text <new-text>
+```
+
+### Example: change the external message visibility
+**OSC Message**
+```bash
+/ontime/message/external/visible true | false
 ```
 
 ## Playback

@@ -128,7 +128,7 @@ Message: {
 The following endpoints allow controlling the messages Ontime sends to the views. \
 The payload response is the current state of the message data
 
-### Example: change the external message
+### Example: change the external message text
 **Request**
 ```bash
 Target: ws://<ip-address>:<port>/ws
@@ -156,6 +156,38 @@ Message: {
         "external":{
             "text":"new text",
             "visible":false
+        }
+    }
+}
+```
+### Example: change the external message visibility
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "message", 
+    "payload": {
+        "external": {
+            "visible": true
+        }
+    }
+}
+```
+
+**Response**
+```ts
+{
+    "type":"message",
+    "payload": {
+        "timer": {
+            "text":"",
+            "visible":false,
+            "blink":false,
+            "blackout":false
+            },
+        "external":{
+            "text":"new text",
+            "visible":true
         }
     }
 }
