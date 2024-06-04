@@ -22,20 +22,29 @@ You can monitor the messages received using the **Network log** in  `Editor` -> 
 The change endpoint allows changing some of the properties of a given event (below). \
 The request should contain a patch of the event to be changed, along with the ID of the event to change.
 
-:::note
-See the table below for a list of fields that can be changed using this endpoint. \
-[See the whitelisted properties in the code](https://github.com/cpvalente/ontime/blob/master/apps/server/src/api-integration/integration.utils.ts#L8)
 
-| Property   | Value type                                                                                                  |
-| :--------- | :---------------------------------------------------------------------------------------------------------- |
-| `title`    | string                                                                                                      |
-| `note`     | string                                                                                                      |
-| `cue`      | string (value should be kept under 8 characters)                                                            |
-| `duration` | number (in seconds)                                                                                         |
-| `isPublic` | boolean                                                                                                     |
-| `skip`     | boolean                                                                                                     |
-| `colour`   | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color))   |
-| `custom`   | target the specific custom field with `custom:<fieldname>`                                                    |
+See the table below for a list of fields that can be changed using this endpoint.
+
+| Property      | Value type                                                                                                |
+| :------------ | :-------------------------------------------------------------------------------------------------------- |
+| `title`       | string                                                                                                    |
+| `note`        | string                                                                                                    |
+| `cue`         | string (value should be kept under 8 characters)                                                          |
+| `isPublic`    | boolean                                                                                                   |
+| `skip`        | boolean                                                                                                   |
+| `colour`      | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color)) |
+| `custom`      | target the specific custom field with `custom:<fieldname>`                                                |
+| `timeWarning` | number (in seconds)                                                                                       |
+| `timeDanger`  | number (in seconds)                                                                                       |
+| `endAction`   | string (none / load-next / play-next / stop)                                                              |
+| `timerType`   | string (count-down / count-up / time-to-end / clock)                                                      |
+| `duration`    | number (in seconds)                                                                                       |
+| `timeStart`   | number (in seconds)                                                                                       |
+| `timeEnd`     | number (in seconds)                                                                                       |
+
+:::caution
+Changing the properties `skip` `endAction` `duration` `timeStart` `timeEnd` \
+cause the rundown to be recalculated and writing to them are therefor therefor throttled
 :::
 
 ### Example: change title of event
