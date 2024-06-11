@@ -19,14 +19,10 @@ Ontime is a community project and any contribution is valuable.
 If you have have questions, call for clarifications or suggestions, please open an issue.
 
 ## Download the latest releases here
-
-<div style="display: flex; justify-content: space-around">
-  <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-macOS-arm64.dmg"><img alt="Download MacOS" src="https://github.com/cpvalente/ontime/blob/master/.github/aux-images/mac-download.png"/></a>
-  <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-win64.exe"><img alt="Download Windows" src="https://github.com/cpvalente/ontime/blob/master/.github/aux-images/win-download.png"/></a>
-  <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-linux.AppImage"><img alt="Download Linux" src="https://github.com/cpvalente/ontime/blob/master/.github/aux-images/linux-download.png"/></a>
-  <a href="https://hub.docker.com/r/getontime/ontime"><img alt="Get from Dockerhub" src="https://github.com/cpvalente/ontime/blob/master/.github/aux-images/dockerhub.png"/></a>
-</div>
-
-<br />
-
 <a href="https://www.buymeacoffee.com/cpvalente" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="32"></a>
+
+- Download for <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-win64.exe">Windows</a>
+- Download for <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-macOS-arm64.dmg">MacOS Arm</a>
+- Download for <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-macOS-x64.dmg">MacOS Intel</a>
+- Download AppImage for <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-linux.AppImage">Linux</a>
+- Get from <a href="https://hub.docker.com/r/getontime/ontime">Docker hub</a>
