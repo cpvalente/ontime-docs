@@ -1,14 +1,44 @@
 ---
-title: Using the Docker image
-description: Running ontime with Docker
+title: Headless Ontime
+description: Running Ontime in a headless machine
 ---
 
-You can leverage the Docker install to have an Ontime instance in a headless machine. \
+You can leverage the headless distributions to run Ontime in a computer without GUI. \
 This could be in a local machine part of the venue's installation, a small Raspberry Pi or even a server running in the cloud.
 
-The Docker image is the most lightweight to distribute and install Ontime.
+Headless installs are the most lightweight and versatile ways to distribute and install Ontime.
 
-## Getting started
+## Using NPM
+
+### Getting started
+
+#### Prerequisites
+You will need to have installed the correct version of __node.js__.\
+Please check [the app engines declaration](https://github.com/cpvalente/ontime/blob/master/package.json) for the correct version.
+
+#### Running Ontime
+To get Ontime running, all you need to do is install it in your system using your package manager of choice:
+
+Install globally in your system 
+```bash
+npm install -g @getontime/cli
+```
+
+... and run using the installed script
+```bash
+ontime
+```
+
+Or install and run ontime (the installation here is temporary for the duration of the session)
+```bash
+npx install @getontime/cli
+```
+
+Once running, the app will be available in any device on the same network over (default port 4001)
+
+## Using Docker
+
+### Getting started
 
 Install Docker on your machine. \
 Please refer to [Docker](https://docs.docker.com/engine/install/debian/) or Raspberry Pi guides for this step
@@ -27,7 +57,7 @@ docker-compose up -d
 ```
 
 
-## Notes on Docker-compose
+### Notes on Docker-compose
 
 Considering the example docker-compose below
 
