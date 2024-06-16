@@ -43,9 +43,7 @@ services:
       - "8888:8888/udp"
       - "9999:9999/udp"
     volumes:
-      - "./ontime-db:/external/projects/"
-      - "./ontime-styles:/external/styles/"
-      - "./ontime-external:/external/external/"
+      - "./ontime-external:/external/"
     environment:
       - TZ=Asia/Singapore
     restart: unless-stopped
@@ -54,7 +52,7 @@ services:
 * `4001:4001/tcp` binds local port 4001 to the same container port. Port 4001 is the default for the UI and is necessary to expose the app. 
 * `8888:8888/udp` binds the localhost port 8888 (default for OSC input into the app) to the same in the container, so that it can receive data from the host machine targeted to the loopback interface.
 * `8888:8888/udp` binds the localhost port 9999 (default for OSC output from the app) to the same in the container, this allows Ontime to send data out of the container.
-* `"./ontime-db:/external/projects/"`, `"./ontime-styles:/external/styles/"` and `"./ontime-external:/external/external/"` expose the internal container directories.
+* `"./ontime-external:/external/"` expose the internal container directory.
 * `TZ=Asia/Singapore` overrides the container timezone.
 
 The variations in the network setup will widely depend on your setup.
@@ -75,7 +73,14 @@ Namely:
 - `/external/styles/` contains the user provided CSS Override
 - `/external/external/` is a placeholder directory that users can leverage to distribute data through Ontime 
 
-These three paths can be bound to individual host directories as in the sample docker-compose file, or you can bind a single host directory to /external/ for Ontime to store all its files in.
+You can bind a single host directory to `/external/` for Ontime to store all its files in, or expose the individual parts to host directories:
+
+```
+    volumes:
+      - "./ontime-db:/external/projects/"
+      - "./ontime-styles:/external/styles/"
+      - "./ontime-external:/external/external/"
+```
 
 #### Setting the time in the container
 Docker containers default to UTC timezone, which you can modify using the `TZ` environment variable.
