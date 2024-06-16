@@ -52,7 +52,7 @@ services:
 * `4001:4001/tcp` binds local port 4001 to the same container port. Port 4001 is the default for the UI and is necessary to expose the app. 
 * `8888:8888/udp` binds the localhost port 8888 (default for OSC input into the app) to the same in the container, so that it can receive data from the host machine targeted to the loopback interface.
 * `8888:8888/udp` binds the localhost port 9999 (default for OSC output from the app) to the same in the container, this allows Ontime to send data out of the container.
-* `"./ontime-external:/external/"` expose the internal container directorie.
+* `"./ontime-external:/external/"` expose the internal container directory.
 * `TZ=Asia/Singapore` overrides the container timezone.
 
 The variations in the network setup will widely depend on your setup.
