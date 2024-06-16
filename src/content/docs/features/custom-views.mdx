@@ -1,14 +1,36 @@
 ---
 title: Make custom views
-description: Make custom views
+description: Make and deliver custom views
 ---
 
-Ontime broadcasts its data in the network to be used by any device.
+Ontime broadcasts its data in the network for use by any device.
 
-You can leverage this to create custom views and control interfaces while letting Ontime handle the distribution and time-keeping.
-
-![Custom Ontime view](../../../assets/images/view-template.png)
+You can leverage this to create custom views and control interfaces that match your needs while letting Ontime handle the distribution and time-keeping.
 
 :::tip[Show me the code!]
-You can find a demo template using Javascript and HTML on the [viewer template repo](https://github.com/cpvalente/Ontime-viewer-template-v2) in GitHub.
+Hey! Ontime already provides a demo template.
+
+A simple timer view is shipped with Ontime, which should provide enough code to get you started. It also shows how you can use Ontime's infrastructure to deliver your custom views.
+
+You can see this demo page by navigating to 
+```bash
+http://<ip-address>:<port>/external/demo
+```
+
+You can find [the code from the demo here](https://github.com/cpvalente/ontime/tree/master/apps/server/src/external/demo).
 :::
+
+## Making custom views
+You can create a custom view using any technology of your choice. If you plan to deploy this using Ontime's infrastructure, you must leverage Javascript, CSS and HTML.
+
+In short, you will create a web page / application that listens to the WebSocket stream from Ontime and updates its view. 
+
+Please follow here for the [documentation on the Runtime Data](/api/data/runtime-data). \
+If you are also looking to control Ontime, you can find the needed information in the [API documentation](/api/protocols/websockets).
+
+Alternatively, the [APIs](/api) also offer polling endpoints which can be helpful in cases where you are unable to utilise the WebSocket stream.
+
+## Delivering custom views
+Once you have created your custom Ontime views, you can use Ontime's infrastructure to deliver these in the network. 
+
+Ontime exposes any file inside its external folder to the network. This folder is also used to keep the custom styles.
