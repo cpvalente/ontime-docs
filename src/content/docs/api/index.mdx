@@ -1,10 +1,20 @@
 ---
-title: Feedback and control
-description: Feedback and control
+title: Ontime APIs
+description: Ontime APIs, Feedback and control
 ---
 
-You can leverage one of the available protocols (OSC, WebSocket and HTTP) to automate your worflows with Ontime.\
-With possibility for both [controlling Ontime](/api/#control-ontime) or letting [Ontime control third party applications](/api/#get-data-from-ontime).
+Ontime distinguishes data into two main types
+
+#### Project data
+This is data kept with the project that is persisted across app shutdown, it includes your settings and rundown. \
+The persisted data changes less often and is transmitted over HTTP
+
+#### Runtime data
+This is data that results from your interaction with the app, it includes timers and playback state. \
+The runtime data changes potentially very often. This is transmitted over WebSocket, but can be also consumed and modified over any of the supported protocols (OSC, WebSocket and HTTP).
+
+## Get project data
+Please follow the link to the documentation on the HTTP endpoints that provide access to the project data.
 
 ## Control Ontime
 The OSC, Websocket and HTTP API allow for low latency communication to Ontime. \
@@ -15,6 +25,6 @@ You can find the documentation for the individual protocols by following the lin
 - [WebSockets](/api/protocols/websockets)
 - [HTTP](/api/protocols/http)
 
-## Get data from Ontime
+## Control from Ontime
 You can also leverage the **integrations feature** to distribute the runtime data from Ontime or control other software. \
 More information is available [in the documentation for integrations](/api/integrations/).
