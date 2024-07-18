@@ -99,17 +99,17 @@ That means your URLs would be slightly simpler since you wouldnt need to provide
 The app interacts with some directories that the user can interact with.
 In a docker instance, we need to expose this manually to the container host.
 Namely:
-- `/external/projects/` contains all of Ontime's project files
-- `/external/styles/` contains the user provided CSS Override
-- `/external/external/` is a placeholder directory that users can leverage to distribute data through Ontime 
+- `/data/projects/` contains all of Ontime's project files
+- `/data/styles/` contains the user provided CSS Override
+- `/data/external/` is a placeholder directory that users can ues to distribute data through Ontime 
 
-You can bind a single host directory to `/external/` for Ontime to store all its files in, or expose the individual parts to host directories:
+You can bind a single host directory to `/data/` for Ontime to store all its files in (as in the example docker-compose, above), or expose the individual parts to host directories:
 
 ```
     volumes:
-      - "./ontime-db:/external/projects/"
-      - "./ontime-styles:/external/styles/"
-      - "./ontime-external:/external/external/"
+      - "./ontime-projects:/data/projects/"
+      - "./ontime-styles:/data/styles/"
+      - "./ontime-external:/data/external/"
 ```
 
 #### Setting the time in the container
