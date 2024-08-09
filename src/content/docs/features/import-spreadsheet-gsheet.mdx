@@ -2,6 +2,7 @@
 title: Import from Google Sheets
 description: Import data from Google Sheets
 ---
+import { Steps } from '@astrojs/starlight/components';
 
 [spreadsheet-link]: https://docs.google.com/spreadsheets/d/1Ft5czgMtXAuwdU5X4sxXoNQKan-dR4n1AU3vIN8TSCg
 
@@ -10,46 +11,121 @@ This is ideal for collaboration or extensive data manipulation.
 
 ![Spreadsheet template](../../../assets/screenshots/features/spreadsheet-template.png)
 Follow [here][spreadsheet-link] to see the Google Sheet from the screenshot
-
 To enable this feature, you will to need provide Ontime with the necessary permissions.\ 
 From there, we can read and write to the Google Sheet spreadsheet.
 
-### Generate Client Secret in Google
-
-You will need to create a token in your Google Account and upload it to Ontime.
-
-:::tip[Create token in Google Cloud Console]
-This guide follow the Google documentation at https://console.cloud.google.com
-- On the __Google Cloud Console__, __Create a Project__ for the integration.
-- In the left menu click `Create Credentials` (or use the link https://console.cloud.google.com/apis/credentials), and select `OAuth client ID`.  \
-_NOTE: You may need to configure a consent screen at this point. This is a Google requirement. Follow the instructions on the page._
-- Select `TV and Limited Input devices` as the `Application Type`, and give the app a name.
-- In the popup modal presented, click `Download JSON` button to download the Client ID secrets. You can also do this later from the interface.
+:::note[Prerequisites]
+To use the Google Sheet integration, you will a Google account and to the Google Console. \
+The machine running Ontime must have access to the internet.
 :::
 
-### 2. Authenticate Ontime
-With Client ID Ontime can request Google permission to access the data in the spreadsheet.  
+<Steps>
+  <ol>
+    <li>
+      ### Create project
+      <details>
+        <summary>Go to https://console.cloud.google.com/ and create a new project</summary>
+        ![step-1.1](../../../assets/screenshots/features/sheet-guide/step-1.1.jpg)
+        ![step-1.2](../../../assets/screenshots/features/sheet-guide/step-1.2.jpg)
+        ![step-1.3](../../../assets/screenshots/features/sheet-guide/step-1.3.jpg)
+      </details>
 
-- Start the synchronisation process in `Editor` -> `Settings` -> `Data Sources` by clicking the `Synchronise with Google` button
-- Upload the client secret downloaded from Google and provide the ID of the sheet to synchronise
-- Click the `Connect` button to request the authentication in Google services.
+      <details>
+        <summary>On the front page select the newly created project</summary>
+        ![step-1.1](../../../assets/screenshots/features/sheet-guide/step-1.1.jpg)
+        ![step-1.4](../../../assets/screenshots/features/sheet-guide/step-1.4.jpg)
+      </details>
+    </li>
+    <li>
+      ### Enable the Sheet API
+      <details>
+        <summary>Click enable APIs and Services</summary>
+        ![step-2.1](../../../assets/screenshots/features/sheet-guide/step-2.1.jpg)
+      </details>
+   
+      <details>
+        <summary>... and search for Sheets</summary>
+        ![step-2.2](../../../assets/screenshots/features/sheet-guide/step-2.2.jpg)
+        ![step-2.3](../../../assets/screenshots/features/sheet-guide/step-2.3.jpg)
+        ![step-2.4](../../../assets/screenshots/features/sheet-guide/step-2.4.jpg)
+      </details>
+    </li>
+    <li>
+      ### Setup consent screen
+      <details>
+        <summary>Back on the APIs and Services to set up a OAuth consent screen</summary>
+        ![step-3.1](../../../assets/screenshots/features/sheet-guide/step-3.1.jpg)
+      </details>
 
-You will be provided a 6 digit code and a link to the Google Authentication page. \
-Please follow the link and insert the provided 6 digit code.
+      <details>
+        <summary>Add necessary scopes</summary>
+        The first step depends very much on how your organization is set up but it should make sense by reading through the options
+        If you are unsure select external and only fill out the required fields
 
-:::note[Spreadsheet ID]
-The Spreadsheet ID is available in the URL after the `d` attribute:
-`https://docs.google.com/spreadsheets/d/<Spreadsheet ID>/`
-:::
+        When thats done click "ADD OR REMOVE SCOPES"
 
-### 3. Read and write data
-Now Ontime is connected to your Google Sheet.
+        ![step-3.3](../../../assets/screenshots/features/sheet-guide/step-3.3.jpg)
+      </details>
+      
+      <details>
+        <summary>Filter for sheets, add "/auth/spreadsheets" and click update</summary>
+        ![step-3.4](../../../assets/screenshots/features/sheet-guide/step-3.4.jpg)
+        ![step-3.5](../../../assets/screenshots/features/sheet-guide/step-3.5.jpg)
+      </details>
 
-You can now read and write to and from the spreadsheet in this interface.
-Keep in mind that these operations will override the data in the other location
+      <details>
+        <summary>Click save and continue</summary>
+        For "Test users" add the email(s) the will be using this. \
+        Save and go back to the dashboard
+      </details>
+    </li>
+    <li>
+      ### Create credentials
+      <details>
+        <summary>Go to Credentials</summary>
+        ![step-4.1](../../../assets/screenshots/features/sheet-guide/step-4.1.jpg)
+      </details>
+   
+      <details>
+        <summary>Click Create Credentials and select OAuth client ID</summary>
+        ![step-4.2](../../../assets/screenshots/features/sheet-guide/step-4.2.jpg)
+        ![step-4.3](../../../assets/screenshots/features/sheet-guide/step-4.3.jpg)
+      </details>
 
-:::note[Client Secret] 
-The authentication is kept in memory and wiped when Ontime quits. This means: 
-1. We do not keep any sensitive data where others can find it 
-2. You will need to provide this file and authenticate every time you restart Ontime
-:::
+      <details>
+        <summary>For Application type select TVs and Limited input device, give it a name and click create</summary>
+        ![step-4.4](../../../assets/screenshots/features/sheet-guide/step-4.4.jpg)
+      </details>
+
+      <details>
+        <summary>Download the result, we are now done with the Google console</summary>
+        ![step-4.5](../../../assets/screenshots/features/sheet-guide/step-4.5.jpg)
+      </details>
+    </li>
+    <li>
+      ### Connect Ontime
+      <details>
+        <summary>Go to the sheet sync settings</summary>
+        ![step-5.1](../../../assets/screenshots/features/sheet-guide/step-5.1.jpg)
+        ![step-5.2](../../../assets/screenshots/features/sheet-guide/step-5.2.jpg)
+        ![step-5.3](../../../assets/screenshots/features/sheet-guide/step-5.3.jpg)
+      </details>
+
+      <details>
+        <summary>Upload the file we have downloaded from Google console</summary>
+        ![step-5.4](../../../assets/screenshots/features/sheet-guide/step-5.4.jpg)
+      </details>
+
+      <details>
+        <summary>Get the sheet ID, paste it in Ontime and click connect</summary>
+        ![step-5.5](../../../assets/screenshots/features/sheet-guide/step-5.5.jpg)
+        ![step-5.6](../../../assets/screenshots/features/sheet-guide/step-5.6.jpg)
+      </details>
+
+      <details>
+        <summary>Copy the code and click authenticate and follow the instructions from Google</summary>
+        ![step-5.7](../../../assets/screenshots/features/sheet-guide/step-5.7.jpg)
+      </details>
+    </li>
+  </ol>
+</Steps>
