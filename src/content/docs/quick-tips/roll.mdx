@@ -3,11 +3,29 @@ title: Roll Mode
 description: Ontime runs on its own
 ---
 
-Roll allows Ontime to run standalone by using the a given clock source. \
-Ontime allows moving from Roll mode (automated playback) to manual playback. 
+"Roll" is a playback mode allowing Ontime to run standalone using the current clock. \
+It can be used independently or in conjunction with manual playback to allow for automated rundown sections.
 
-This means you can use roll mode to automate parts of your event while manually controlling others. \
+:::note[Example]
+- 12:00 - 17:00 -> Stage setup
+- 17:00 - 19:00 -> Dinner
+- 19:00 - 19:30 -> Doors
+- 19:30 - 20:00 -> Warm up act
+- 20:00 - 20:10 -> Main act
 
-:::note
-Keep in mind that roll mode will always play the first event which schedule matches the current time.
+In a concert setting, we could have a rundown that includes house and production events. \
+In that case, automating parts of the rundown would be desirable since there is no sitting operator for those sections. \
+At the show start, we would manually take over the playback to run the timers and their integrations.
 :::
+
+### General behaviour
+- As long as there are non-skipped events in the rundown, we will always accept Roll mode
+- If there are no events in the current time frame, we load the next event and count down to its start
+- Roll will always load the first matching event in the current time, this could cause issues if there are multiple days planned or if the rundown is not in order
+- Roll mode will automate loading the next event when the current is finished
+
+### Moving from manual playback to Roll
+If we go from manual playback to Roll mode, the playback should continue as is. \
+There are a few edge cases to consider:
+- Roll is disabled if the current event is in overtime
+- Roll will maintain the current offset when considering event end / start times. You would need to manage the offset manually
