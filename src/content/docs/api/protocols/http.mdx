@@ -135,53 +135,89 @@ You can change multiple fields in a single request by using adding on more query
 ```
 
 ## Message
-The following endpoints allow controlling the messages Ontime sends to the views. \
-The payload response is the current state of the message data
+The following endpoints allow controlling the messages Ontime sends to the timer view. \
+The payload response is the current state of the message data.
 
 ### Example: change the external message text
 **Request**
 ```bash
-<localhost:4001>/api/message/external?text=new text
+<localhost:4001>/api/message/external/new text
 ```
 
 **Response**
 ```ts
 {
     "payload": {
+        "external": "new text",
         "timer": {
-            "text":"",
-            "visible":true,
-            "blink":false,
-            "blackout":false
+            "text": "",
+            "visible": true,
+            "blink": false,
+            "blackout": false,
+            "secondarySource": null
         },
-        "external": {
-            "text":"new text",
-            "visible":false
-        }
     }
 }
 ```
 
-### Example: change the external message visibility
+### Example: secondary source in the timer view
 **Request**
-```bash
-<localhost:4001>/api/message/external?visible=true
+```bash title="Show auxiliary timer as secondary field"
+<localhost:4001>/api/message/timer?secondarySource=aux
+```
+
+**Request**
+```bash title="Show external message as secondary field"
+<localhost:4001>/api/message/timer?secondarySource=external
+```
+
+**Request**
+```bash title="Hide secondary field"
+# Note: The secondary source can be `aux` or `external`, any other value will assign the property to null (ie: off)
+<localhost:4001>/api/message/timer?secondarySource=off
 ```
 
 **Response**
 ```ts
 {
     "payload": {
+        "external": "new text",
         "timer": {
-            "text":"",
-            "visible":true,
-            "blink":false,
-            "blackout":false
+            "text": "",
+            "visible": true,
+            "blink": false,
+            "blackout": false,
+            "secondarySource": "external"
         },
-        "external": {
-            "text":"new text",
-            "visible":true
-        }
+    }
+}
+```
+
+### Example: blackout timer screens
+You can remotely blackout every screen that is in the timer view.
+
+**Request**
+```bash title="Blackout timer screen"
+<localhost:4001>/api/message/timer?blackout=true
+```
+
+**Request**
+```bash title="Disable timer screen blackout"
+<localhost:4001>/api/message/timer?blackout=false
+```
+
+**Response**
+```ts
+{
+    "payload": {
+        "external": "",
+        "timer": {
+            "text": "",
+            "visible": true,
+            "blink": true,
+            "blackout": false,
+            "secondarySource": null
+        },
     }
 }
 ```

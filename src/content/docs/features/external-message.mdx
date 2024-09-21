@@ -3,18 +3,17 @@ title: External message
 description: Inject messages to the Ontime presenter view
 ---
 
-You can inject data into Ontime's presenter view. \
-This is useful in cases where you would like another software to push some data to Ontime, ie: a running time from your video playback software.
+You can show any text as a secondary field in the [timer view](/interface/backstage/stage-timer).
 
 ![Timer with external data](../../../assets/screenshots/features/timer-external.png)
 
+This external message can be set from the editor interface or API. \
+The latter is ideal for software-to-software communication.
 
-## Setting external message
+Typical use cases include:
+- share non-intrusive information with the speaker eg: a talking point reminder
+- show information from another software, such as the title of a playing media asset or its elapsed time
 
-The External message is meant for other applications to share data with Ontime. \
-As such it cannot be set within Ontime, you will need to use one of the APIs to do so.
-
-See the documentation on setting the external message using the [OSC](/api/protocols/osc/#example-change-the-external-message-text) or [WebSocket API](/api/protocols/websockets/#example-change-the-external-message-text).
-
-## Message preview
-In the `editor` view, you can see the current value and visibility of the external data in the message panel, along with the `Timer message`.
+### Setting external message from API
+The External message is great to allow other applications to share data with Ontime.
+See the documentation on setting the external message using the [OSC](/api/protocols/osc/#example-change-the-external-message-text), [HTTP](/api/protocols/http/#example-change-the-external-message-text) or [WebSocket](/api/protocols/websockets/#example-change-the-external-message-text) APIs.

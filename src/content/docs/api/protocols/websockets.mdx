@@ -133,8 +133,8 @@ Message: {
 ```
 
 ## Message
-The following endpoints allow controlling the messages Ontime sends to the views. \
-The payload response is the current state of the message data
+The following endpoints allow controlling the messages Ontime sends to the timer view. \
+The payload response is the current state of the message data.
 
 ### Example: change the external message text
 **Request**
@@ -143,9 +143,7 @@ Target: ws://<ip-address>:<port>/ws
 Message: {
     "type": "message", 
     "payload": {
-        "external": {
-            "text": "new text"
-        }
+        "external": "new text"
     }
 }
 ```
@@ -155,28 +153,54 @@ Message: {
 {
     "type":"message",
     "payload": {
+        "external": "new text",
         "timer": {
-            "text":"",
-            "visible":false,
-            "blink":false,
-            "blackout":false
-            },
-        "external":{
-            "text":"new text",
-            "visible":false
-        }
+            "text": "",
+            "visible": true,
+            "blink": false,
+            "blackout": false,
+            "secondarySource": null
+        },
     }
 }
 ```
-### Example: change the external message visibility
+
+### Example: secondary source in the timer view
 **Request**
-```bash
+```bash title="Show auxiliary timer as secondary field"
 Target: ws://<ip-address>:<port>/ws
 Message: {
     "type": "message", 
     "payload": {
-        "external": {
-            "visible": true
+        "timer": {
+            "secondarySource": "aux"
+        }
+    }
+}
+```
+
+**Request**
+```bash title="Show external message as secondary field"
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "message", 
+    "payload": {
+        "timer": {
+            "secondarySource": "external"
+        }
+    }
+}
+```
+
+**Request**
+```bash title="Hide secondary field"
+# Note: The secondary source can be `aux` or `external`, any other value will assign the property to null (ie: off)
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "message", 
+    "payload": {
+        "timer": {
+            "secondarySource": null
         }
     }
 }
@@ -185,20 +209,64 @@ Message: {
 **Response**
 ```ts
 {
-    "type":"message",
+    "payload": {
+        "external": "new text",
+        "timer": {
+            "text": "",
+            "visible": true,
+            "blink": false,
+            "blackout": false,
+            "secondarySource": "external"
+        },
+    }
+}
+```
+
+### Example: blackout timer screens
+You can remotely blackout every screen that is in the timer view.
+
+**Request**
+```bash title="Blackout timer screen"
+# Note: The secondary source can be `aux` or `external`, any other value will assign the property to null (ie: off)
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "message", 
     "payload": {
         "timer": {
-            "text":"",
-            "visible":false,
-            "blink":false,
-            "blackout":false
-            },
-        "external":{
-            "text":"new text",
-            "visible":true
+            "blackout": true
         }
     }
 }
+```
+
+**Request**
+```bash title="Disable timer screen blackout"
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "message", 
+    "payload": {
+        "timer": {
+            "blackout": false
+        }
+    }
+}
+```
+
+**Response**
+```ts
+{
+    "payload": {
+        "external": "",
+        "timer": {
+            "text": "",
+            "visible": true,
+            "blink": true,
+            "blackout": false,
+            "secondarySource": null
+        },
+    }
+}
+
 ```
 
 ## Playback
