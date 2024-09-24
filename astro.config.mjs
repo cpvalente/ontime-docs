@@ -20,6 +20,7 @@ export default defineConfig({
       customCss: ["./src/styles/custom.css"],
       social: {
         github: "https://github.com/cpvalente/ontime",
+        discord: 'https://discord.com/invite/eje3CSUEXm',
       },
       editLink: {
         baseUrl: "https://github.com/cpvalente/ontime-docs/edit/main",
