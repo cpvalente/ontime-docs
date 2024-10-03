@@ -6,7 +6,11 @@ import vercelStatic from "@astrojs/vercel/static";
 // https://astro.build/config
 export default defineConfig({
 	output: "static",
-	adapter: vercelStatic(),
+	adapter: vercelStatic({
+		webAnalytics: {
+			enabled: true,
+		},
+	}),
 	site: "https://docs.getontime.no",
 	integrations: [
 		starlight({
