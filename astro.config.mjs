@@ -1,31 +1,17 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightLinksValidator from "starlight-links-validator";
-import vercelStatic from "@astrojs/vercel/static";
+
+import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-	output: "static",
-	adapter: vercelStatic(),
+	output: "server",
+  adapter: cloudflare(),
 	site: "https://docs.getontime.no",
 	integrations: [
 		starlight({
 			plugins: [starlightLinksValidator()],
-			head: [
-				{
-					tag: "script",
-					attrs: {
-						src: "https://www.googletagmanager.com/gtag/js?id=G-8G20EBYWKR",
-						defer: true,
-					},
-					content: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-8G20EBYWKR');
-        `,
-				},
-			],
 			title: "Ontime documentation",
 			favicon: "./favicon.ico",
 			logo: {
