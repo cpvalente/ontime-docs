@@ -3,26 +3,33 @@ title: Network and security
 description: Notes on Network and security
 ---
 
+## Network availability
+Ontime, is a server process.
+
 Once Ontime is running, it will make itself available in all network interfaces to which the machine has access. \
-You can find the list of IP addresses in `Editor` -> `Settings` -> `Network`.
+These links can be shared with your team to allow any device that in the same network to access Ontime.
 
-![Network settings](../../../assets/screenshots/editor/settings/network.png)
-
-Use the device's web browser to navigate to the IP address of the computer running Ontime and point your automation to the same IP address.
-
-:::note
-You will find a list of network interfaces at the top of the network settings page; clicking on one of the blue links will open a browser pointing to that address. \
-You can share any of these addresses with your team so that they can access Ontime views from any device in that network.
-:::
+You can also use the IP address of the link for automation from other devices software.
 
 :::caution
 If you cannot reach Ontime from another device, please check your network configuration and firewall. \
 There are no settings in Ontime other than the server port (by default 4001).
 
-If you are running behind a **reverse proxy**, please check the configuration and make sure to allow passthrought for WebSockets.
+If you are running behind a **reverse proxy**, please check the configuration and make sure to allow passthrough for WebSockets.
 :::
 
-### Security
+### Find interfaces in Settings
+The Network settings `Editor` -> `Settings` -> `Network` contains the list of Network Interfaces where Ontime is available.
+
+![Network settings](../../../assets/screenshots/editor/settings/network.png)
+
+### Find interfaces in navigation
+If you are using Ontime in the same machine as the app is running. \
+You can find the external links to the view at the bottom of the navigation menu.
+
+![Network settings](../../../assets/screenshots/features/timer__nav.png)
+
+## Security
 Note that Ontime discourages you from exposing the application in a public network. 
 
 You can add a thin layer of protection over some views such as `/editor`, `/cuesheet` and `/op` using the **Pin Code** defined in the **App Settings**.
