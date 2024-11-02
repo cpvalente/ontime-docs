@@ -79,7 +79,14 @@ See the definition directly in the [example override file here](https://github.c
     
     /** Colour used for external message and aux timer in /timer */
     --external-color-override: #161616;
-        
+    
+    /** View specific features: /cuesheet */
+    --cuesheet-running-bg-override: #D20300;
+    
+    /** View specific features: /op */
+    --operator-running-bg-override: #D20300;
+    --operator-highlight-override: #FFAB33;
+    
     /** View specific features: /studio */
     --studio-active: #101010;
     --studio-idle: #cfcfcf;
@@ -95,14 +102,6 @@ See the definition directly in the [example override file here](https://github.c
     --lowerThird-bottom-font-style-override: italic;
     --lowerThird-line-height-override: 1vh;
     --lowerThird-text-align-override: end;
-}
-
-/** 
- * You can inspect the page in your browser and add the selectors here.
- * In the below example, we change the colour of the overlay message in the stage-timer view.
- */
-.stage-timer > .message-overlay--active > div {
-    color: red;
 }
 ```
 
