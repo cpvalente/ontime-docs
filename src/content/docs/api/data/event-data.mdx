@@ -52,15 +52,22 @@ All times are in milliseconds.
 }
 ````
 
+### End action
+An event end-action refers to automations to the rundown that may occur once an event finishes (reaches 00:00). \
+This is unrelated to how the timer is displayed and concerns only to rundown automation.
+- `none`: Event will reach 00:00 and continue playing into negative numbers
+- `stop`: Event will reach 00:00 and the rundown will stop
+- `load-next`: Next event in the rundown will be loaded
+- `play-next`: Next event in the rundown will be loaded and started
 
 ### Timer type
-An event timer-type informs Ontime on how the event duration should be calculated
-
-### End action
-An event timer-type informs Ontime on how the event duration should be calculated
-
-### End action
-An event timer-type informs Ontime on how the event duration should be calculated
+An event timer-type informs Ontime on how the timer show be presented. \
+- `count-down`: Ontime will count down the duration of the event
+- `count-up` : Ontime will count up from when the event starts
+- `time-to-end`: Ontime will count down to the scheduled event end, regardless of start time
+- `clock`: Ontime will display the current clock
+- `none`: Ontime will display a placeholder `--:--:--` when this event is playing
 
 ### Time strategy
-An event timer-type informs Ontime on how the event duration should be calculated
+An event timer-strategy informs Ontime on how to calculate changes to timers when events are linked. \
+[Read more.](/quick-tips/smart-time-entry#time-strategy)
