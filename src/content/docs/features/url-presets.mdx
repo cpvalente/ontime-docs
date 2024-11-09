@@ -3,36 +3,38 @@ title: URL Presets
 description: Define URL presets to ease onsite setup
 ---
 
-URL presets allow providing a short name for any Ontime URL.
+URL presets are user defined aliases (shortcuts) to Ontime URLs.
 
-It serves two primary purposes:
+URL aliases are configured centrally from the editor settings. This means that these can be changed for all users accessing Ontime from one place, without changes necessary in the other devices.
 
-* **Providing dynamic URLs for automation or unattended screens**
-* **Simplifying complex URLs**
+The configuration for URL Presets can be found in `Editor` -> `Feature Settings` -> `URL Presets`. \
+The feature serves two primary purposes:
 
-The configuration for URL Presets can be found in `Editor` -> `App settings` -> `URL Presets`.
+### Providing dynamic URLs for automation or unattended screens
+Consider the case of fixed devices, unattended screens or hardware integrations, where access to change the browser URL may be impractical. \
+Any changes to the aliases will be automatically reflected in the devices that are pointed at that URL.
 
-### URL Automation
+### Managing complex view configurations
+We may have specific configurations for operator views or utility screens that we want to manage centrally. \
+See example below:
 
-This is useful for cases where we would like a URL to change from Ontime without it being necessary to change the view consumers.
 
-Consider the case of fixed devices, unattended screens or hardware integrations, where access to change the browser URL may be impractical.
+:::tip[Aliases example]
+Consider a camera operator that needs an Ontime view with a specific configuration. \
+We have configured the view as necessary and it resolves to the following URL:
+`http://localhost:4001/op?main=note&secondary=custom-name&hidepast=true`
 
-:::tip[URL Automation]
-We could for create an alias for a specific screen that relates to its role, position or type\
-eg: `192.168.10.10:4001/room51`
+We may want to manage the configuration in Ontime, so that the camera operator can access the already configured view without needing to concern about the view options.
+This is a typical use case for URL Presets.
 
-In Ontime editor we would configure `room51` to be a preset to a view such as `public` or `backstage`. \
-We could also change the view `room51` represents during the runtime, and all screens in that URL will update accordingly.
+To achieve this we would need the following steps:
+![URL Presets](../../../assets/screenshots/features/url-presets.png)
+
+- Copy the path of the configured URL above (part after the port `op?main=note&secondary=custom-name&hidepast=true`)
+- In `Editor` -> `Feature Settings` -> `URL Presets` create a **New Preset**
+- Give our preset name (1) (eg: `cam3`)
+- Associate the previously copied URL segment (2)
+
+From here, anyone that accesses ontime on the URL `http://localhost:4001/cam3` will be redirected to `http://localhost:4001/op?main=note&secondary=custom-name&hidepast=true`
 :::
 
-
-### Simplifying complex or lengthy URLs
-
-With the view customisations through URL parameters, the URL can become complex.
-
-Leveraging URL Presets, you can create a simple URL that can encode a view with given styles or configuration.
-
-:::tip[Simple URL]
-The custom url `lower?bg=ff2&text=f00&size=0.6&transition=5` could be simply called `mylower` for quickly recalling.
-:::
