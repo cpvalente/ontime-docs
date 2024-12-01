@@ -539,3 +539,17 @@ Message: {
     }
 }
 ```
+
+### Add / remove time to auxiliary timer
+**Request**
+```bash
+Target: ws://<ip-address>:<port>/ws
+Message: {
+    "type": "auxtimer",
+    "payload": {
+        "1": {
+            "addtime": <value-in-seconds>
+        }
+    }
+}
+```
