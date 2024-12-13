@@ -50,6 +50,10 @@ export default defineConfig({
 					autogenerate: { directory: "ontime" },
 				},
 				{
+					label: "Ontime Cloud",
+					autogenerate: { directory: "ontime-cloud" },
+				},
+				{
 					label: "Interface",
 					items: [
 						{
