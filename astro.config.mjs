@@ -1,12 +1,12 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightLinksValidator from "starlight-links-validator";
-import vercel from '@astrojs/vercel';
+import vercelStatic from "@astrojs/vercel/static";
 
 // https://astro.build/config
 export default defineConfig({
 	output: "static",
-	adapter: vercel({
+	adapter: vercelStatic({
 		webAnalytics: {
 			enabled: true,
 		},
