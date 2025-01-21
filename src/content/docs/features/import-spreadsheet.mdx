@@ -46,17 +46,22 @@ Field names are not case-sensitive: both `Title` and `title` would be recognised
 | Note         | string                                                                                  | ""                 |
 | Colour       | string (# hex colour or [named css colour][css-colour])                                 | ""                 |
 | End action   | `none` `stop` `load-next` `play-next`                                                   | `none`             |
-| Timer type*  | `count-down` `count-up` `time-to-end` `clock` `block` `skip` `none`                     | `count-down`       |
+| Timer type*  | `count-down` `count-up` `clock` `block` `skip` `none`                                   | `count-down`       |
+| Count to end*| boolean                                                                                 | false              |
 | Time warning | Excel time \| [string](/quick-tips/smart-time-entry)                                    | 00:02:00           |
 | Time danger  | Excel time \| [string](/quick-tips/smart-time-entry)                                    | 00:01:00           |
 
 :::note[Timer type and skipping import]
 The **Timer type** column extends the possible values for timers. 
 
-Where a timer count type can be `count-down` `count-up` `time-to-end` `clock` `count-down`. \
+Where a timer count type can be `count-down` `count-up` `clock` `count-down`. \
 Adding a value `block` to this field, creates a Block event.
 
 Any value added here that is not one of the above (eg: `skip` or `production`), will prompt Ontime to skip importing this row.
+::: 
+
+:::note[Count to end]
+The count to end property can be used to tell Ontime that this event should always count to its scheduled end, regardless of its start time.
 ::: 
 
 ### Custom Fields

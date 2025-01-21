@@ -54,11 +54,10 @@ In this case, the offset will indicate a 10 minute `-00:10:00` deviation.
 ```
 :::
 
-:::tip[In combination with time-to-end timers]
-Time to end timers - since they count to their finish time regardless of when they were started - always finish on time unless they are in overtime.
+:::tip[In combination with count to end timers]
+Count to end timers - since they count to their finish time regardless of when they were started - always finish on time unless they are in overtime.
 
-An offset will only be added if the event is in overtime or the user has added time.
-
+This is a useful flow for events that have hard deadlines (eg: doors open or crew call cut time) and can be leveraged to recover runtime delays.
 ```
 # We started late, but the event is time-to-end
 | Runtime                       | Result offset                 |
