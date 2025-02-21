@@ -15,21 +15,6 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			plugins: [starlightLinksValidator()],
-			head: [
-				{
-					tag: "script",
-					attrs: {
-						src: "https://www.googletagmanager.com/gtag/js?id=G-8G20EBYWKR",
-						defer: true,
-					},
-					content: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-8G20EBYWKR');
-        `,
-				},
-			],
 			title: "Ontime documentation",
 			favicon: "./favicon.ico",
 			logo: {
