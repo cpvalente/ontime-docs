@@ -3,7 +3,7 @@ title: Sending OSC
 description: Sending OSC (Open Sound Control) from Ontime
 ---
 
-You can leverage the [integrations feature](/api/integrations) to send Ontime data to other applications via OSC (Open Sound Control).
+You can leverage the [automation feature](/api/automation) to send Ontime data to other applications via OSC (Open Sound Control).
 
 
 ## OSC Payload examples
@@ -40,7 +40,7 @@ Which would be sent as a single message with the payload
 ```
 
 :::note
-Keep in mind that these rules will also affect [template variables](/api/integrations#using-variables-in-integrations).
+Keep in mind that these rules will also affect [template variables](/api/automation#using-variables-in-automation).
 
 We advise wrapping template variables that you want to remain as strings in quotes to avoid unintended payloads of strings being split by their spaces or interpreted as numbers.
 :::

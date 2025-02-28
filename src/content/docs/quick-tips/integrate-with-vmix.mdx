@@ -27,18 +27,23 @@ Please follow vMix documentation for the next steps.
 
 ## Control vMix from Ontime
 
-You can leverage the [integrations feature](/api/integrations) to send HTTP data from Ontime to set parameters in vMix.
+You can leverage the [automation feature](/api/automation) to send HTTP data from Ontime to set parameters in vMix.
 
 The example below will set a `Headline text` property to the title of the current event every time one is loaded.
-- Navigate to the Integration Settings at `Editor` -> `Settings` -> `Integrations`
-- Add a new HTTP integration and choose `onLoad` as a cycle and add the following URL
+- Navigate to the Integration Settings at `Editor` -> `Settings` -> `Automation`
+- In "Manage automations" create a new automation and add an appropriate title
+- Create an output of type HTTP and add the following URL:
 
 ```bash
 http://127.0.0.1:8088/api/?Function=SetText&Input=Title%201&Value={{eventNow.title}}&SelectedName=Headline.Text
 ```
 
+- In "Manage triggers" create a new trigger and add a title
+- For the lifecycle trigger option select `On Load`
+- For the Automation title option select the previously created automation
+
 :::note
-The request above sends variables from Ontime as described in the [integrations documentation](/api/integrations/#using-variables-in-integrations).
+The request above sends variables from Ontime as described in the [automation documentation](/api/automation/#using-variables-in-automation).
 
 Remember to modify the IP address and port as necessary.
 :::
