@@ -76,8 +76,8 @@ export default defineConfig({
 							autogenerate: { directory: "api/data" },
 						},
 						{
-							label: "Integrations",
-							autogenerate: { directory: "api/integrations" },
+							label: "Automation",
+							autogenerate: { directory: "api/automation" },
 						},
 						{
 							label: "Protocol API",

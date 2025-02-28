@@ -1,15 +1,42 @@
 ---
-title: Integrations
+title: Automation
 description: Control and feedback from Ontime
 ---
 
-**Integrations** is a feature that allows Ontime to share its data or control other software and hardware in your system. \
-The feature can be configured in the `Editor` -> `Settings` -> `Integrations`
+The Automation feature aims to integrate Ontime into users' workflows. \
+Ontime has a large amount of production information, which users need considerable effort to maintain. We want to allow tools so that:
+
+- allow distribution of Ontime's and other production data
+- allow surfacing Ontime events
+- allow synchronizing with other tools
+
+The feature can be configured in the `Editor` -> `Settings` -> `Automation`
+
+## Setting up automations in Ontime
+
+The automations feature is split in two parts: [automation](#manage-automations) and [trigger](#manage-triggers).
+
+### Manage automations
+An automation entry contains **filter logic** and **outputs**. Ie: if these conditions are true, send these messages.
+
+![Network settings](../../../../assets/screenshots/editor/settings/automation__create-automation.png)
+In the image example, we check if a custom field contains data (ie: is not empty), and if so, send an OSC message with its value.
+
+:::note[HTTP, OSC and Ontime actions]
+Aside from OSC, you can also automate the sending of HTTP messages and internal Ontime actions like manipulating the Auxiliary timer.
+:::
+
+### Manage triggers
+Triggers associate the automation with the Ontime event lifecycle. \
+We can describe, what action in Ontime should trigger which automation.
+
+![Network settings](../../../../assets/screenshots/editor/settings/automation__create-trigger.png)
+In the image example, we build on the previous automation to say: "when Ontime starts an event, trigger the automation that starts the sound".
 
 ### The Ontime lifecycle
 
 While running your event, Ontime will go through a few lifecycle events.\
-The integration feature allows you to request a message once that happens.
+The automation feature allows you to request a message once that happens.
 
 | Event                 | Description                                                        | 
 | :-------------------- | :----------------------------------------------------------------- |
@@ -22,12 +49,7 @@ The integration feature allows you to request a message once that happens.
 | `On Finish`           | Triggered when a timer passes the 0 mark                           |
 
 
-:::tip[Example]
-If you add a message to the `On Load` lifecycle, eg: `/ontime/loaded-event`,\
-a message will be sent to the device configured in OSC settings every time an event is loaded.
-:::
-
-### Using variables in integrations
+### Using variables in automation outputs
 
 You can embed data from the application runtime in the message using templates `/your-message/{{ontime-data}} {{ontime-more-data}}`
 
@@ -37,7 +59,7 @@ When the lifecycle event is triggered, Ontime places the updated piece of data i
 
 :::tip[Example]
 
-Extending the example above, you could compose a message that sends the index of the loaded event
+You could compose a message that sends the index of the loaded event
 
 ```
 /send-this/loaded-event-{{runtime.selectedEventIndex}}
