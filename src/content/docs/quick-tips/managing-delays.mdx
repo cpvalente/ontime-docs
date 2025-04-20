@@ -3,45 +3,67 @@ title: Managing delays
 description: Ontime provides tools to visualise and manage runtime delays
 ---
 
-Ontime provides mechanisms for managing and communicating runtime delays. \
-Namely: [Added time](#added-time), [Scheduled delays](#scheduled-delays) and [offsets](#offset).
+In live environments, things don’t always go exactly as scheduled. Events may start late, run long, or require timing adjustments. \
+Ontime provides tools to communicate and manage these delays during production.
+
+The key features for delay management are: 
+- [Added time](#added-time) 
+- [Projected time](#projected-time) 
+- [Scheduled delays](#scheduled-delays)
+- [Offsets](#offset)
+
+![Link and lock times](../../../assets/screenshots/features/rundown__delay-management.png)
 
 ## Added time
-You can add/remove time from the currently running event from the editor view or through one of the APIs.
 
-This is the simplest form of time / delay management. \
-The added time affects the `offset` and `expect end` datasets.
+You can manually add or remove time from the currently running event, either from the editor view or via the API.
+
+This is the simplest form of delay management
+`Added time` adjusts the `offset` and `expected end` values, letting you extend or compress the active event without altering the rundown schedule.
+
+## Projected time
+
+`Projected time` combines `scheduled delays` and `offsets` to communicate the accumulated timing shifts during a show. \
+i.e. based on the current trajectory, when are we expected to start any given event.
 
 ## Scheduled delays
 
-You can add delay blocks to the rundown as with any other event. \
-This flow allows communication of schedule delays at runtime. 
+`Scheduled delays` represent intentional timing adjustments in the rundown.
 
-All the production and backstage views will see the schedule with the added delays, while the public views will remain with the original schedule.
+Unlike added time, `scheduled delays` are layered over the schedule without changing it. \
+This allows the original timing to remain intact while clearly communicating a change to your team.
 
-:::note[Production data only]
-The delay information is only available in [production](/interface/#production-views) and [backstage](/interface/#backstage-views) views. \
-This allows you to communicate delays to the production team without affecting views visible to the public.
+You can apply a `scheduled delay` permanently, making it part of the schedule. \
+Once applied, Ontime no longer treats it as a schedule deviation.
 
-No delay information is shown in the [Public views](/interface/#public-views).
-::::
+:::note[Delay propagation]
+`Scheduled delays` automatically propagate through the rundown. \
+A delay will continue affecting downstream events until it finds a schedule gap large enough to absorb its value.
+:::
 
 ## Offset
 
-The `offset` calculates our capacity to finish the schedule on time. \
-In combination with `actual start` and `expected end` datasets, it provides a good overview of the rundown schedule.
+The `offset` indicates how far the current runtime has drifted from the original schedule and our capacity to finish the rundown on time.
 
-:::note
-The offset value can be negative or positive \
-__Positive__ -> offset indicates time ahead \
-__Negative__ -> offset indicates time delayed
+Offsets can be positive (running early) or negative (running late).
+
+:::note[In combination with count to end timers]
+`Count to end` timers always count down to their scheduled end time, regardless of when they start. \
+Their duration is dynamic, calculated from its `actual start` and `scheduled end`.
+
+This makes them ideal for events with hard deadlines such as show start or crew cut off.
 :::
 
+### Absolute mode
 
-#### See the following examples
+Absolute mode is the default mode for `offset` calculation in Ontime.
+
+It compares the current wall clock time to the rundown scheduled to show how far ahead or behind we are running.
+
+#### Examples of Absolute offset calculation
 
 :::tip[We start late and there are no gaps to recover]
-In this case, the offset will indicate a 10 minute `-00:10:00` deviation.
+In this case, the `offset` value will show a 10 minute `-00:10:00` deviation.
 
 ```
 | Runtime                       | Result offset                 |
@@ -52,14 +74,13 @@ In this case, the offset will indicate a 10 minute `-00:10:00` deviation.
 | - Event A 9:00 -> 10:00       | Expected end: 10:10           |
 | - Event B 10:00 -> 11:00      | Offset: -00:10:00             |
 ```
+
 :::
 
-:::tip[In combination with count to end timers]
-Count to end timers - since they count to their finish time regardless of when they were started - always finish on time unless they are in overtime.
+:::tip[We started late, but the event is count-to-end]
+`Count to end` events always finish at their scheduled end, so no `offset` is generated ...
 
-This is a useful flow for events that have hard deadlines (eg: doors open or crew call cut time) and can be leveraged to recover runtime delays.
 ```
-# We started late, but the event is time-to-end
 | Runtime                       | Result offset                 |
 | ----------------------------- | ----------------------------- |
 | Time Now: 09:10               | Scheduled start: 09:00        |
@@ -67,15 +88,15 @@ This is a useful flow for events that have hard deadlines (eg: doors open or cre
 | Rundown:                      | Actual start: 09:10           |
 | - Event A                     | Expected end: 10:00           |
 |   schedule: 9:00 -> 10:00     | Offset: 00:00:00              |
-|   type: time-to-end           |                               |
+|   type: count-to-end          |                               |
 | - Event B                     |                               |
 |   schedule: 9:00 -> 10:00     |                               |
 |   type: count-down            |                               |
 ```
 
+... if a `count to end` event goes overtime, it generates an `offset` equal to this value.
 
 ```
-# The event is time-to-end and we are in overtime
 | Runtime                       | Result offset                 |
 | ----------------------------- | ----------------------------- |
 | Time Now: 10:10               | Scheduled start: 09:00        |
@@ -88,4 +109,21 @@ This is a useful flow for events that have hard deadlines (eg: doors open or cre
 |   schedule: 9:00 -> 10:00     |                               |
 |   type: count-down            |                               |
 ```
+
+:::
+
+### Relative mode
+
+Relative mode calculates `offset` based on when the rundown actually started, ignoring the rundown scheduled start.
+
+This mode is useful when the exact start time is not relevant (eg: during rehearsals, recordings, or pre-show prep) but we still want to keep track of time drifts during the runtime.
+
+:::tip[Starting from 00:00:00]
+Some users will want to start their rundown at `00:00:00`. Either to represent a midnight show start or to indicate that the wall clock schedule is not relevant.
+
+In **absolute mode**, Ontime treats `00:00:00` as a literal midnight reference. \
+This causes an immediate `offset` based on the difference between the current time and midnight.
+
+Relative mode normalises all `offset` calculations to the actual start time of the rundown. \
+This allows `00:00:00` to be a neutral baseline and avoid producing an initial `offset`.
 :::
