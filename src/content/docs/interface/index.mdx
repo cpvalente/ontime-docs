@@ -3,47 +3,54 @@ title: Interface overview
 description: Ontime offers different views as ways of interacting with the data
 ---
 
-Ontime provides different screens which allow for different types of interactions with the data. These are called views. \
-Each view in Ontime focuses on empowering a specific role or achieving a particular task. 
-
-Any device with a browser in the same network can access Ontime's views.
+![Ontime](../../../assets/images/ontime-for-all.png)
 
 ## Available views
 
-![Ontime](../../../assets/images/ontime-for-all.webp)
+Ontime offers different interfaces to consume and extend rundown data, these interfaces are designed to support different tasks:
 
-Some views are oriented towards your production team to edit and manage the data ([Production views](#production-views)), while others provide non-interactive data to your team backstage ([Backstage views](#backstage-views)) or public ([Public views](#public-views)).
+- [Production views](#production-views): interactive views where users can edit the rundown and add information, focusing on detailed and collaborative work
+- [Signage views](#signage-views): non-interactive displays that present key parts of the rundown in a clear, accessible way to support quick reference and coordination during the show.
+
+Any device with a browser in the same network can access Ontime's views.
 
 :::note
-This view can be customised using the [URL Parameters editor](/quick-tips/configuring-views)
+All views are configurable, allowing users to customise the behaviour and data of each interface. \
+The configuration for signage views is saved in the URL for easy bookmarking and sharing.
+
+[Read more](/quick-tips/configuring-views)
 :::
 
-
 ### Production views
+
 These refer to views which allow for data entry and are typically used by directors, show runners and operators.
 
-| URL                                   | See the docs                                     |
-| :------------------------------------ | :----------------------------------------------- |
-| `http://MY-IP-ADDRESS:4001/editor`    | [Editor](/interface/production/app-editor)       |
-| `http://MY-IP-ADDRESS:4001/cuesheet`  | [Cuesheet](/interface/production/cuesheet)       |
-| `http://MY-IP-ADDRESS:4001/operator`  | [Operator](/interface/production/operator)       |
+| URL                                  | See the docs                               |
+| :----------------------------------- | :----------------------------------------- |
+| `http://MY-IP-ADDRESS:4001/editor`   | [Editor](/interface/production/app-editor) |
+| `http://MY-IP-ADDRESS:4001/cuesheet` | [Cuesheet](/interface/production/cuesheet) |
+| `http://MY-IP-ADDRESS:4001/op`       | [Operator](/interface/production/operator) |
 
-### Backstage views
-These are non-interactive views typically used in signage or unattended screens backstage.
+### Signage views
 
-| URL                                   | See the docs                                         |
-| :------------------------------------ | :--------------------------------------------------- |
-| `http://MY-IP-ADDRESS:4001/timer`     | [Timer](/interface/backstage/stage-timer)            |
-| `http://MY-IP-ADDRESS:4001/minimal`   | [Minimal Timer](/interface/backstage/minimal-timer)  |
-| `http://MY-IP-ADDRESS:4001/clock`     | [Clock](/interface/backstage/clock)                  |
-| `http://MY-IP-ADDRESS:4001/backstage` | [Backstage View](/interface/backstage/backstage)     |
-| `http://MY-IP-ADDRESS:4001/countdown` | [Countdown](/interface/backstage/countdown)          |
-| `http://MY-IP-ADDRESS:4001/studio`    | [Studio Clock](/interface/backstage/studio-clock)    |
+Signage views are non-interactive interfaces focusing on display the rundown data at different levels of detail
 
-### Public views
-These are non-interactive views typically used in signage or unattended screens in the audience area.
+#### Backstage data
 
-| URL                                   | See the docs                                     |
-| :------------------------------------ | :----------------------------------------------- |
-| `http://MY-IP-ADDRESS:4001/public`    | [Public / Foyer View](/interface/public/public)  |
-| `http://MY-IP-ADDRESS:4001/lower`     | [Lower Thirds](/interface/public/lower-thirds)   |
+| URL                                   | See the docs                                        |
+| :------------------------------------ | :-------------------------------------------------- |
+| `https//MY-IP-ADDRESS:4001/timer`     | [Timer](/interface/backstage/stage-timer)           |
+| `http://MY-IP-ADDRESS:4001/minimal`   | [Minimal Timer](/interface/backstage/minimal-timer) |
+| `http://MY-IP-ADDRESS:4001/clock`     | [Clock](/interface/backstage/clock)                 |
+| `http://MY-IP-ADDRESS:4001/backstage` | [Backstage View](/interface/backstage/backstage)    |
+| `http://MY-IP-ADDRESS:4001/countdown` | [Countdown](/interface/backstage/countdown)         |
+| `http://MY-IP-ADDRESS:4001/studio`    | [Studio Clock](/interface/backstage/studio-clock)   |
+
+A sub-section of these views focus on **public data**
+
+#### Public data
+
+| URL                                | See the docs                                    |
+| :--------------------------------- | :---------------------------------------------- |
+| `http://MY-IP-ADDRESS:4001/public` | [Public / Foyer View](/interface/public/public) |
+| `http://MY-IP-ADDRESS:4001/lower`  | [Lower Thirds](/interface/public/lower-thirds)  |
