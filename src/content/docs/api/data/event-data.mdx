@@ -24,6 +24,7 @@ All times are in milliseconds.
 | Time Warning               | `Internal` second threshold from time end                                   |
 | End Action                 | `Internal` defines potential automation for when an event ends              |
 | Timer Type                 | `Internal` defines a method for the counting of the running timer           |
+| Count to End               | `Internal` whether an event counts to its duration or scheduled end         |
 | Time Strategy              | `Internal` defines the significant dataset for event duration               |
 | Type                       | `Internal`, this will always be `Event`                                     |
 | Custom                     | This is an object of user given custom fields associated to the event       |
@@ -61,12 +62,18 @@ This is unrelated to how the timer is displayed and concerns only to rundown aut
 - `play-next`: Next event in the rundown will be loaded and started
 
 ### Timer type
-An event timer-type informs Ontime on how the timer show be presented. \
+An event timer-type informs Ontime on how the timer show be presented.
 - `count-down`: Ontime will count down the duration of the event
 - `count-up` : Ontime will count up from when the event starts
-- `time-to-end`: Ontime will count down to the scheduled event end, regardless of start time
 - `clock`: Ontime will display the current clock
 - `none`: Ontime will display a placeholder `--:--:--` when this event is playing
+
+### Count to end
+Usually Ontime will count to the total event duration, regardless of when it is started.\
+The difference is often reflected in offset.
+
+If `count to end` is active, Ontime will instead count down to the events scheduled end, regardless of the start time. \
+No offset is added unless the event is considered to be in overtime. 
 
 ### Time strategy
 An event timer-strategy informs Ontime on how to calculate changes to timers when events are linked. \
