@@ -64,13 +64,13 @@ You can change any field in an event using this endpoint. See below a descriptio
 | `skip`        | boolean                                                                                                   |
 | `colour`      | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color)) |
 | `custom`      | target the specific custom field with `custom:<fieldname>`                                                |
-| `timeWarning` | number (in seconds)                                                                                       |
-| `timeDanger`  | number (in seconds)                                                                                       |
+| `timeWarning` | number (in milliseconds)                                                                                       |
+| `timeDanger`  | number (in milliseconds)                                                                                       |
 | `endAction`   | string (none / load-next / play-next / stop)                                                              |
 | `timerType`   | string (count-down / count-up / clock / none)                                                             |
-| `duration`    | number (in seconds)                                                                                       |
-| `timeStart`   | number (in seconds)                                                                                       |
-| `timeEnd`     | number (in seconds)                                                                                       |
+| `duration`    | number (in milliseconds)                                                                                       |
+| `timeStart`   | number (in milliseconds)                                                                                       |
+| `timeEnd`     | number (in milliseconds)                                                                                       |
 
 :::caution
 Changing the properties `skip` `endAction` `duration` `timeStart` `timeEnd` \
@@ -436,7 +436,7 @@ Target: ws://<ip-address>:<port>/ws
 Message: {
     "type": "addtime",
     "payload": {
-        "add": <value-in-seconds>
+        "add": <value-in-milliseconds>
     }
 }
 ```
@@ -448,7 +448,7 @@ Target: ws://<ip-address>:<port>/ws
 Message: {
     "type": "addtime",
     "payload": {
-        "remove": <value-in-seconds>
+        "remove": <value-in-milliseconds>
     }
 }
 ```
@@ -466,7 +466,7 @@ Message: {
     "type": "auxtimer",
     "payload": {
         "1": {
-            "duration": <value-in-seconds>
+            "duration": <value-in-milliseconds>
         }
     }
 }
@@ -547,7 +547,7 @@ Message: {
     "type": "auxtimer",
     "payload": {
         "1": {
-            "addtime": <value-in-seconds>
+            "addtime": <value-in-milliseconds>
         }
     }
 }

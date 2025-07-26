@@ -85,13 +85,13 @@ You can change any field in an event using this endpoint. See below a descriptio
 | `skip`        | boolean                                                                                                   |
 | `colour`      | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color)) |
 | `custom`      | target the specific custom field with `custom:<fieldname>`                                                |
-| `timeWarning` | number (in seconds)                                                                                       |
-| `timeDanger`  | number (in seconds)                                                                                       |
+| `timeWarning` | number (in milliseconds)                                                                                       |
+| `timeDanger`  | number (in milliseconds)                                                                                       |
 | `endAction`   | string (none / load-next / play-next / stop)                                                              |
 | `timerType`   | string (count-down / count-up / clock / none)                                                             |
-| `duration`    | number (in seconds)                                                                                       |
-| `timeStart`   | number (in seconds)                                                                                       |
-| `timeEnd`     | number (in seconds)                                                                                       |
+| `duration`    | number (in milliseconds)                                                                                       |
+| `timeStart`   | number (in milliseconds)                                                                                       |
+| `timeEnd`     | number (in milliseconds)                                                                                       |
 
 :::caution
 Changing the properties `skip` `endAction` `duration` `timeStart` `timeEnd` \
@@ -383,7 +383,7 @@ GET <localhost:4001>/api/roll
 ### Add time
 **Request**
 ```bash
-GET <localhost:4001>/api/addtime/add/<value-in-seconds>
+GET <localhost:4001>/api/addtime/add/<value-in-milliseconds>
 ```
 **Response**
 ```ts
@@ -393,7 +393,7 @@ GET <localhost:4001>/api/addtime/add/<value-in-seconds>
 ### Remove time
 **Request**
 ```bash
-GET <localhost:4001>/api/addtime/remove/<value-in-seconds>
+GET <localhost:4001>/api/addtime/remove/<value-in-milliseconds>
 ```
 **Response**
 ```ts
@@ -408,7 +408,7 @@ This can be controlled using the API as shown below
 ### Set auxiliary timer duration
 **Request**
 ```bash
-GET <localhost:4001>/api/auxtimer/1/duration/<value-in-seconds>
+GET <localhost:4001>/api/auxtimer/1/duration/<value-in-milliseconds>
 ```
 
 ### Set auxiliary timer direction
@@ -447,5 +447,5 @@ GET <localhost:4001>/api/auxtimer/1/stop
 ### Add / remove time to auxiliary timer
 **Request**
 ```bash
-GET <localhost:4001>/api/auxtimer/1/addtime/<value-in-seconds>
+GET <localhost:4001>/api/auxtimer/1/addtime/<value-in-milliseconds>
 ```

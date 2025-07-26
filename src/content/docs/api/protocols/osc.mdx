@@ -31,13 +31,13 @@ You can change any field in an event using this endpoint. See below a descriptio
 | `cue`         | string (value should be kept under 8 characters)                                                          || `skip`        | boolean                                                                                                   |
 | `colour`      | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color)) |
 | `custom`      | target the specific custom field with `custom:<fieldname>`                                                |
-| `timeWarning` | number (in seconds)                                                                                       |
-| `timeDanger`  | number (in seconds)                                                                                       |
+| `timeWarning` | number (in milliseconds)                                                                                       |
+| `timeDanger`  | number (in milliseconds)                                                                                       |
 | `endAction`   | string (none / load-next / play-next / stop)                                                              |
 | `timerType`   | string (count-down / count-up / clock / none)                                                             |
-| `duration`    | number (in seconds)                                                                                       |
-| `timeStart`   | number (in seconds)                                                                                       |
-| `timeEnd`     | number (in seconds)                                                                                       |
+| `duration`    | number (in milliseconds)                                                                                       |
+| `timeStart`   | number (in milliseconds)                                                                                       |
+| `timeEnd`     | number (in milliseconds)                                                                                       |
 
 :::caution
 Changing the properties `skip` `endAction` `duration` `timeStart` `timeEnd` \
@@ -205,13 +205,13 @@ The following endpoints allow controlling the Ontime's playback.
 ### Add time
 **OSC Message**
 ```bash
-/ontime/addtime/add <value-in-seconds>
+/ontime/addtime/add <value-in-milliseconds>
 ```
 
 ### Remove time
 **OSC Message**
 ```bash
-/ontime/addtime/remove <value-in-seconds>
+/ontime/addtime/remove <value-in-milliseconds>
 ```
 
 ## Auxiliary timer
@@ -222,7 +222,7 @@ This can be controlled using the API as shown below
 ### Set auxiliary timer duration
 **OSC Message**
 ```bash
-/ontime/auxtimer/1/duration <value-in-seconds>
+/ontime/auxtimer/1/duration <value-in-milliseconds>
 ```
 
 ### Set auxiliary timer direction
@@ -261,5 +261,5 @@ Auxiliary timer can count up or count down.
 ### Add / remove time to auxiliary timer
 **OSC Message**
 ```bash
-/ontime/auxtimer/1/addtime <value-in-seconds>
+/ontime/auxtimer/1/addtime <value-in-milliseconds>
 ```
