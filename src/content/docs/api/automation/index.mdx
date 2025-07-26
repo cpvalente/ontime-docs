@@ -69,7 +69,7 @@ You could compose a message that sends the index of the loaded event
 The template inside the brackets need to reference the same shape as the nesting of the runtime data as described in [Runtime Data](/api/data/runtime-data). \
 Use the  `.` when referencing a subkey
 
-`{{titlesPublic.noteNext}}` \
+`{{eventNext.note}}` \
 `{{playback}}` \
 `{{timer.current}}`
 :::
@@ -146,7 +146,6 @@ Follow the steps above to find this for yourself
 | `eventNow.linkStart`            | Link start time of the current event (null if not used)                     |
 | `eventNow.endAction`            | End action of the current event                                             |
 | `eventNow.timerType`            | Timer type of the current event                                             |
-| `eventNow.isPublic`             | Boolean indicating if the current event is public                           |
 | `eventNow.skip`                 | Boolean indicating if the current event is skipped                          |
 | `eventNow.note`                 | Note for the current event                                                  |
 | `eventNow.colour`               | Colour code for the current event                                           |
@@ -168,7 +167,6 @@ Follow the steps above to find this for yourself
 | `eventNext.linkStart`           | Link start time of the next event (null if not used)                        |
 | `eventNext.endAction`           | End action of the next event                                                |
 | `eventNext.timerType`           | Timer type of the next event                                                |
-| `eventNext.isPublic`            | Boolean indicating if the next event is public                              |
 | `eventNext.skip`                | Boolean indicating if the next event is skipped                             |
 | `eventNext.note`                | Note for the next event                                                     |
 | `eventNext.colour`              | Colour code for the next event                                              |
