@@ -3,7 +3,7 @@ title: Import from spreadsheets
 description: Import data from spreadsheets
 ---
 
-[spreadsheet-link]: https://docs.google.com/spreadsheets/d/1Ft5czgMtXAuwdU5X4sxXoNQKan-dR4n1AU3vIN8TSCg
+[spreadsheet-link]: https://docs.google.com/spreadsheets/d/1zT6yRgQUaICEiAFR85VEL-E9hAUDujKg6DaWR0iDYmY
 [css-colour]: https://developer.mozilla.org/en-US/docs/Web/CSS/named-color
 
 Ontime allows importing a rundown from a spreadsheet written elsewhere (eg. Excel or Google-Sheets).
@@ -41,11 +41,10 @@ Field names are not case-sensitive: both `Title` and `title` would be recognised
 | Duration     | Excel time \| [string](/quick-tips/smart-time-entry)                                    | 00:00:00           |
 | Cue          | string                                                                                  | ""                 |
 | Title        | string                                                                                  | ""                 |
-| Public       | boolean                                                                                 | false              |
 | Skip         | boolean                                                                                 | false              |
 | Note         | string                                                                                  | ""                 |
 | Colour       | string (# hex colour or [named css colour][css-colour])                                 | ""                 |
-| End action   | `none` `stop` `load-next` `play-next`                                                   | `none`             |
+| End action   | `none` `load-next` `play-next`                                                          | `none`             |
 | Timer type*  | `count-down` `count-up` `clock` `block` `skip` `none`                                   | `count-down`       |
 | Count to end*| boolean                                                                                 | false              |
 | Time warning | Excel time \| [string](/quick-tips/smart-time-entry)                                    | 00:02:00           |

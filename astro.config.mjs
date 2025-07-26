@@ -83,12 +83,8 @@ export default defineConfig({
               autogenerate: { directory: "interface/production" },
             },
             {
-              label: "Backstage views",
-              autogenerate: { directory: "interface/backstage" },
-            },
-            {
-              label: "Public views",
-              autogenerate: { directory: "interface/public" },
+              label: "Automated views",
+              autogenerate: { directory: "interface/automated" },
             },
           ],
         },

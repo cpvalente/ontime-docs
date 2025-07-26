@@ -3,29 +3,9 @@ title: Custom styling
 description: Use a custom stylesheet to define your own styles
 ---
 
-You can override the app-defined styles for some views by changing a supplied CSS override file. \
-There are a few **CSS variables** which allow for quick customisation of the viewers.
+You can override the app-defined styles for some views by changing a supplied CSS override file.
 
-You can toggle this feature on / off at `Editor` -> `Settings` -> `App settings` -> `View settings`.
-
-:::tip[Where is the file?]
-The CSS file location is dependent on both the operating system and installation.
-
-If you are running **Ontime from install**, you can use the native Menu to find the folder by navigating to
-`File` -> `Open directory` -> `CSS override`. \
-It is also worth noting that other potentially useful directories are listed here.
-
-For users **running headless installations (npm or docker)**, you can find the path to the file by navigating in app in the `Editor` -> `Settings` -> `App settings` -> `View settings` where you activate the CSS override.
-
-**For PC users:**\
-`AppData/Roaming/Ontime/user/styles/override.css`
-
-**For Mac users:**\
-`Library/Application Support/Ontime/user/styles/override.css`
-
-**For Linux users:**\
-`Home/Ontime/user/styles/override.css`
-:::
+You can toggle this feature and edit the CSS file in `Editor` -> `Settings` -> `View settings`.
 
 ## Notes on style overriding
 
@@ -69,9 +49,6 @@ See the definition directly in the [example override file here](https://github.c
   /** Font used for all text in views */
   --font-family-override: 'Open Sans';
 
-  /** Font used for clock in /minimal and /clock views */
-  --font-family-bold-override: 'Arial Black';
-
   /** Colour used for external message and aux timer in /timer */
   --external-color-override: #161616;
 
@@ -93,14 +70,5 @@ See the definition directly in the [example override file here](https://github.c
   --studio-active-label: #101010;
   --studio-idle-label: #595959;
   --studio-overtime: #101010;
-
-  /** View specific features: /lower */
-  --lowerThird-font-family-override: 'Courier New';
-  --lowerThird-top-font-weight-override: bold;
-  --lowerThird-bottom-font-weight-override: bold;
-  --lowerThird-top-font-style-override: normal;
-  --lowerThird-bottom-font-style-override: italic;
-  --lowerThird-line-height-override: 1vh;
-  --lowerThird-text-align-override: end;
 }
 ```
