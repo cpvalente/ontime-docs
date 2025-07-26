@@ -1,39 +1,32 @@
 ---
-title: What's new in v3
-description: What's new in v3
+title: What's new in v4
+description: What's new in v4
 ---
 
-## Smaller, better, faster, stronger
+## More
 
-At the time of writing, Ontime has been four years in the making. \
-We have learned about the App and what users have been doing with it.
+We have been working on Ontime for over 5 years. Over time, we have learned more about how we can make Ontime solve real-world user cases on-site.
 
-The newest release (v3) focuses on improving the quality of life in the code base, user interfaces, and APIs.
+The newest release (v4) focuses on improving the user's ability to detail the rundown and leverage timers to make decisions on it. Some highlights:
 
-Some highlights of the user-facing work:
+* [x] Grouped events and timers to the expected and scheduled completion of the running group, allowing better planning.
+* [x] Added flags in the rundown to calculate times to any arbitrary upcoming event, improving flexibility.
+* [x] Introduced milestone events to add metadata to the rundown for better organization.
+* [x] Improved sharing of views with granular read and write permissions for the cuesheet, enhancing collaboration.
+* [x] Enabled a single project to contain multiple (non-concurrent) rundowns, increasing project versatility.
+* [x] Added more auxiliary timers for enhanced functionality.
+* [x] Implemented several UI design changes and improvements for a better user experience.
 
-* [x] Project manager to simplify handling many Ontime project files
-* [x] Improvements in delay management and a new offset data point
-* [x] Comprehensive timer types and end actions for allowing complex interactions
-* [x] Ability to link event times
-* [x] User-definable custom fields
-* [x] Re-write of the APIs to simplify interacting with Ontime
-* [x] Auxiliar timers
-* [x] Several UI design changes and improvements
-
-... and many more
+... and many more.
 
 ### Removals and breaking changes
 
-- `Removed` __subtitle__ and __presenter__ fields in event in favour of fully customisable __custom fields__
-- `Removed` __user fields__ in favour of fully customisable __custom fields__
-- `Removed` __On Air__ data is not user controlled, but indicates whether the playback is loaded
-- `Breaking` __Roll mode__ needs ordered events*
-- `Breaking` restructure of all __APIs__
+- `Removed` **minimal** and **clock** views in favor of extra customization of the **timer** view, providing more flexibility.
+- `Removed` **lower thirds** view to streamline the interface.
+- `Removed` **public data** in favor of filtering based on custom fields, improving data management.
+- `Removed` support for some languages in favor of user-defined translations, allowing more tailored localization.
+- `Breaking` Deprecated **offset** in favor of the more common **over/under**, aligning with industry standards.
 
-:::note[*Roll mode]
-Previously you could have events in any order and __Roll Mode__ would figure out what should be playing.
-With v3, we expect that the events are in the correct order as Ontime will look for the __first event with matching time__.
-
-We promise we will make it worth it.
+:::note[APIs]
+We have made several changes to make our communication more effective. If you manage an integration to Ontime that leverages websockets, check out the [docs for the new implementation](#) or get in touch if you need help.
 :::
