@@ -5,9 +5,9 @@ description: Define URL presets to ease onsite setup
 
 URL presets are user defined aliases (shortcuts) to Ontime URLs.
 
-URL aliases are configured centrally from the editor settings. This means that these can be changed for all users accessing Ontime from one place, without changes necessary in the other devices.
+The configuration for URL Presets is done centrally from the Editor settings at `Editor` -> `Feature Settings` -> `URL Presets`. \
+This means that these can be changed for all users accessing Ontime from one place, without changes necessary in the other devices.
 
-The configuration for URL Presets can be found in `Editor` -> `Feature Settings` -> `URL Presets`. \
 The feature serves two primary purposes:
 
 ### Providing dynamic URLs for automation or unattended screens
@@ -30,11 +30,11 @@ This is a typical use case for URL Presets.
 To achieve this we would need the following steps:
 ![URL Presets](../../../assets/screenshots/features/url-presets.png)
 
-- Copy the path of the configured URL above (part after the port `op?main=note&secondary=custom-name&hidepast=true`)
-- In `Editor` -> `Feature Settings` -> `URL Presets` create a **New Preset**
-- Give our preset name (1) (eg: `cam3`)
-- Associate the previously copied URL segment (2)
+1. Open the relevant view and configure using the [available configuration options](/quick-tips/configuring-views)  
+2. Once configured, copy the view result URL and navigate to `Editor` -> `Sharing and reporting` -> `URL Presets` create a **New Preset**
+3. Give Ontime an alias for the URL (eg: cam3) and paste the link in the `Paste URL` input
+4. Click **Generate** and **Save** to make the new preset and save it
 
-From here, anyone that accesses ontime on the URL `http://localhost:4001/cam3` will be redirected to `http://localhost:4001/op?main=note&secondary=custom-name&hidepast=true`
+From here, anyone that accesses ontime on the URL `http://localhost:4001/cam3` will be redirected to configured link.
 :::
 

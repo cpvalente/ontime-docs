@@ -3,10 +3,10 @@ title: Import from spreadsheets
 description: Import data from spreadsheets
 ---
 
-[spreadsheet-link]: https://docs.google.com/spreadsheets/d/1Ft5czgMtXAuwdU5X4sxXoNQKan-dR4n1AU3vIN8TSCg
+[spreadsheet-link]: https://docs.google.com/spreadsheets/d/1zT6yRgQUaICEiAFR85VEL-E9hAUDujKg6DaWR0iDYmY
 [css-colour]: https://developer.mozilla.org/en-US/docs/Web/CSS/named-color
 
-Ontime allows importing a rundown from a spreadsheet written elsewhere (eg. Excel or Google-Sheets).
+Ontime allows importing a rundown from a spreadsheet written elsewhere (eg. Excel or Google Sheets).
 
 ![Spreadsheet template](../../../assets/screenshots/features/spreadsheet-template.png)
 Follow [here][spreadsheet-link] to see the Google Sheet template in the screenshot.
@@ -24,14 +24,13 @@ For a successful import, there are a few conventions to follow.
 
 1. Ontime reads a single worksheet
 2. You can have as many columns as necessary, Ontime only imports the columns you request
-2. The name of the worksheet and columns are given in the app on import
-3. Ontime creates an event for every row on the table (see exception in Timer type notes)
-4. All fields in an event (row) are optional, Ontime will fill in with default data if necessary
-5. The times can be either an Excel time field or a short text entry as described [in the smart entry feature](/quick-tips/smart-time-entry) eg: `00:10:15` or `10m15s`
+2. You will provide a reference of the spreadsheet column names on import
+3. Ontime creates a rundown entry for every row on the table (see exception in Timer type notes)
+4. The times can be either an Excel time field or a short text entry as described [in the smart entry feature](/quick-tips/smart-time-entry) eg: `00:10:15` or `10m15s`
 
 See below the expected data types of the rundown data
 
-Field names are not case-sensitive: both `Title` and `title` would be recognised on import.
+Note: Field names are not case-sensitive: both `Title` and `title` would be recognised on import.
 
 | Event Field  | Data Type                                                                               | Default value      |
 | :----------  | :-------------------------------------------------------------------------------------- | :----------------- |
@@ -45,7 +44,7 @@ Field names are not case-sensitive: both `Title` and `title` would be recognised
 | Note         | string                                                                                  | ""                 |
 | Colour       | string (# hex colour or [named css colour][css-colour])                                 | ""                 |
 | End action   | `none` `load-next` `play-next`                                                          | `none`             |
-| Timer type*  | `count-down` `count-up` `clock` `block` `skip` `none`                                   | `count-down`       |
+| Timer type*  | `count-down` `count-up` `clock` `block` `skip` `group` `group-end` `milestone` `none`   | `count-down`       |
 | Count to end*| boolean                                                                                 | false              |
 | Time warning | Excel time \| [string](/quick-tips/smart-time-entry)                                    | 00:02:00           |
 | Time danger  | Excel time \| [string](/quick-tips/smart-time-entry)                                    | 00:01:00           |
