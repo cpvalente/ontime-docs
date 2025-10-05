@@ -29,10 +29,9 @@ Please follow vMix documentation for the next steps.
 
 You can leverage the [automation feature](/api/automation) to send HTTP data from Ontime to set parameters in vMix.
 
-The example below will set a `Headline text` property to the title of the current event every time one is loaded.
-- Navigate to the Integration Settings at `Editor` -> `Settings` -> `Automation`
-- In "Manage automations" create a new automation and add an appropriate title
-- Create an output of type HTTP and add the following URL:
+The example below will set a **Headline text** property to the title of the current event every time one is loaded.
+- Navigate to the Automation Settings at `Editor` -> `Settings` -> `Automation`
+- In **Manage automations** create a new automation and add an output of type HTTP and add the following URL:
 
 ```bash
 http://127.0.0.1:8088/api/?Function=SetText&Input=Title%201&Value={{eventNow.title}}&SelectedName=Headline.Text
@@ -48,6 +47,6 @@ The request above sends variables from Ontime as described in the [automation do
 Remember to modify the IP address and port as necessary.
 :::
 
-![Setup HTTP Integration](../../../assets/screenshots/features/vmix_setup-integration.png)
+![Setup HTTP Integration](../../../assets/screenshots/features/vmix_setup-automation.png)
 ![vMix 1](../../../assets/screenshots/features/vmix_1.png)
 ![vMix 2](../../../assets/screenshots/features/vmix_2.png)

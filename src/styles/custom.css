@@ -34,5 +34,10 @@
 	--sl-color-gray-5: #353841;
 	--sl-color-gray-6: #24272f;
 	--sl-color-black: #17181c;
+}
 
+mark {
+    background-color: var(--ontime-accent);
+    color: var(--ontime-text-primary);
+    padding-inline: 0.25em;
 }

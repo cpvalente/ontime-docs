@@ -43,7 +43,7 @@ export default defineConfig({
       title: "Ontime documentation",
       favicon: "./favicon.ico",
       logo: {
-        src: "./src/assets/images/icon.webp",
+        src: "./src/assets/images/logo.png",
         replacesTitle: true,
       },
       customCss: ["./src/styles/custom.css"],

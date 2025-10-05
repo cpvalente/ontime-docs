@@ -9,36 +9,37 @@ Ontime provides a few fail-safes to protect its runtime.
 
 :::tip[Where are these file?]
 The user directory location is dependent on both the operating system and installation. \
-You can find the path to the file in the `Editor` -> `Settings` -> `App settings` -> `View settings` where you activate the CSS override.
+If you are running Ontime locally in an installer, you can find the path to the internal files by using the application menu `File` -> `Open Directory` -> `...`. \
+From here you will find the `crash` and `corrupt files` directories
 
-**For PC users:**\
+**For PC users**\
 `AppData/Roaming/Ontime/`
 
-**For Mac users:**\
+**For Mac users**\
 `Library/Application Support/Ontime/`
 
-**For Linux users:**\
+**For Linux user:**\
 `Home/Ontime/styles/`
-
-From here you will find the `crash` and `corrupt files` directories
 :::
 
 
 ## Crash logs
 If the Ontime process crashes, we generate a crash log in the user directory.
 
-Send it over to us and we will take a look.
+Send it over and we will take a look.
 
 ## Recover on bad shutdown
-Ontime persists to the machine the major milestones of the runtime. \
-If the app detects that it has been shutdown without the proper processes (in the examples of crash or machine shutdown), Ontime will recover the state on the next start.
+If the app detects that it has been shutdown unexpectedly (in the examples of crash or machine shutdown), Ontime will recover the state on the next start.
 
-This means that you can restart Ontime and the app will jump playback to where it should be.
+This means that you can restart Ontime and the app will jump the playback state to where it should be.
 
 ## Refuse corrupt data
-Everytime Ontime loads a project, it parses its data to ensure that it is safe to consume at runtime.
+When Ontime loads a project it ensures that its data is correct.
 
 If Ontime is to find data that is either corrupt, or does not conform with the expectations, the data will be refused by the parser. \
-These are rare occurences but can happen in the case of external software writing to ontime's project, or while upgrading Ontime versions.
+This can happen in the case of external software writing to Ontime's project, or while upgrading Ontime versions.
 
-To safeguard your data, Ontime creates a copy of the project before the parse and pushes it to a `corrupt files` directory. The parsed file is renamed to include a `(recovered)` label.
+To safeguard your data, Ontime creates a copy of the project before parsing and pushes it to a `corrupt files` directory. \
+The parsed file is renamed to include a `(recovered)` label.
+
+When a project is migrated across versions which contain data structure changes, you will find that we create a new file and label it `(migrated)`.

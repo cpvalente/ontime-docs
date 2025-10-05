@@ -3,30 +3,40 @@ title: What's new in v4
 description: What's new in v4
 ---
 
-## More
+import { LinkCard } from "@astrojs/starlight/components";
 
-We have been working on Ontime for over 5 years. Over time, we have learned more about how we can make Ontime solve real-world user cases on-site.
+### More
 
-The newest release (v4) focuses on improving the user's ability to detail the rundown and leverage timers to make decisions on it. Some highlights:
+We have been working on Ontime for over 5 years.
+Thousands of users are leveraging Ontime in different fields, from streaming to conferences, festivals and churches. \
+Ontime is, at this point, an impactful project in the space, empowering users with professional-level tools at no cost.
 
-* [x] Grouped events and timers to the expected and scheduled completion of the running group, allowing better planning.
-* [x] Added flags in the rundown to calculate times to any arbitrary upcoming event, improving flexibility.
-* [x] Introduced milestone events to add metadata to the rundown for better organization.
-* [x] Improved sharing of views with granular read and write permissions for the cuesheet, enhancing collaboration.
-* [x] Enabled a single project to contain multiple (non-concurrent) rundowns, increasing project versatility.
-* [x] Added more auxiliary timers for enhanced functionality.
-* [x] Implemented several UI design changes and improvements for a better user experience.
+Over time, we have learned more about how we can make Ontime solve real-world user cases on-site.
+
+The newest release (v4) focuses on improving the user's ability to detail the rundown and leverage timers to make decisions on it. \
+
+- [x] Allow users to group events and keep track of the time to group completion.
+- [x] Allow users to create a timer to any upcoming event by leveraging flags.
+- [x] Introduce detailing of the rundown by adding of the milestone rundown entry type.
+- [x] Improve collaboration and safety with granular read and write permissions for cuesheet share links.
+- [x] Improve view configuration and sharing leveraging presets.
+- [x] Allow a single project to contain multiple (non-concurrent) rundowns.
+- [x] Added more auxiliary timers for enhanced functionality.
+- [x] Implemented several UI design changes and improvements to user experience.
 
 ... and many more.
 
 ### Removals and breaking changes
 
-- `Removed` **minimal** and **clock** views in favor of extra customization of the **timer** view, providing more flexibility.
-- `Removed` **lower thirds** view to streamline the interface.
-- `Removed` **public data** in favor of filtering based on custom fields, improving data management.
-- `Removed` support for some languages in favor of user-defined translations, allowing more tailored localization.
-- `Breaking` Deprecated **offset** in favor of the more common **over/under**, aligning with industry standards.
+- `Removed` **minimal** and **clock** views in favour of extra customization of the **timer** view.
+- `Removed` **lower thirds**.
+- `Removed` **public data** in favour of filtering based on custom fields.
+- `Removed` support for some languages in favour of user-defined translations.
+- `Removed` CSV export in favour of xlsx (Excel) export.
+- `Breaking` Deprecated **offset** in favour of the more common **over/under**.
 
-:::note[APIs]
-We have made several changes to make our communication more effective. If you manage an integration to Ontime that leverages websockets, check out the [docs for the new implementation](#) or get in touch if you need help.
-:::
+<LinkCard
+  title="API documentation"
+  href="/api"
+  description="If you manage an integration to Ontime that leverages WebSockets, check out the API docs"
+/>

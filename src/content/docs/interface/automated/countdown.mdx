@@ -1,24 +1,17 @@
 ---
 title: Countdown
-description: A timer to another any scheduled event
+description: Count down scheduled event
 ---
 
 
 ```bash title="Countdown"
-https://MY-IP-ADDRESS:4001/countdown           
+https://cloud.getontime.no/my-stage/countdown           
 ```
 
-This view solves the case where you need to track the time or progress of a particular event.  \
-eg: An actor in dressing room number 3 needs to know when to enter. No other times are relevant.
+The <mark>Countdown</mark> view allows you to create countdowns to a custom selection of scheduled events.
 
-Enter `Countdown` view!
+It aims to solve the case where you need to track the time or progress of a particular selection of events.  \
+eg: Hospitality tracking the scheduled breaks, or an actor following time to their scene. No other times are relevant.
 
-![Ontime](../../../../assets/screenshots/views/countdown.png)
-
-:::note
-When calling the route `<ontime-ip>:4001/countdown`, you can choose any event in the rundown.
-
-You can also use the direct routes `<ontime-ip>:4001/countdown?event=1` to follow an event by its order in the list or `<ontime-ip>:4001/countdown?eventid=test` to follow a specific event regardless of its position.
-
-This is a great workflow when combined with [URL Presets](/features/url-presets)
-:::
+![Ontime](../../../../assets/screenshots/views/8-countdown-one.png)
+![Ontime](../../../../assets/screenshots/views/8-countdown-many.png)

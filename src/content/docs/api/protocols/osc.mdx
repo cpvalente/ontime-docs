@@ -60,7 +60,7 @@ See more on [custom fields](/features/custom-fields)
 ```
 
 ## Message
-The following endpoints allow controlling the messages Ontime sends to the timer view. \
+The following endpoints allow controlling the messages Ontime sends to the stage timer view. \
 The payload response is the current state of the message data.
 
 ### Example: change the external message text
@@ -72,7 +72,7 @@ The payload response is the current state of the message data.
 /ontime/message/external <new-text>
 ```
 
-### Example: secondary source in the timer view
+### Example: secondary source in the stage timer view
 **OSC Message**
 ```bash title="Show auxiliary timer as secondary field"
 /ontime/message/timer/secondarySource 'aux'
@@ -90,7 +90,7 @@ The payload response is the current state of the message data.
 ```
 
 ### Example: blackout timer screens
-You can remotely blackout every screen that is in the timer view.
+You can remotely blackout every screen that is in the stage timer view.
 
 **OSC Message**
 ```bash title="Blackout timer screen"
