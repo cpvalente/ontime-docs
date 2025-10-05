@@ -69,7 +69,28 @@ export default defineConfig({
         },
         {
           label: "Ontime Cloud",
-          autogenerate: { directory: "ontime-cloud" },
+          items: [
+            {
+              label: "✨Ontime Cloud✨",
+              link: "/ontime-cloud/",
+            },
+            {
+              label: "Manage your stages",
+              link: "/ontime-cloud/manage-stages/",
+            },
+            {
+              label: "Manage your team",
+              link: "/ontime-cloud/manage-team/",
+            },
+            {
+              label: "Ontime Cloud FAQ",
+              link: "/ontime-cloud/cloud-faq/",
+            },
+            {
+              label: "Tips",
+              autogenerate: { directory: "ontime-cloud/tips" },
+            },
+          ],
         },
         {
           label: "Interface",
@@ -99,7 +120,6 @@ export default defineConfig({
               label: "API overview",
               link: "/api/",
             },
-
             {
               label: "Data",
               autogenerate: { directory: "api/data" },
