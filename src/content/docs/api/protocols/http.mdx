@@ -134,7 +134,7 @@ GET <localhost:4001>/api/change/<my-event-id>?title=new-title&cue=new-cue
 ```
 
 ## Message
-The following endpoints allow controlling the messages Ontime sends to the timer view. \
+The following endpoints allow controlling the messages Ontime sends to the stage timer view. \
 The payload response is the current state of the message data.
 
 ### Example: change the external message text
@@ -159,7 +159,7 @@ GET <localhost:4001>/api/message/external/new text
 }
 ```
 
-### Example: secondary source in the timer view
+### Example: secondary source in the stage timer view
 **Request**
 ```bash title="Show auxiliary timer as secondary field"
 <localhost:4001>/api/message/timer?secondarySource=aux
@@ -193,7 +193,7 @@ GET <localhost:4001>/api/message/external/new text
 ```
 
 ### Example: blackout timer screens
-You can remotely blackout every screen that is in the timer view.
+You can remotely blackout every screen that is in the stage timer view.
 
 **Request**
 ```bash title="Blackout timer screen"

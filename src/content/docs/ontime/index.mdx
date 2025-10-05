@@ -1,58 +1,58 @@
 ---
 title: Ontime
 description: Documentation for ontime
-    
 ---
 
-Ontime is an application for creating and managing event rundowns and timers.
+import { Card, CardGrid } from "@astrojs/starlight/components";
 
-![Ontime](../../../assets/images/ontime-overview.webp)
+## Free open-source software for managing <mark>rundowns</mark> and <mark>event timers</mark>
 
-:::tip[Multi Platform]
-Ontime has available installers for Windows, macOS, Linux, and a Docker image. \
-Follow [the website](https://www.getontime.no) for download links.
+:::tip[What is Ontime]
+
+Ontime is a browser-based application that manages rundowns, scheduling, and cueing. \
+It supports live productions, broadcasts, and events with real-time collaboration and powerful integrations.
+
+Ontime streamlines your production workflow by enabling real-time collaboration, managing last-minute changes, and ensuring smooth communication.
+
+You can run Ontime anywhere: \
+Install it in your machine, run it in a production network or in the cloud.
+
+Checkout our website to find out more www.getontime.no
 :::
 
-### For live environments
-Ontime is designed for use in live environments.
-This guides the application into being flexible and efficiently integrating into different workflows.
+![Ontime](../../../assets/images/ontime-overview.png)
 
-### For teams
-All information added in Ontime is shared with the production team and other software / hardware in your workflow.
-Ontime also improves team collaboration with dedicated views for cuesheets and operators, and signage screens.
+<CardGrid stagger>
+  <Card title="Multiplatform" icon="approve-check">
+    Available for Windows, MacOS, and Linux. You can also self host the
+    docker image in your own server.
+  </Card>
+  <Card title="In any device" icon="approve-check">
+    Ontime is accessible on any device with a web browser, including tablets,
+    mobile phones, laptops, production signage, and media servers.{" "}
+  </Card>
+  <Card title="Delay workflows" icon="approve-check">
+    Manage and communicate runtime delays in real-time to your entire production
+    team.
+  </Card>
+  <Card title="Built for teamwork" icon="approve-check">
+    Ontime offers real-time collaboration tools for various roles in your
+    production team, including directors, operators, and backstage crew, without
+    imposing any restrictions on the number of team members who can join a
+    session.
+  </Card>
+  <Card title="Automatable" icon="approve-check">
+    Ontime can be fully or partially controlled by an operator, or run
+    standalone with the system clock for automated rundowns.
+  </Card>
+  <Card title="Focus on integrations" icon="approve-check">
+    Use one of the APIs provided (OSC, HTTP, Websocket) or the available
+    Companion module to integrate into your existing workflow (disguise, Qlab,
+    OBS).
+  </Card>
+</CardGrid>
 
-### Simple infrastructure
-All the data is distributed over the network, making its distribution and infrastructure flexible and cheap.
-With the availability of the docker image, you can also leverage IT infrastructure to make Ontime available online for your team and clients.
-
-## Features
-Ontime is an application for creating and managing event rundowns and event timers. \
-See below what we consider are the core features:
-
-![Ontime](../../../assets/images/ontime-for-all.png)
-
-##### ✓ Multiplatform
-Available for Windows / MacOS, Linux. You can also self host with the docker image
-
-##### ✓ In any device
-Ontime is available in the local network to any device with a browser, eg: tablets, mobile phones, laptops, signage, media servers...
-
-##### ✓ Made for teams
-Ontime caters to different roles in your production team: directors, operators, backstage and front of house signage...
-
-##### ✓ Delay workflows
-Manage and communicate runtime delays in real-time to your team
-
-##### ✓ Extendable
-You can customise Ontime views and create your own
-
-##### ✓ Automatable
-Ontime can be fully or partially controlled by an operator, or run standalone with the system clock
-
-##### ✓ Focus on integrations
-Use one of the [APIs provided (OSC, HTTP, Websocket)](/api) or the available [Companion module](https://bitfocus.io/connections/getontime-ontime) to integrate into your workflow (disguise, Qlab, OBS)
-
-## Roadmap
+### Roadmap
 
 Ontime is under active development. We continue adding and tweaking features in collaboration with users.
 
