@@ -1,43 +1,60 @@
 :root {
-    --ontime-bg-colour: hsl(0 0% 6%);
-    --ontime-bg-detailing: hsl(240 5.9% 7%);
-    --ontime-bg-accent: hwb(240 15% 84%);
-    --ontime-text-primary: hsl(0 0% 80%);
-    --ontime-text-high: #eaeaea;
-    --ontime-text-secondary: hsl(240 5% 64.9%);
-    --ontime-action-blue: #2b5abc;
-    --ontime-accent: #578af4;
-    --ontime-accent-dark: #0d1b36;
-    --ontime-accent-gradient: linear-gradient(45deg, var(--bg-colour), var(--bg-colour) 40%, var(--action-blue) 100%);
-    --ontime-spacing-mobile: 5vw;
-    --ontime-spacing-desktop: 10vw;
-    --sl-content-width: 70rem;
+  --ontime-bg-colour: hsl(0 0% 6%);
+  --ontime-bg-detailing: hsl(240 5.9% 7%);
+  --ontime-bg-accent: hwb(240 15% 84%);
+  --ontime-text-primary: hsl(0 0% 80%);
+  --ontime-text-high: #eaeaea;
+  --ontime-text-secondary: hsl(240 5% 64.9%);
+  --ontime-action-blue: #2b5abc;
+  --ontime-accent: #578af4;
+  --ontime-accent-dark: #0d1b36;
+  --ontime-accent-gradient: linear-gradient(
+    45deg,
+    var(--bg-colour),
+    var(--bg-colour) 40%,
+    var(--action-blue) 100%
+  );
+  --ontime-spacing-mobile: 5vw;
+  --ontime-spacing-desktop: 10vw;
+  --sl-content-width: 70rem;
 }
 
-:root[data-theme='dark'],
+:root[data-theme="dark"],
 ::backdrop {
-    --sl-color-bg: var(--ontime-bg-colour);
-    --sl-color-bg-nav: var(--ontime-bg-detailing);
-    --sl-color-bg-sidebar: var(--ontime-bg-detailing);
-    --sl-color-text: var(--ontime-text-primary);
-    --sl-color-text-accent: var(--ontime-accent);
+  --sl-color-bg: var(--ontime-bg-colour);
+  --sl-color-bg-nav: var(--ontime-bg-detailing);
+  --sl-color-bg-sidebar: var(--ontime-bg-detailing);
+  --sl-color-text: var(--ontime-text-primary);
+  --sl-color-text-accent: var(--ontime-accent);
 
-    /** from the docs */
-    --sl-color-accent-low: #09204e;
-	--sl-color-accent: #0057f1;
-	--sl-color-accent-high: #abc9ff;
-	--sl-color-white: hsl(0 0% 98%);
-	--sl-color-gray-1: #eaeaea;
-	--sl-color-gray-2: #c0c2c7;
-	--sl-color-gray-3: #888b96;
-	--sl-color-gray-4: #545861;
-	--sl-color-gray-5: #353841;
-	--sl-color-gray-6: #24272f;
-	--sl-color-black: #17181c;
+  /** from the docs */
+  --sl-color-accent-low: #09204e;
+  --sl-color-accent: #0057f1;
+  --sl-color-accent-high: #abc9ff;
+  --sl-color-white: hsl(0 0% 98%);
+  --sl-color-gray-1: #eaeaea;
+  --sl-color-gray-2: #c0c2c7;
+  --sl-color-gray-3: #888b96;
+  --sl-color-gray-4: #545861;
+  --sl-color-gray-5: #353841;
+  --sl-color-gray-6: #24272f;
+  --sl-color-black: #17181c;
 }
 
 mark {
-    background-color: var(--ontime-accent);
-    color: var(--sl-color-white);
-    padding-inline: 0.25em;
+  background-color: var(--ontime-accent);
+  color: var(--sl-color-white);
+  padding-inline: 0.25em;
+}
+
+.tag {
+  background: red;
+  border-radius: 99px;
+  color: var(--sl-color-white);
+  border: 1px solid var(--sl-color-white);
+  height: 1.5rem;
+  width: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
