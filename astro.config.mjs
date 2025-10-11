@@ -157,6 +157,12 @@ export default defineConfig({
               badge: "Link",
               attrs: { target: "_blank" },
             },
+            {
+              label: "v3 Documentation",
+              link: "https://v3docs.getontime.no/",
+              badge: "Link",
+              attrs: { target: "_blank" },
+            },
           ],
         },
       ],
