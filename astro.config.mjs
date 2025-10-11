@@ -93,6 +93,10 @@ export default defineConfig({
           ],
         },
         {
+          label: "Ontime concepts",
+          autogenerate: { directory: "concepts" },
+        },
+        {
           label: "Interface",
           items: [
             {
