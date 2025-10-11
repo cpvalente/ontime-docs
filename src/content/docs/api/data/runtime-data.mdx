@@ -27,7 +27,7 @@ Where the type `Ontime` indicates the type of message, and the payload is a port
 To keep things efficient, Ontime also broadcasts the individual objects in state as they change. \
 This allows for smaller payloads and granular updates.
 ```ts
-// ontime sends smaller messages to update subsets of the object
+// Ontime sends smaller messages to update subsets of the object
 { type: "ontime-timer", payload: "<runtime-data-object>.timer"}
 { type: "ontime-playback", payload: "<runtime-data-object>.playback"}
 { type: "ontime-eventNow", payload: "<runtime-data-object>.eventNow"}
