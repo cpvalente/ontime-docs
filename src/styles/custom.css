@@ -2,7 +2,7 @@
     --ontime-bg-colour: hsl(0 0% 6%);
     --ontime-bg-detailing: hsl(240 5.9% 7%);
     --ontime-bg-accent: hwb(240 15% 84%);
-    --ontime-text-primary: hsl(0 0% 98%);
+    --ontime-text-primary: hsl(0 0% 80%);
     --ontime-text-high: #eaeaea;
     --ontime-text-secondary: hsl(240 5% 64.9%);
     --ontime-action-blue: #2b5abc;
@@ -19,7 +19,7 @@
     --sl-color-bg: var(--ontime-bg-colour);
     --sl-color-bg-nav: var(--ontime-bg-detailing);
     --sl-color-bg-sidebar: var(--ontime-bg-detailing);
-    --sl-color-text: var(--ontime-text-secondary);
+    --sl-color-text: var(--ontime-text-primary);
     --sl-color-text-accent: var(--ontime-accent);
 
     /** from the docs */
@@ -38,6 +38,6 @@
 
 mark {
     background-color: var(--ontime-accent);
-    color: var(--ontime-text-primary);
+    color: var(--sl-color-white);
     padding-inline: 0.25em;
 }
