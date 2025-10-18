@@ -63,13 +63,13 @@ See more on [custom fields](/features/custom-fields)
 The following endpoints allow controlling the messages Ontime sends to the stage timer view. \
 The payload response is the current state of the message data.
 
-### Example: change the external message text
+### Example: change the secondary message text
 
 **OSC Message**
 ```bash
 # Note that this will set the text, however setting its visibility is a separate operation.
 # See below
-/ontime/message/external <new-text>
+/ontime/message/secondary <new-text>
 ```
 
 ### Example: secondary source in the stage timer view
@@ -79,13 +79,13 @@ The payload response is the current state of the message data.
 ```
 
 **OSC Message**
-```bash title="Show external message as secondary field"
-/ontime/message/timer/secondarySource 'external'
+```bash title="Show secondary message as secondary field"
+/ontime/message/timer/secondarySource 'secondary'
 ```
 
 **OSC Message**
 ```bash title="Hide secondary field"
-# Note: The secondary source can be `aux` or `external`, any other value will assign the property to null (ie: off)
+# Note: The secondary source can be `aux` or `secondary`, any other value will assign the property to null (ie: off)
 /ontime/message/timer/secondarySource 'off'
 ```
 

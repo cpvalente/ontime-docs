@@ -135,14 +135,14 @@ Message: {
 The following endpoints allow controlling the messages Ontime sends to the timer view. \
 The payload response is the current state of the message data.
 
-### Example: change the external message text
+### Example: change the secondary message text
 **Request**
 ```bash
 Target: ws://<ip-address>:<port>/ws
 Message: {
     "type": "message", 
     "payload": {
-        "external": "new text"
+        "secondary": "new text"
     }
 }
 ```
@@ -152,7 +152,7 @@ Message: {
 {
     "type":"message",
     "payload": {
-        "external": "new text",
+        "secondary": "new text",
         "timer": {
             "text": "",
             "visible": true,
@@ -179,13 +179,13 @@ Message: {
 ```
 
 **Request**
-```bash title="Show external message as secondary field"
+```bash title="Show secondary message as secondary field"
 Target: ws://<ip-address>:<port>/ws
 Message: {
     "type": "message", 
     "payload": {
         "timer": {
-            "secondarySource": "external"
+            "secondarySource": "secondary"
         }
     }
 }
@@ -193,7 +193,7 @@ Message: {
 
 **Request**
 ```bash title="Hide secondary field"
-# Note: The secondary source can be `aux` or `external`, any other value will assign the property to null (ie: off)
+# Note: The secondary source can be `aux` or `secondary`, any other value will assign the property to null (ie: off)
 Target: ws://<ip-address>:<port>/ws
 Message: {
     "type": "message", 
@@ -209,13 +209,13 @@ Message: {
 ```ts
 {
     "payload": {
-        "external": "new text",
+        "secondary": "new text",
         "timer": {
             "text": "",
             "visible": true,
             "blink": false,
             "blackout": false,
-            "secondarySource": "external"
+            "secondarySource": "secondary"
         },
     }
 }
@@ -226,7 +226,7 @@ You can remotely blackout every screen that is in the stage timer view.
 
 **Request**
 ```bash title="Blackout timer screen"
-# Note: The secondary source can be `aux` or `external`, any other value will assign the property to null (ie: off)
+# Note: The secondary source can be `aux` or `secondary`, any other value will assign the property to null (ie: off)
 Target: ws://<ip-address>:<port>/ws
 Message: {
     "type": "message", 
@@ -255,7 +255,7 @@ Message: {
 ```ts
 {
     "payload": {
-        "external": "",
+        "secondary": "",
         "timer": {
             "text": "",
             "visible": true,
