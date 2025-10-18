@@ -11,6 +11,7 @@ If you think this is incorrect or that there should be contracts for extra resou
 :::
 
 ## Rundown
+
 The following endpoints allow operations on the rundown of the currently loaded project.
 
 :::tip[Show me the code]
@@ -20,54 +21,39 @@ This documentation can get out of sync as we add new features to Ontime.
 :::
 
 ### GET Rundown
-Allows requesting the full rundown or a optionally a paginated section.
 
-**Request** 
+Allows requesting the full rundown.
+
+**Request**
+
 ```bash
-GET <localhost:4001>/data/rundown
-```
-**Request Query Params** 
-```
-
-| param                | value                |
-| -------------------- | -------------------- |
-| offset               | Optional<number>     |
-| limit                | Optional<number>     |
+GET <localhost:4001>/data/rundown/current
 ```
 
 **Response**
+
 ```ts
-200: {"rundown": OntimeEvent[], "total": number}
+200: {
+  id: RundownId;
+  title: string;
+  order: EntryId[];
+  flatOrder: EntryId[];
+  entries: RundownEntries;
+  revision: number;
+}
 ```
 
-### GET Event with ID
-Returns an event data given its ID.
+### POST Entry
 
-**Request** 
+Adds a new entry to the rundown.
+
+**Request**
+
 ```bash
-GET <localhost:4001>/data/rundown/:eventId
-```
-**Request Params** 
+POST <localhost:4001>/data/rundown/:rundownId/entry
 ```
 
-| param                | value                |
-| -------------------- | -------------------- |
-| offset               | Required<string>     |
-```
-
-**Response**
-```ts
-200: {OntimeEvent}
-```
-
-### POST Event
-Adds a new event to the rundown.
-
-**Request** 
-```bash
-POST <localhost:4001>/data/rundown
-```
-**Request Body** 
+**Request Body**
 
 The endpoint expect the properties of [Ontime Event](/api/data/event-data). All properties are optional.
 
@@ -75,29 +61,34 @@ Additionally you can send an after property with the ID of the event after which
 If this property is not provided, the event is appended to the end of the rundown.
 
 ```
-| property             | value                       |
-| -------------------- | --------------------------- |
-| type                 | "event" | "delay" | "block" |
-| after                | Optional<string>            |
+| property             | value                                     |
+| -------------------- | ----------------------------------------- |
+| type                 | "event" | "delay" | "group" | "milestone" |
+| after                | Optional<string>                          |
 ```
 
 **Response**
+
 ```ts
-201: {OntimeEvent}
+201: {OntimeEntry}
 ```
 
 ### PUT Event
+
 Patches the contents of an existing event.
 
-**Request** 
-```bash
-PUT <localhost:4001>/data/rundown/:eventId
-```
-**Request Body** 
+**Request**
 
-The endpoint expect a patch object that includes an event ID and any of the properties of [Ontime Event](/api/data/event-data). 
+```bash
+PUT <localhost:4001>/data/rundown/:rundownId/:entryId
+```
+
+**Request Body**
+
+The endpoint expect a patch object that includes an event ID and any of the properties of [Ontime Event](/api/data/event-data).
 
 All properties are optional.
+
 ```
 
 | property             | value                       |
@@ -108,18 +99,23 @@ All properties are optional.
 **Response**
 
 The response contains the event as it is added to the rundown.
+
 ```ts
-200: {OntimeEvent}
+200: {OntimeEntry}
 ```
 
 ### DELETE Event
+
 Deletes events given its IDs.
 
-**Request** 
+**Request**
+
 ```bash
-DELETE <localhost:4001>/data/rundown/:eventId
+DELETE <localhost:4001>/data/rundown/:rundownId/:entryId
 ```
-**Request Body** 
+
+**Request Body**
+
 ```
 
 | param                | value                |
@@ -128,6 +124,7 @@ DELETE <localhost:4001>/data/rundown/:eventId
 ```
 
 **Response**
+
 ```ts
 204: {message: 'Events deleted'}
 ```
