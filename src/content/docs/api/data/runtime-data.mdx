@@ -79,16 +79,18 @@ timer: {
 secondary: string
 ````
 
-### ontime-runtime
-Contains data related to the application runtime.
+### ontime-rundown
+Contains data related to the application rundown.
 ```ts
 {
-  numEvents: number                                             // number of non-skipped events in rundown
+  numEvents: number                                             // number of events in rundown
   selectedEventIndex: number | null                             // index of selected event
-  offset: number | null                                         // difference between current runtime and schedule
-  plannedStart: number                                          // schedule planned start time
-  plannedEnd: number | null                                     // schedule planned end time
+  plannedStart: number                                          // schedule start time
+  plannedEnd: number | null                                     // schedule end time
   actualStart: number | null                                    // actual start time of rundown
+  currentDay: number | null                                     // internally used to calculate day offsets
+  actualGroupStart: number | null                               // actual start time of the current group
+  offset: number | null                                         // difference between current runtime and schedule
   expectedEnd: number | null                                    // time for expected end
 }
 ````
