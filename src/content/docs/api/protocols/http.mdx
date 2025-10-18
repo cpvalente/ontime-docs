@@ -137,17 +137,17 @@ GET <localhost:4001>/api/change/<my-event-id>?title=new-title&cue=new-cue
 The following endpoints allow controlling the messages Ontime sends to the stage timer view. \
 The payload response is the current state of the message data.
 
-### Example: change the external message text
+### Example: change the secondary message text
 **Request**
 ```bash
-GET <localhost:4001>/api/message/external/new text
+GET <localhost:4001>/api/message/secondary/new text
 ```
 
 **Response**
 ```ts
 {
     "payload": {
-        "external": "new text",
+        "secondary": "new text",
         "timer": {
             "text": "",
             "visible": true,
@@ -166,13 +166,13 @@ GET <localhost:4001>/api/message/external/new text
 ```
 
 **Request**
-```bash title="Show external message as secondary field"
-<localhost:4001>/api/message/timer?secondarySource=external
+```bash title="Show secondary message as secondary field"
+<localhost:4001>/api/message/timer?secondarySource=secondary
 ```
 
 **Request**
 ```bash title="Hide secondary field"
-# Note: The secondary source can be `aux` or `external`, any other value will assign the property to null (ie: off)
+# Note: The secondary source can be `aux` or `secondary`, any other value will assign the property to null (ie: off)
 <localhost:4001>/api/message/timer?secondarySource=off
 ```
 
@@ -180,13 +180,13 @@ GET <localhost:4001>/api/message/external/new text
 ```ts
 {
     "payload": {
-        "external": "new text",
+        "secondary": "new text",
         "timer": {
             "text": "",
             "visible": true,
             "blink": false,
             "blackout": false,
-            "secondarySource": "external"
+            "secondarySource": "secondary"
         },
     }
 }
@@ -209,7 +209,7 @@ GET <localhost:4001>/api/message/timer?blackout=false
 ```ts
 {
     "payload": {
-        "external": "",
+        "secondary": "",
         "timer": {
             "text": "",
             "visible": true,

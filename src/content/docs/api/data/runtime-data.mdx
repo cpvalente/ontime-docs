@@ -65,9 +65,8 @@ Contains data related to the application timer
 
 ### ontime-message
 Data related to message feature. It contains two message objects:
-
-#### Timer object
 Corresponding to the visibility of messages to the [stage timer view](/interface/automated/stage-timer).
+and [secondary messages](/features/secondary-message) (also displayed in the stage timer view).
 
 ```ts
 timer: {
@@ -75,17 +74,9 @@ timer: {
   visible: boolean
   blink: boolean
   blackout: boolean
+  secondarySource: 'aux1' | 'aux2' | 'aux3' | 'secondary' | null
 }
-````
-
-#### Message object
-Corresponding to visibility of [external messages](/features/external-message) (also displayed in the stage timer view).
-
-```ts
-external: {
-  text: string
-  visible: boolean
-}
+secondary: string
 ````
 
 ### ontime-runtime
