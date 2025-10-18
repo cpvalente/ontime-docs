@@ -95,6 +95,18 @@ Contains data related to the application rundown.
 }
 ````
 
+### ontime-offset
+Contains data related to the application offset.
+```ts
+{
+  absolute: number                                              // accounts for planned times
+  relative: number                                              // only counts for generated offset since start
+  mode: 'absolute' | 'relative'                                 // currently selected offset mode
+  expectedGroupEnd: number | null                               // expected end time of the current group
+  expectedRundownEnd: number | null                             // expected end time of the rundown
+  expectedFlagStart: number | null                              // expected start time of the next flagged event
+}
+````
 
 ### ontime-auxtimer1
 Contains data related to the [auxiliary timer](/features/aux-timer).
