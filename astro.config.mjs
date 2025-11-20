@@ -33,9 +33,19 @@ export default defineConfig({
               description: "The official GitHub repository for Ontime.",
             },
             {
+              label: "Ontime's Youtube Channel",
+              url: "https://www.youtube.com/@ontimeapp",
+              description: "The official Youtube channel for Ontime.",
+            },
+            {
               label: "Ontime's Discord",
               url: "https://discord.com/invite/eje3CSUEXm",
               description: "The official Discord server for Ontime.",
+            },
+            {
+              label: "Ontime's Subreddit",
+              url: "https://www.reddit.com/r/ontimeapp",
+              description: "The official Subreddit for Ontime.",
             },
           ],
         }),
@@ -57,6 +67,16 @@ export default defineConfig({
           icon: "discord",
           label: "Discord",
           href: "https://discord.com/invite/eje3CSUEXm",
+        },
+        {
+          icon: "youtube",
+          label: "Youtube",
+          href: "https://www.youtube.com/@ontimeapp",
+        },
+        {
+          icon: "reddit",
+          label: "Reddit",
+          href: "https://www.reddit.com/r/ontimeapp",
         },
       ],
       editLink: {
@@ -162,8 +182,14 @@ export default defineConfig({
               attrs: { target: "_blank" },
             },
             {
-              label: "v3 Documentation",
-              link: "https://v3docs.getontime.no/",
+              label: "Youtube Channel",
+              link: "https://www.youtube.com/@ontimeapp",
+              badge: "Link",
+              attrs: { target: "_blank" },
+            },
+            {
+              label: "Subreddit",
+              link: "https://www.reddit.com/r/ontimeapp",
               badge: "Link",
               attrs: { target: "_blank" },
             },
