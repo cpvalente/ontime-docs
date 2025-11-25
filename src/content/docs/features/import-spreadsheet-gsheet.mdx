@@ -2,7 +2,8 @@
 title: Import from Google Sheets
 description: Import data from Google Sheets
 ---
-import { Steps } from '@astrojs/starlight/components';
+
+import { Steps } from "@astrojs/starlight/components";
 
 [spreadsheet-link]: https://docs.google.com/spreadsheets/d/1zT6yRgQUaICEiAFR85VEL-E9hAUDujKg6DaWR0iDYmY
 
@@ -39,62 +40,67 @@ The machine running Ontime must have access to the internet.
     <li>
       ### Enable the Sheet API
       <details>
-        <summary>Click enable APIs and Services</summary>
-        ![step-2.1](../../../assets/screenshots/features/sheet-guide/step-2.1.jpg)
+        <summary>Open the sidebar and click "APIs and Services"</summary>
+        ![step-2.00](../../../assets/screenshots/features/sheet-guide/step-2.00.jpg)
+        ![step-2.01](../../../assets/screenshots/features/sheet-guide/step-2.01.jpg)
       </details>
-   
       <details>
-        <summary>... and search for Sheets</summary>
+        <summary>Click "Enable APIs and Services"</summary>
+        ![step-2.02](../../../assets/screenshots/features/sheet-guide/step-2.02.jpg)
+      </details>
+
+      <details>
+        <summary>... and search for "Sheets"</summary>
         ![step-2.2](../../../assets/screenshots/features/sheet-guide/step-2.2.jpg)
         ![step-2.3](../../../assets/screenshots/features/sheet-guide/step-2.3.jpg)
         ![step-2.4](../../../assets/screenshots/features/sheet-guide/step-2.4.jpg)
       </details>
     </li>
     <li>
-      ### Setup consent screen
+      ### Setup Data Access
       <details>
-        <summary>Back on the APIs and Services to set up a OAuth consent screen</summary>
+        <summary>Add the necessary scopes</summary>
+        Go to "Data Access" and click "Add or remove scopes"
+        This could depend on your organization is set up but it should make sense by reading through the options
         ![step-3.1](../../../assets/screenshots/features/sheet-guide/step-3.1.jpg)
-      </details>
 
-      <details>
-        <summary>Add necessary scopes</summary>
-        The first step depends very much on how your organization is set up but it should make sense by reading through the options
-        If you are unsure select external and only fill out the required fields
-
-        When thats done click "ADD OR REMOVE SCOPES"
-
-        ![step-3.3](../../../assets/screenshots/features/sheet-guide/step-3.3.jpg)
-      </details>
-      
-      <details>
-        <summary>Filter for sheets, add "/auth/spreadsheets" and click update</summary>
+        Find the correct scopes by filtering for "sheets"
         ![step-3.4](../../../assets/screenshots/features/sheet-guide/step-3.4.jpg)
+
+        Enable ".../auth/spreadsheets" and click "Update"
         ![step-3.5](../../../assets/screenshots/features/sheet-guide/step-3.5.jpg)
       </details>
 
       <details>
         <summary>Click save and continue</summary>
+        ![step-3.6](../../../assets/screenshots/features/sheet-guide/step-3.6.jpg)
         For "Test users" add the email(s) the will be using this. \
         Save and go back to the dashboard
+      </details>
+
+      <details>
+        <summary>Add test user</summary>
+        Go to "Audience" and click "Add users"
+        Here add the email(s) the will be using this. \
+        Remember to save
+        ![step-3.7](../../../assets/screenshots/features/sheet-guide/step-3.7.jpg)
       </details>
     </li>
     <li>
       ### Create credentials
       <details>
-        <summary>Go to Credentials</summary>
+        <summary>Go to "Clients"</summary>
         ![step-4.1](../../../assets/screenshots/features/sheet-guide/step-4.1.jpg)
-      </details>
-   
-      <details>
-        <summary>Click Create Credentials and select OAuth client ID</summary>
-        ![step-4.2](../../../assets/screenshots/features/sheet-guide/step-4.2.jpg)
-        ![step-4.3](../../../assets/screenshots/features/sheet-guide/step-4.3.jpg)
       </details>
 
       <details>
-        <summary>For Application type select TVs and Limited input device, give it a name and click create</summary>
-        ![step-4.4](../../../assets/screenshots/features/sheet-guide/step-4.4.jpg)
+        <summary>Click "Create client"</summary>
+        ![step-4.2](../../../assets/screenshots/features/sheet-guide/step-4.2.jpg)
+      </details>
+
+      <details>
+        <summary>For Application type select "TVs and Limited input device", give it a name and click "create"</summary>
+        ![step-4.3](../../../assets/screenshots/features/sheet-guide/step-4.3.jpg)
       </details>
 
       <details>
@@ -127,5 +133,6 @@ The machine running Ontime must have access to the internet.
         ![step-5.7](../../../assets/screenshots/features/sheet-guide/step-5.7.jpg)
       </details>
     </li>
+
   </ol>
 </Steps>
