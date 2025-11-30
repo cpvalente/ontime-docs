@@ -40,7 +40,7 @@ GET <localhost:4001>/api/version
 ### Get Ontime runtime state
 **Request** 
 ```bash
-GET <localhost:4001>/api/poll
+GET <localhost:4001> /api/poll
 ```
 
 **Response** \
@@ -54,17 +54,19 @@ The response of a poll request is a [runtime data object](/api/data/runtime-data
 With the HTTP API, in addition to controlling the application, you can also retrieve its data. \
 There is no expected payload for these GET requests
 
-| Address                | Description                                                  |
-| :--------------------- | :----------------------------------------------------------- |
-| `/data/custom-fields`  | Get registered [custom fields](/features/custom-fields)      |
-| `/data/db`             | Get currently loaded project file                            |
-| `/data/http`           | Get HTTP integration settings                                |
-| `/data/osc`            | Get OSC integration settings                                 |
-| `/data/project`        | Get current project data                                     |
-| `/data/rundown`        | Get current rundown                                          |
-| `/data/settings`       | Get current application settings                             |
-| `/data/url-presets`    | Get currently defined [URL Presets](/features/url-presets)   |
-| `/data/view-settings`  | Get currently defined settings for views                    |
+| Address                                        | Description                                                  |
+| :--------------------------------------------- | :----------------------------------------------------------- |
+| `GET <localhost:4001>/data/automations`        | Get project [automations](/api/automation)                   |
+| `GET <localhost:4001>/data/custom-fields`      | Get registered [custom fields](/features/custom-fields)      |
+| `GET <localhost:4001>/data/db`                 | Get currently loaded project file                            |
+| `GET <localhost:4001>/data/project`            | Get current project data                                     |
+| `GET <localhost:4001>/data/report`             | Get current session report                                   |
+| `GET <localhost:4001>/data/rundowns`           | Get all rundowns in the project                              |
+| `GET <localhost:4001>/data/rundowns/current`   | Get the current rundown                                      |
+| `GET <localhost:4001>/data/session`            | Get current session stats.                                   |
+| `GET <localhost:4001>/data/settings`           | Get current application settings                             |
+| `GET <localhost:4001>/data/url-presets`        | Get currently defined [URL Presets](/features/url-presets)   |
+| `GET <localhost:4001>/data/view-settings`      | Get currently defined settings for views                     |
 
 
 ## Change event
@@ -87,7 +89,7 @@ You can change any field in an event using this endpoint. See below a descriptio
 | `custom`      | target the specific custom field with `custom:<fieldname>`                                                |
 | `timeWarning` | number (in milliseconds)                                                                                       |
 | `timeDanger`  | number (in milliseconds)                                                                                       |
-| `endAction`   | string (none / load-next / play-next / stop)                                                              |
+| `endAction`   | string (none / load-next / play-next)                                                              |
 | `timerType`   | string (count-down / count-up / clock / none)                                                             |
 | `duration`    | number (in milliseconds)                                                                                       |
 | `timeStart`   | number (in milliseconds)                                                                                       |
