@@ -100,7 +100,7 @@ export default defineConfig({
             },
             {
               label: "Manage your team",
-              link: "/ontime-cloud/manage-team/",
+              link: "/ontime-cloud/manage-teams/",
             },
             {
               label: "Ontime Cloud FAQ",
