@@ -14,10 +14,14 @@ All the stages are isolated and have their own projects, passwords, permissions 
 ### What is the difference between installing Ontime in my machine or using Ontime Cloud
 
 Ontime is a server application. \
-When you run Ontime in your laptop or desktop all users in the same network are able to collaborate and use Ontime. \
-However, is not always viable to setup a production network in short time. You may also be working with a client in pre-production where there is no such common network.
+Ontime Cloud is a hosted version of Ontime that runs online without requiring you to manage servers, networking, or updates.
 
-Ontime Cloud is simply a convenient and cost-effective way to have Ontime running online so that it can be accessed by anyone anywhere.
+Ontime itself is a server application. When you self-host Ontime, you are responsible for running the server, exposing it on a network, and ensuring it remains reachable by collaborators. \
+This works well in controlled environments, but can be impractical when working across locations, with external teams, or under time pressure.
+
+Ontime Cloud removes this setup step by running Ontime for you.\
+Each stage is hosted online, accessible through a stable URL, and available whenever you need it.\
+The Ontime software itself is unchanged.
 
 ### How many people can I invite to collaborate on my project
 
@@ -35,3 +39,19 @@ Ontime Cloud supports the same [HTTP and WebSocket API](/api) as Ontime, meaning
 The Ontime Companion module also works as expected.
 
 For connecting Companion to Ontime Cloud, please follow [the guide](/additional-notes/companion-module/#connecting-to-ontime-from-ontimes-companion-module).
+
+### Can Studio customers request custom Cloud setups
+
+Yes!
+
+Some Studio customers require Cloud-level setup that does not make sense as a general Ontime feature, such as:
+
+custom domains
+
+vanity URLs
+
+specific routing or deployment adjustments
+
+These requests are handled as optional Cloud extensions. They are scoped per request and priced separately from the Studio subscription.
+
+Availability depends on feasibility and scope.
