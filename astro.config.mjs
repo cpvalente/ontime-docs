@@ -20,7 +20,7 @@ export default defineConfig({
         starlightLlmsTxt({
           projectName: "Ontime",
           projectDescription:
-            "Documentation for Ontime, a platform for managing production and backstage operations.",
+            "Documentation for Ontime, a Free open-source software for managing rundowns and event timers.",
           optionalLinks: [
             {
               label: "Ontime's website",
