@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightLinksValidator from "starlight-links-validator";
-import starlightLlmsTxt from "starlight-llms-txt";
 import vercel from "@astrojs/vercel"
 
 // https://astro.build/config
@@ -17,38 +16,6 @@ export default defineConfig({
     starlight({
       plugins: [
         starlightLinksValidator(),
-        starlightLlmsTxt({
-          projectName: "Ontime",
-          projectDescription:
-            "Documentation for Ontime, a platform for managing production and backstage operations.",
-          optionalLinks: [
-            {
-              label: "Ontime's website",
-              url: "https://www.getontime.no",
-              description: "The official website for Ontime.",
-            },
-            {
-              label: "Ontime's GitHub",
-              url: "https://github.com/cpvalente/ontime",
-              description: "The official GitHub repository for Ontime.",
-            },
-            {
-              label: "Ontime's Youtube Channel",
-              url: "https://www.youtube.com/@ontimeapp",
-              description: "The official Youtube channel for Ontime.",
-            },
-            {
-              label: "Ontime's Discord",
-              url: "https://discord.com/invite/eje3CSUEXm",
-              description: "The official Discord server for Ontime.",
-            },
-            {
-              label: "Ontime's Subreddit",
-              url: "https://www.reddit.com/r/ontimeapp",
-              description: "The official Subreddit for Ontime.",
-            },
-          ],
-        }),
       ],
       title: "Ontime documentation",
       favicon: "./favicon.ico",
