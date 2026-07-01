@@ -1,0 +1,79 @@
+---
+title: MCP Server
+description: Connect your agent to Ontimes MCP server
+---
+
+import { Steps } from "@astrojs/starlight/components";
+
+Ontime exposes an MCP server over Streamable HTTP.
+
+:::tip[TLDR: Connecting to MCP server step-by-step]
+Connecting to Ontime's MCP is just like any other server. \
+Your agent will be able to help you through the process if necessary.
+
+<Steps>
+  1. In the editor page, navigate to `Settings` -> `MCP Server`
+  2. Copy the `Client configuration snippet` and add it to the agent settings along with the other MCP servers.\
+  If your server is behind a password, the link will contain a pre-signed token.
+</Steps>
+
+
+**Quick check**\
+The server should respond to MCP initialization requests at `/mcp`.\
+A plain browser `GET` request will return `405 Method not allowed`, which is expected.
+:::
+
+### Endpoint
+
+The default endpoint for connecting to the server is:
+
+```bash
+https://cloud.getontime.no/<stage>/mcp
+```
+
+while for local installs the default would be
+
+```bash
+http://localhost:4001/mcp
+```
+
+If Ontime is running on another host or port, replace `localhost:4001` with that address.
+
+### Authentication
+
+If Ontime has no session password configured, no MCP authentication is required.
+
+If a session password is configured, authenticate with the hashed Ontime token.
+The settings UI generates an endpoint URL with the token in the query string:
+
+```text
+http://localhost:4001/mcp?token=<hashed-token>
+```
+
+If your MCP client supports request headers, you can send the same token as a
+bearer token instead:
+
+```http
+Authorization: Bearer <hashed-token>
+```
+
+This is the same token used in authenticated Ontime share URLs as the `token` query
+parameter. The raw session password is not accepted as the bearer token.
+
+### Client Configuration
+
+Use a Streamable HTTP MCP client and point it at the MCP endpoint:
+
+```json
+{
+  "mcpServers": {
+    "ontime": {
+      "url": "http://localhost:4001/mcp?token=<hashed-token>"
+    }
+  }
+}
+```
+
+Omit the token when Ontime is not password protected. If you prefer headers, use
+`"url": "http://localhost:4001/mcp"` and add an `Authorization` header with the
+same bearer token.
