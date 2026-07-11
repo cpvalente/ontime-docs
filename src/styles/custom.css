@@ -58,3 +58,8 @@ mark {
   align-items: center;
   justify-content: center;
 }
+
+.sl-markdown-content lite-youtube:not(:where(.not-content *)) {
+  width: 100%;
+  max-width: 100%;
+}
