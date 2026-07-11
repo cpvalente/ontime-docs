@@ -1,6 +1,41 @@
 ---
 title: FAQ
-description: Frequently asked questions
+description: Frequently asked questions about installing, running, and shutting down Ontime
+head:
+  - tag: script
+    attrs:
+      type: application/ld+json
+    content: |
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can I run Ontime in old Intel Apple devices",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Ontime has separate distributions for Apple Silicon and Intel (x64) processors. Download links can be found on the Ontime website."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which Linux version do I need",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ontime distributes a few Linux packages depending on your architecture: a 64-bit AppImage for normal PCs and desktops, an Arm 64-bit AppImage for Raspberry Pi 4 or newer, and an Arm 32-bit AppImage for older Raspberry Pi devices."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I shutdown Ontime?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "When running the app from the desktop installer, closing Ontime's window does not shut down the server process, as a safety feature to prevent accidental shutdowns. To completely shut down Ontime, navigate to Editor > Settings > Shutdown. Ontime can only be shut down from the machine it is running on."
+            }
+          }
+        ]
+      }
 ---
 
 ## Can I run Ontime in old Intel Apple devices
