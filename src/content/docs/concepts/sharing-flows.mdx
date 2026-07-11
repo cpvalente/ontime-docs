@@ -1,0 +1,67 @@
+---
+title: Sharing flows
+description: How sharing and access work in Ontime, and when Ontime Cloud helps
+---
+
+Ontime is designed for shared production work: one rundown, multiple role-specific views, and browser access from the devices your team already uses. \
+This page explains what a shared link does, what it does not do, and when [Ontime Cloud](/ontime-cloud/) is the better fit.
+
+## Sharing inside Ontime
+
+Once Ontime is running, every view has a URL. \
+Sharing is handing out the right link for the job: a [Cuesheet](/interface/production/cuesheet/) for a department to follow and annotate, an [Operator](/interface/production/operator/) view for a stage manager, or an automated [timeline](/interface/automated/timeline/) or stage timer for signage.
+
+Any device with a browser on the same network can open these links. \
+See [network and security](/additional-notes/network-and-security/) for how Ontime becomes available on your network.
+
+### Links carry their configuration
+
+Views in Ontime save their configuration in the URL, so a link carries the layout and data you set up, not just an address.
+
+You can leverage [URL Presets](/features/url-presets/) to turn these into short, memorable links and to lock navigation: opening a preset lands the user on the intended view, configured as you set it.
+
+In short, links let you pre-set a configuration and send people to the right view.
+
+### Where access control belongs
+
+Ontime does not have built-in accounts, users or logins. \
+This is a deliberate trade-off: the app stays quick to set up, self-hostable, and usable from any browser on your network without managing credentials.
+
+The consequence is that Ontime does not decide who a user is. \
+A link directs people to the right place, but it is not a security boundary. Someone who can reach the Ontime server can also edit the URL to try another view, including the editor. Adding a **Pin Code** can block that, but it also blocks the viewers you intended to reach.
+
+For this reason, **access control belongs at the network layer** — controlling who can reach the machine in the first place.
+
+:::note[The Pin Code]
+The **Pin Code** in the General Settings adds a thin layer of protection over views such as `/editor`, `/cuesheet` and `/op`. \
+It gates a whole view and is easily shared around, so treat it as a convenience rather than a boundary.
+:::
+
+## When Ontime Cloud helps
+
+[Ontime Cloud](/ontime-cloud/) is the same Ontime workflow, hosted for you. It is useful when the team needs online access without setting up or maintaining infrastructure.
+
+The Cloud plans are built around:
+
+- **Stable public links** — a reachable URL with HTTPS.
+- **No setup or maintenance** — Ontime runs online without managing a local server.
+- **No seat limits** — invite the people who need to help manage stages.
+- **Support for the open-source project** — subscriptions help fund continued development.
+
+### Invite your team
+
+You can [invite people into your team](/ontime-cloud/manage-teams/) to manage Cloud stages from the dashboard.
+
+This is orchestration access, for the people running your infrastructure. \
+It is separate from viewing a stage: you do not need to add someone to your team for them to open a shared view.
+
+### Share live views
+
+Ontime Cloud can also share live, read-only views of your **rundown** and **overview timeline**.
+
+These shares are separate from stage access, so guests can follow the show without being given a route back into the running stage:
+
+- **Read-only** — the viewer follows the show but cannot write to it.
+- **No login** — guests can open the share without registering.
+- **Own password** — a share can optionally have its own password.
+- **Pre-defined expiration** — shares are scoped to the stage and can optionally have an expiration date.
