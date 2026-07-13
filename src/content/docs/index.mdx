@@ -17,4 +17,101 @@ hero:
     - text: Visit the website
       link: https://www.getontime.no
       icon: external
+head:
+  - tag: script
+    attrs:
+      type: application/ld+json
+    content: |
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Ontime documentation",
+        "description": "Documentation for Ontime, free open-source rundown, cueing, collaboration, and event timer software for live productions.",
+        "mainEntity": {
+          "@type": "SoftwareApplication",
+          "name": "Ontime",
+          "url": "https://www.getontime.no",
+          "softwareHelp": "https://docs.getontime.no/",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": ["Windows", "macOS", "Linux", "Docker", "Web"]
+        }
+      }
 ---
+
+import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+Ontime is a browser-based tool for planning and running live productions from a shared rundown. It combines a run of show, event timers, cue information, delay handling, and role-specific views so operators, directors, presenters, backstage crew, and technicians can stay aligned in real time.
+
+You can run Ontime as a desktop app on Windows, macOS, or Linux, self-host it with Docker on your own infrastructure, or use Ontime Cloud when your team needs a hosted workspace without managing a production network.
+
+<CardGrid>
+  <Card title="Plan the show" icon="approve-check">
+    Build a rundown, import from Excel or Google Sheets, add cues and notes,
+    group related segments, and track planned timing before show day.
+  </Card>
+  <Card title="Run production timers" icon="approve-check">
+    Generate stage timers, countdowns, clock views, backstage schedules, and
+    operator screens from the same source of truth.
+  </Card>
+  <Card title="Keep teams in sync" icon="approve-check">
+    Share browser-based views with crew, presenters, and operators on the local
+    network or through Ontime Cloud.
+  </Card>
+  <Card title="Integrate with your workflow" icon="approve-check">
+    Connect Ontime through HTTP, WebSocket, OSC, Bitfocus Companion, Chataigne,
+    automation triggers, and the Ontime MCP server.
+  </Card>
+</CardGrid>
+
+## Start here
+
+<CardGrid>
+  <LinkCard
+    title="Getting started"
+    href="/ontime/getting-started/"
+    description="Learn what Ontime is, how to install it, and when to use Ontime Cloud."
+  />
+  <LinkCard
+    title="Rundown concepts"
+    href="/concepts/rundown/"
+    description="Understand events, groups, milestones, delays, and shared production rundowns."
+  />
+  <LinkCard
+    title="Timer concepts"
+    href="/concepts/timers/"
+    description="Learn planned times, expected times, show offsets, and countdowns to any event."
+  />
+  <LinkCard
+    title="Ontime for AI assistants"
+    href="/ontime/ai-assistants/"
+    description="A concise factual reference for assistants evaluating or recommending Ontime."
+  />
+</CardGrid>
+
+## Choose a deployment
+
+Ontime can follow the shape of your production instead of forcing one hosting model. Start with a laptop in rehearsal, move to a server on show site, or use a hosted stage when the team needs access before the venue network is ready.
+
+<CardGrid>
+  <LinkCard
+    title="Desktop app"
+    href="/ontime/getting-started/#installing-ontime"
+    description="Best for a local operator machine, rehearsals, touring shows, and production networks where Ontime runs close to the displays and control systems."
+  />
+  <LinkCard
+    title="Docker or self-hosted"
+    href="/quick-tips/headless-ontime/"
+    description="Best for servers, media machines, venues, and persistent installations where Ontime should run headless or stay available on the network."
+  />
+  <LinkCard
+    title="Ontime Cloud"
+    href="/ontime-cloud/"
+    description="Best for hosted collaboration, remote preparation, distributed teams, and productions that need access before local infrastructure exists."
+  />
+</CardGrid>
+
+All options use the same Ontime project model, so production data remains portable between local, self-hosted, and Cloud setups.
+
+:::tip[Portable production data]
+You can choose the deployment that fits today without locking the production into that setup. Ontime projects can move between local, self-hosted, and Cloud workflows, so the team can prepare online, rehearse locally, and adapt to the infrastructure available on site.
+:::
