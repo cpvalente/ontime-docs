@@ -1,11 +1,23 @@
 ---
 title: MCP Server
-description: Connect AI agents to Ontime's MCP server to inspect and control production rundown and timer data.
+description: Connect AI agents to Ontime's MCP server to build, edit and audit production rundowns, including from unstructured notes and spreadsheets.
 ---
 
 import { Steps } from "@astrojs/starlight/components";
 
 Ontime exposes an MCP server over Streamable HTTP.
+
+### What the MCP server does
+
+The MCP server is guided to understand Ontime rundowns, so a connected agent can build and maintain them for you rather than just read data. \
+Point it at unstructured material — a pasted agenda, an email, a script, or a spreadsheet — and it will turn it into a clean, readable rundown, following Ontime's conventions for grouping, colours, cue naming and keeping tech detail in custom fields rather than titles.
+
+From there the agent can edit, restructure and audit the rundown: creating and grouping events, filling custom fields, reordering entries, and flagging schedule gaps, overlaps or automation risks.
+
+:::note
+The MCP server has no transport controls. \
+It can build and tidy your rundown but cannot start, stop or advance the timers, so it stays useful while planning without any risk to a live show.
+:::
 
 :::tip[TLDR: Connecting to MCP server step-by-step]
 Connecting to Ontime's MCP is just like any other server. \
