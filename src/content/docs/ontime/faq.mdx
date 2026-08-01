@@ -1,6 +1,6 @@
 ---
 title: FAQ
-description: Frequently asked questions about installing, running, and shutting down Ontime
+description: Frequently asked questions about installing and running Ontime
 head:
   - tag: script
     attrs:
@@ -25,14 +25,6 @@ head:
               "@type": "Answer",
               "text": "Ontime distributes a few Linux packages depending on your architecture: a 64-bit AppImage for normal PCs and desktops, an Arm 64-bit AppImage for Raspberry Pi 4 or newer, and an Arm 32-bit AppImage for older Raspberry Pi devices."
             }
-          },
-          {
-            "@type": "Question",
-            "name": "How do I shutdown Ontime?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "When running the app from the desktop installer, closing Ontime's window does not shut down the server process, as a safety feature to prevent accidental shutdowns. To completely shut down Ontime, navigate to Editor > Settings > Shutdown. Ontime can only be shut down from the machine it is running on."
-            }
           }
         ]
       }
@@ -47,14 +39,3 @@ Ontime distributes a few Linux packages depending on your architecture.
 - Are you on a **normal PC / desktop**, download the [64-bit AppImage](https://github.com/cpvalente/ontime/releases/latest/download/ontime-linux-x86_64.AppImage)
 - Are you on a **Raspberry Pi 4 or newer**, download the [Arm 64-bit AppImage](https://github.com/cpvalente/ontime/releases/latest/download/ontime-linux-arm64.AppImage)
 - Are you on a **older Raspberry Pi**, download the [Arm 32-bit AppImage](https://github.com/cpvalente/ontime/releases/latest/download/ontime-linux-armv7l.AppImage)
-
-## How do I shutdown Ontime?
-When running the app from the desktop installer, closing Ontime's window does not shutdown the server process. \
-This is a safety feature to prevent accidental shutdowns.
-
-To completely shutdown Ontime, navigate to `Editor` -> `Settings` -> `Shutdown`.
-
-:::note
-Ontime can only be shutdown from the machine it is running in. \
-If you are in the correct machine, and still see the disabled button with the warning message, please use the localhost address in the browser or the app window instead.
-:::
