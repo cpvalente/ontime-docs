@@ -6,27 +6,27 @@ description: Reference for Ontime rundown event fields, timing properties, cue d
 Any scheduled event in Ontime (called an event in the app) will contain the following information. \
 All times are in milliseconds.
 
-| Data                       | Note                                                                        |
-|:---------------------------|:----------------------------------------------------------------------------|
-| ID                         | Event ID, cannot be changed                                                 |
-| Title                      |                                                                             |
-| Cue                        |                                                                             |
-| Colour                     |                                                                             |
-| Note                       | User defined note, available in some views                                  |
-| Time Start                 | Scheduled start time                                                        |
-| Time End                   | Scheduled end time                                                          |
-| Duration                   | Scheduled duration time                                                     |
-| Delay                      | Whether there is a delay associated to the event                            |
-| Skip                       | Skipped events are ignored by the runtime playback                          |
-| Link Start                 | `Internal` whether the start of the event is associated with the previous   |
-| Time Danger                | `Internal` second threshold from time end                                   |
-| Time Warning               | `Internal` second threshold from time end                                   |
-| End Action                 | `Internal` defines potential automation for when an event ends              |
-| Timer Type                 | `Internal` defines a method for the counting of the running timer           |
-| Count to End               | `Internal` whether an event counts to its duration or scheduled end         |
-| Time Strategy              | `Internal` defines the significant dataset for event duration               |
-| Type                       | `Internal`, this will always be `Event`                                     |
-| Custom                     | This is an object of user given custom fields associated to the event       |
+| Data          | Note                                                                      |
+| :------------ | :------------------------------------------------------------------------ |
+| ID            | Event ID, cannot be changed                                               |
+| Title         |                                                                           |
+| Cue           |                                                                           |
+| Colour        |                                                                           |
+| Note          | User defined note, available in some views                                |
+| Time Start    | Scheduled start time                                                      |
+| Time End      | Scheduled end time                                                        |
+| Duration      | Scheduled duration time                                                   |
+| Delay         | Whether there is a delay associated to the event                          |
+| Skip          | Skipped events are ignored by the runtime playback                        |
+| Link Start    | `Internal` whether the start of the event is associated with the previous |
+| Time Danger   | `Internal` second threshold from time end                                 |
+| Time Warning  | `Internal` second threshold from time end                                 |
+| End Action    | `Internal` defines potential automation for when an event ends            |
+| Timer Type    | `Internal` defines a method for the counting of the running timer         |
+| Count to End  | `Internal` whether an event counts to its duration or scheduled end       |
+| Time Strategy | `Internal` defines the significant dataset for event duration             |
+| Type          | `Internal`, this will always be `Event`                                   |
+| Custom        | This is an object of user given custom fields associated to the event     |
 
 ```ts
 // example event data
@@ -55,29 +55,35 @@ All times are in milliseconds.
     "artist": "Ronela Hajati"
   }
 }
-````
+```
 
 ### End action
+
 An event end-action refers to automations to the rundown that may occur once an event finishes (reaches 00:00). \
 This is unrelated to how the timer is displayed and concerns only to rundown automation.
+
 - `none`: Event will reach 00:00 and continue playing into (overtime) negative numbers
 - `load-next`: Next event in the rundown will be loaded
 - `play-next`: Next event in the rundown will be loaded and started
 
 ### Timer type
+
 An event timer-type informs Ontime on how the timer show be presented.
+
 - `count-down`: Ontime will count down the duration of the event
 - `count-up` : Ontime will count up from when the event starts
 - `clock`: Ontime will display the current clock
 - `none`: Ontime will display a placeholder `--:--:--` when this event is playing
 
 ### Count to end
+
 Usually Ontime will count to the total event duration, regardless of when it is started.\
 The difference is often reflected in offset.
 
 If `count to end` is active, Ontime will instead count down to the events scheduled end, regardless of the start time. \
-No offset is added unless the event is considered to be in overtime. 
+No offset is added unless the event is considered to be in overtime.
 
 ### Time strategy
+
 An event timer-strategy informs Ontime on how to calculate changes to timers when events are linked. \
 [Read more.](/quick-tips/smart-time-entry#time-strategy)

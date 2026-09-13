@@ -15,10 +15,7 @@ export default defineConfig({
   site: "https://docs.getontime.no",
   integrations: [
     starlight({
-      plugins: [
-        starlightLinksValidator(),
-        starlightLlmsTxt(getLlmsTxtOptions()),
-      ],
+      plugins: [starlightLinksValidator(), starlightLlmsTxt(getLlmsTxtOptions())],
       title: "Ontime documentation",
       description:
         "Documentation for Ontime, free and open source, self-hostable rundown and run-of-show software for live productions.",

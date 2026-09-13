@@ -3,16 +3,17 @@ title: Make custom views
 description: Build custom Ontime browser views for production displays, confidence monitors, signage, and role-specific timing interfaces.
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { FileTree } from "@astrojs/starlight/components";
 
 Ontime broadcasts its data in the network for use by any device.
 
 You can leverage this to create custom views and control interfaces that match your needs while letting Ontime handle the distribution and time-keeping.
 
 ## Making custom views
+
 You can create a custom view using any technology of your choice. If you plan to deploy this using Ontime's infrastructure, you must leverage Javascript, CSS and HTML.
 
-In short, you will create a web page / application that listens to the WebSocket stream from Ontime and updates its view. 
+In short, you will create a web page / application that listens to the WebSocket stream from Ontime and updates its view.
 
 You can use Ontime's demo page to get started. It contains a well documented demo with explanation on how to connect and datasets.
 
@@ -29,7 +30,8 @@ If you are also looking to control Ontime, you can find the needed information i
 Alternatively, the [APIs](/api) also offer polling endpoints which can be helpful in cases where you are unable to utilise the WebSocket stream.
 
 ## Delivering custom views
-Once you have created your custom Ontime views, you can use Ontime's infrastructure to deliver these in the network. 
+
+Once you have created your custom Ontime views, you can use Ontime's infrastructure to deliver these in the network.
 
 Ontime exposes any file inside its external folder to the network. \
 In the example of this folder directory, the demo interface would be available at `http://<ip-address:port>/external/demo`.

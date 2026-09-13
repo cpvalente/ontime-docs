@@ -13,23 +13,28 @@ Headless installs are the most lightweight and versatile ways to distribute and 
 ### Getting started
 
 #### Prerequisites
-You will need to have installed the correct version of __node.js__.\
+
+You will need to have installed the correct version of **node.js**.\
 Please check [the app engines declaration](https://github.com/cpvalente/ontime/blob/master/package.json) for the correct version.
 
 #### Running Ontime
+
 To get Ontime running, all you need to do is install it in your system using your package manager of choice:
 
-Install globally in your system 
+Install globally in your system
+
 ```bash
 npm install -g @getontime/cli
 ```
 
 ... and run using the installed script
+
 ```bash
 ontime
 ```
 
 Or install and run Ontime (the installation here is temporary for the duration of the session)
+
 ```bash
 npx install @getontime/cli
 ```
@@ -56,7 +61,6 @@ To start Ontime with the example docker compose file use the command:
 docker-compose up -d
 ```
 
-
 ### Notes on Docker-compose
 
 Considering the example docker-compose below
@@ -79,29 +83,32 @@ services:
     restart: unless-stopped
 ```
 
-* `4001:4001/tcp` binds local port 4001 to the same container port. Port 4001 is the default for the UI and is necessary to expose the app. 
-* `8888:8888/udp` binds the localhost port 8888 (default for OSC input into the app) to the same in the container, so that it can receive data from the host machine targeted to the loopback interface.
-* `8888:8888/udp` binds the localhost port 9999 (default for OSC output from the app) to the same in the container, this allows Ontime to send data out of the container.
-* `"./ontime-data:/data/"` expose the internal container data directory.
-* `TZ=Asia/Singapore` overrides the container timezone.
+- `4001:4001/tcp` binds local port 4001 to the same container port. Port 4001 is the default for the UI and is necessary to expose the app.
+- `8888:8888/udp` binds the localhost port 8888 (default for OSC input into the app) to the same in the container, so that it can receive data from the host machine targeted to the loopback interface.
+- `8888:8888/udp` binds the localhost port 9999 (default for OSC output from the app) to the same in the container, this allows Ontime to send data out of the container.
+- `"./ontime-data:/data/"` expose the internal container data directory.
+- `TZ=Asia/Singapore` overrides the container timezone.
 
 The variations in the network setup will widely depend on your setup.
 
 ### Docker Frequently Asked Questions 🚨
 
 #### Ontime default port
+
 Ontime serves its web pages on port 4001. 
-In the docker compose example `4001:4001/tcp` exposes this port to the outside so it can be accessed at `http://<ip-address>:4001`. 
+In the docker compose example `4001:4001/tcp` exposes this port to the outside so it can be accessed at `http://<ip-address>:4001`.
 Instead, you could use `80:4001/tcp` to expose the internal container port 4001 to the outside port 80 (the default for http).
 That means your URLs would be slightly simpler since you wouldnt need to provide a port, (eg: `http://<ip-address>/editor` instead og `http://<ip-address>:4001/editor`)
 
 ### Volumes
+
 The app interacts with some directories that the user can interact with.
 In a docker instance, we need to expose this manually to the container host.
 Namely:
+
 - `/data/projects/` contains all of Ontime's project files
 - `/data/styles/` contains the user provided CSS Override
-- `/data/external/` is a placeholder directory that users can ues to distribute data through Ontime 
+- `/data/external/` is a placeholder directory that users can ues to distribute data through Ontime
 
 You can bind a single host directory to `/data/` for Ontime to store all its files in (as in the example docker-compose, above), or expose the individual parts to host directories:
 
@@ -113,6 +120,7 @@ You can bind a single host directory to `/data/` for Ontime to store all its fil
 ```
 
 #### Setting the time in the container
+
 Docker containers default to UTC timezone, which you can modify using the `TZ` environment variable.
 
 Setting time in a Docker container is not an operation specific to Ontime. \

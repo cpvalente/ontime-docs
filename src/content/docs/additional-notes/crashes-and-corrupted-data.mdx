@@ -6,7 +6,6 @@ description: Crashes and corrupted data - handling runtime issues
 Sometimes things go badly. \
 Ontime provides a few fail-safes to protect its runtime.
 
-
 :::tip[Where are these file?]
 The user directory location is dependent on both the operating system and installation. \
 If you are running Ontime locally in an installer, you can find the path to the internal files by using the application menu `File` -> `Open Directory` -> `...`. \
@@ -22,18 +21,20 @@ From here you will find the `crash` and `corrupt files` directories
 `Home/Ontime/styles/`
 :::
 
-
 ## Crash logs
+
 If the Ontime process crashes, we generate a crash log in the user directory.
 
 Send it over and we will take a look.
 
 ## Recover on bad shutdown
+
 If the app detects that it has been shutdown unexpectedly (in the examples of crash or machine shutdown), Ontime will recover the state on the next start.
 
 This means that you can restart Ontime and the app will jump the playback state to where it should be.
 
 ## Refuse corrupt data
+
 When Ontime loads a project it ensures that its data is correct.
 
 If Ontime is to find data that is either corrupt, or does not conform with the expectations, the data will be refused by the parser. \
