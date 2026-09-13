@@ -21,7 +21,7 @@ export default defineConfig({
       ],
       title: "Ontime documentation",
       description:
-        "Documentation for Ontime, free open-source software for managing rundowns and event timers for live productions, broadcasts, and events.",
+        "Documentation for Ontime, free and open source, self-hostable rundown and run-of-show software for live productions.",
       favicon: "./favicon.ico",
       logo: {
         src: "./src/assets/images/logo.png",
@@ -74,7 +74,7 @@ export default defineConfig({
                 name: "Ontime",
                 url: "https://www.getontime.no",
                 description:
-                  "Free open-source software for managing rundowns, scheduling, cueing, stage timers, and event timing for live productions, broadcasts, and events.",
+                  "Free and open source, self-hostable rundown and run-of-show software for live productions.",
                 applicationCategory: "MultimediaApplication",
                 operatingSystem: ["Windows", "macOS", "Linux", "Docker", "Web"],
                 license: "https://www.gnu.org/licenses/gpl-3.0.html",
@@ -166,8 +166,12 @@ export default defineConfig({
           ],
         },
         {
-          label: "Ontime concepts",
-          items: [{ autogenerate: { directory: "concepts" } }],
+          label: "How Ontime works",
+          items: [
+            { label: "Ontime Rundown", link: "/concepts/rundown/" },
+            { label: "Ontime Timers", link: "/concepts/timers/" },
+            { label: "Sharing flows", link: "/concepts/sharing-flows/" },
+          ],
         },
         {
           label: "Interface",
@@ -281,4 +285,3 @@ Useful starting points:
 - API overview: https://docs.getontime.no/api/`,
   };
 }
-
