@@ -1,0 +1,206 @@
+---
+title: Share your show
+description: Share read-only rundowns and timelines from Ontime Cloud with crew, clients, and talent. No login needed, optional password and expiry.
+---
+
+import { Card, CardGrid, Steps } from "@astrojs/starlight/components";
+
+Ontime Cloud can give anyone a **read-only link** to your show. \
+Send it to crew, clients, talent, or a lobby screen: they follow along in a browser, without an Ontime account and without a way back into your running stage.
+
+<CardGrid>
+  <Card title="Read-only" icon="seti:lock">
+    Viewers can follow the show but never change it.
+  </Card>
+  <Card title="No login" icon="approve-check">
+    Guests open the link in any browser. Nobody needs to sign up.
+  </Card>
+  <Card title="Optional password" icon="seti:pipeline">
+    Each link can have its own password, separate from the stage password.
+  </Card>
+  <Card title="Optional expiry" icon="seti:clock">
+    Links can stop working after 1, 7 or 30 days, or never expire.
+  </Card>
+</CardGrid>
+
+## Why share a view instead of the stage link?
+
+Your [stage link](/ontime-cloud/manage-stages/) opens the full Ontime app. \
+Anyone who has it can reach the editor, and the only thing in the way is the stage password or Pin Code.
+
+A share is a separate, safer link:
+
+- It shows **only** the rundown or timeline, never the editor or the stage itself.
+- It has its **own password and expiry**, so you can hand it out widely and revoke it without touching the stage.
+- You can create **several links** for the same show, one per audience, and delete each one independently.
+
+See [Sharing flows](/concepts/sharing-flows/) for the bigger picture of access in Ontime.
+
+## Common use cases
+
+| You want to… | Use |
+| --- | --- |
+| Let crew follow the running order on their phones | Stage rundown share |
+| Show a client how the show is tracking, without edit access | Stage rundown share |
+| Put the whole event on a lobby or green room screen | Overview share |
+| Give a producer one link for every room at a multi-stage event | Overview share |
+| Send a client the final rundown for sign-off after the show | Archive share |
+| Keep a rundown available after you stop or delete the stage | Archive share |
+| Hand talent a fixed running order that won't change under them | Archive share |
+
+## Types of shares
+
+There are three types of share. \
+Two are **live** and follow the show as it runs. One is an **archive**, frozen at the moment you captured it.
+
+| | Stage rundown share | Overview share | Archive share |
+| --- | --- | --- | --- |
+| **Shows** | The rundown table of one stage | A timeline of several stages | The rundown of one archive |
+| **Data** | Live | Live | Frozen snapshot |
+| **Needs a running stage** | Yes | Yes | No |
+| **Created from** | Shares page or a stage's menu | Shares page or the Overview page | Project archive page |
+
+### Stage rundown share
+
+A live, read-only view of the rundown of **one stage**.
+
+Viewers can:
+
+- follow the running order as it changes
+- choose which columns to show, 12h or 24h time, and whether to show seconds
+- refresh on demand, or auto refresh every 1, 5 or 10 minutes
+- export the rundown to PDF
+- switch between rundowns, if the project has more than one
+
+The badge on the page tells viewers how fresh the data is, for example `Readonly · synced 2 minutes ago`.
+
+### Overview share
+
+A live timeline that puts **several running stages side by side**, with a wall clock.
+It is made for screens and for anyone who needs to see the whole event at a glance.
+
+When you create it, you pick which stages appear.
+If you pick none, the share shows **all running stages**, including stages you start later.
+
+### Archive share
+
+A read-only view of an [archive](#archive-vs-live-which-one-to-use): a snapshot of a stage's project, taken at the moment you captured it.
+
+The link shows the rundown **exactly as it was captured**. It never follows later changes to the stage, and it keeps working after the stage is stopped or deleted.
+Viewers get the same rundown tools as a stage rundown share, and the badge reads `Archive · captured …` so nobody mistakes it for live data.
+
+## Archive vs live: which one to use?
+
+The difference is **when** the viewer sees the data.
+
+- A **live share** (stage rundown or overview) shows the show **now**. It changes as the operator edits the rundown and as the show runs.
+- An **archive share** shows the show **as it was** at one moment. It never changes.
+
+**Use a live share when**
+
+- the show is running, or about to run
+- viewers need to react to changes: delays, reordered events, new notes
+- the stage will stay running for as long as people need the link
+
+**Use an archive share when**
+
+- you want sign-off on a specific version of the rundown
+- the show is over and you want to stop the stage, but keep the rundown available
+- you are about to make changes and don't want viewers to see work in progress
+- you need a record of what was planned, or what actually happened
+
+:::tip[Combine them]
+Capture an archive before you start editing a rundown someone has approved. \
+Share the archive for reference, and keep the live share for the people who need to see changes as they happen.
+:::
+
+## Create a share
+
+Manage all your shares from the **Shares** page in the dashboard.
+
+### Share a stage rundown
+
+<Steps>
+
+1. Start the stage you want to share.
+
+2. Open the stage's menu and choose **Create rundown share**. \
+   Alternatively, go to **Shares** and click create under **Stage rundown shares**, then pick the stage.
+
+3. Give the link a name, so you can recognise it later. It defaults to the stage title.
+
+4. Optionally, choose a **Link expiry** and tick **Require password**.
+
+5. Click **Create** and copy the link.
+
+</Steps>
+
+Stages with at least one share show a **Shared** badge on the dashboard.
+
+### Share an overview
+
+<Steps>
+
+1. Start the stages you want to show.
+
+2. Go to **Shares** and click create under **Overview shares**. \
+   Alternatively, open the **Overview** page, use **Select stages** to pick the stages you want, then click **Share this view**.
+
+3. Choose which stages to include. Leave all unticked to include every running stage.
+
+4. Name the link and optionally set an expiry and a password.
+
+5. Create the share and copy the link.
+
+</Steps>
+
+### Share an archive
+
+<Steps>
+
+1. With the stage running, open the stage's menu and choose **Create archive**. \
+   This captures the project as it is right now.
+
+2. Go to **Project archive** and open the menu of the archive you want to share.
+
+3. Choose **Create share link**.
+
+4. Name the link and optionally set an expiry and a password.
+
+5. Click **Create link** and copy the link.
+
+</Steps>
+
+## Manage your shares
+
+From the **Shares** page you can open, copy, edit or delete every link.
+
+- **Rename** a link, or **change its password** and **expiry**. Choosing `No change` keeps the current expiry.
+- For overview shares, **change which stages** are included. The link stays the same.
+- **Delete** a link to revoke it straight away. Anyone who opens it afterwards gets a "not found" page.
+
+Each page shows how many links you are using, for example `1 of 2 used`.
+The number of shares you can create depends on your plan, see the [Ontime Cloud plans](https://www.getontime.no/pricing).
+
+## What your viewers see
+
+**Password-protected links** ask for the password once. The browser then remembers it for 24 hours.
+Remember to send the password along with the link.
+
+**Expired or deleted links** show a "not found" page.
+
+**When a stage is stopped**, viewers of its live shares see a **Share unavailable** page. The same link works again as soon as you start the stage.
+
+**When a stage is deleted**, its stage rundown shares are deleted too, and it is removed from any overview share.
+If you need the rundown after deleting the stage, capture and share an archive first.
+
+**When an archive is deleted**, its share links are deleted with it.
+
+:::note[Live, but not instant]
+Live shares read from your stage at most about once a minute. They are great for following a running order, but they are not a replacement for the second-by-second views in Ontime, like the [Operator](/interface/production/operator/) or a [stage timer](/interface/automated/stage-timer/).
+:::
+
+:::note[Network hiccups]
+If the stage is briefly unreachable, a live share keeps showing the last data it had, and the badge changes to `Offline · last synced …`. \
+The view recovers on its own once the stage is reachable again. It only closes if something permanent changes, like the share being deleted or expiring.
+:::

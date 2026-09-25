@@ -148,6 +148,10 @@ export default defineConfig({
               link: "/ontime-cloud/manage-stages/",
             },
             {
+              label: "Share your show",
+              link: "/ontime-cloud/share-views/",
+            },
+            {
               label: "Manage your team",
               link: "/ontime-cloud/manage-teams/",
             },
