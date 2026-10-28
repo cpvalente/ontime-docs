@@ -22,8 +22,8 @@ If you have questions, call for clarifications or suggestions, please open an is
 
 <a href="https://www.buymeacoffee.com/cpvalente" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="32"></a>
 
-- Download for <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-win64.exe">Windows</a>
-- Download for <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-macOS-arm64.dmg">MacOS Arm</a>
-- Download for <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-macOS-x64.dmg">MacOS Intel</a>
-- Download AppImage for <a href="https://github.com/cpvalente/ontime/releases/latest/download/ontime-linux.AppImage">Linux</a>
+- Download for <a href="https://www.getontime.no/download/windows">Windows</a>
+- Download for <a href="https://www.getontime.no/download/macos-arm64">MacOS Arm</a>
+- Download for <a href="https://www.getontime.no/download/macos-x64">MacOS Intel</a>
+- Download AppImage for <a href="https://www.getontime.no/download/linux-x64">Linux</a>
 - Get from <a href="https://hub.docker.com/r/getontime/ontime">Docker hub</a>
