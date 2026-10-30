@@ -13,6 +13,18 @@ export default defineConfig({
     },
   }),
   site: "https://docs.getontime.no",
+  redirects: {
+    "/ontime-cloud/tips/login-with-auth/": "/ontime-cloud/team-and-account/",
+    "/ontime-cloud/getting-started/": "/ontime-cloud/",
+    "/ontime-cloud/manage-stages/": "/ontime-cloud/stages/",
+    "/ontime-cloud/projects-and-archives/": "/ontime-cloud/features/",
+    "/ontime-cloud/share-views/": "/ontime-cloud/share-links/",
+    "/ontime-cloud/manage-teams/": "/ontime-cloud/team-and-account/",
+    "/ontime-cloud/plans-and-billing/": "/ontime-cloud/team-and-account/",
+    "/ontime-cloud/manage-account/": "/ontime-cloud/team-and-account/",
+    "/ontime-cloud/troubleshooting/": "/ontime-cloud/faq/",
+    "/ontime-cloud/cloud-faq/": "/ontime-cloud/faq/",
+  },
   integrations: [
     starlight({
       plugins: [
@@ -139,30 +151,16 @@ export default defineConfig({
         {
           label: "Ontime Cloud",
           items: [
+            { label: "Why Ontime Cloud", link: "/ontime-cloud/" },
+            { label: "Stages", link: "/ontime-cloud/stages/" },
+            { label: "Share links", link: "/ontime-cloud/share-links/" },
+            { label: "Multi-stage overview", link: "/ontime-cloud/overview/" },
             {
-              label: "✨Ontime Cloud✨",
-              link: "/ontime-cloud/",
+              label: "Team and account",
+              link: "/ontime-cloud/team-and-account/",
             },
-            {
-              label: "Manage your stages",
-              link: "/ontime-cloud/manage-stages/",
-            },
-            {
-              label: "Manage your team",
-              link: "/ontime-cloud/manage-teams/",
-            },
-            {
-              label: "Manage your account",
-              link: "/ontime-cloud/manage-account/",
-            },
-            {
-              label: "Ontime Cloud FAQ",
-              link: "/ontime-cloud/cloud-faq/",
-            },
-            {
-              label: "Tips",
-              items: [{ autogenerate: { directory: "ontime-cloud/tips" } }],
-            },
+            { label: "Feature reference", link: "/ontime-cloud/features/" },
+            { label: "FAQ and tips", link: "/ontime-cloud/faq/" },
           ],
         },
         {

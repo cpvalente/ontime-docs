@@ -1,0 +1,185 @@
+---
+title: Feature reference
+description: Ontime Cloud reference for archives, project upload and download, version upgrades, stage settings, share viewers, authenticator app and subscription statuses.
+---
+
+import { Steps } from "@astrojs/starlight/components";
+
+Details of the smaller Ontime Cloud features. For the main workflows, start with [Stages](/ontime-cloud/stages/), [Share links](/ontime-cloud/share-links/), the [Overview](/ontime-cloud/overview/) and [Team and account](/ontime-cloud/team-and-account/).
+
+## The stage card
+
+A running stage card on the **Stages** page has:
+
+- **Quick Access**: the stage link, and **View live rundown**, a read-only rundown inside the dashboard
+- **Open Ontime**: opens the stage editor in a new tab
+- **Live stage info and settings**: the stage password, timezone, Ontime version, project name, start time and playback state
+- **More actions**, grouped into **Stage** (**Refresh stage info**, **Upgrade version**), **Project** (**Download project**, **Upload project**, **Create archive**) and **Sharing** (**Create rundown share**)
+
+A **Shared** badge means the stage has at least one rundown share. Click it to go to the share. \
+The badge at the top of the page shows how many stages you are using, for example `Used 2 / 3 stages`.
+
+## Stage settings
+
+You set the name, password and timezone when you create a stage. To change them later:
+
+<Steps>
+
+1. Stop the stage.
+
+2. Open **Stage details** on the stopped card and edit the **Settings**.
+
+3. Click **Start**. The new settings apply when the stage starts.
+
+</Steps>
+
+### Timezone
+
+- **Choose timezone** offers common timezones, including the one detected from your browser.
+- **Enter manually** accepts any IANA timezone identifier, for example `Europe/Oslo`. See the [list of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
+### Stage password and Pin Code
+
+- The **stage password** protects the whole stage. Leave it empty for no password.
+- Ontime's own **Pin Code**, in the editor settings, adds a thinner layer of protection to production views such as the editor, operator and cuesheet.
+
+## Upgrade the Ontime version
+
+A stage keeps the Ontime version it was created with, so a new release never changes a stage in the middle of a show.
+
+<Steps>
+
+1. Stop the stage.
+
+2. Open **More actions** and choose **Upgrade version**.
+
+3. Click **Start** to bring the stage back on the new version.
+
+</Steps>
+
+No data is lost. Upgrades move to the latest release of the same major version. \
+If the stage is already on it, the action shows **Already on latest version**. On a running stage, it shows **Stop stage to upgrade**.
+
+## Project files
+
+A Cloud stage runs a normal Ontime project. Project actions are in the **More actions** menu of a running stage, under **Project**.
+
+### Download a project
+
+Choose **Download project**. Your browser saves the stage's current project as a `.json` file, in the same format that local and self-hosted Ontime use.
+
+### Upload a project to a stage
+
+<Steps>
+
+1. Start the stage.
+
+2. Open **More actions** and choose **Upload project**.
+
+3. Pick an Ontime project `.json` file of 2 MB or smaller, and confirm with **Upload project**.
+
+</Steps>
+
+The upload replaces the stage's project. To keep what the stage had, download it or create an archive first.
+
+### Move a project between local and Cloud
+
+- **Local to Cloud**: in local Ontime, [export the project file](/quick-tips/import-export/) from the project manager, then [upload it](#upload-a-project-to-a-stage) to a running stage.
+- **Cloud to local**: [download the project](#download-a-project) from the stage, then import it in local Ontime's project manager.
+
+## Archives
+
+An archive is a snapshot of a stage's project, saved in Cloud when you create it. \
+Archives belong to your team, not to the stage, so they are kept when you stop or delete the stage.
+
+To create one, open **More actions** on a running stage and choose **Create archive**. The archive takes its name from the stage.
+
+{/* ![The Archives page, with saved snapshots of a project](../../../assets/ontime-cloud/dashboard-archives.png) */}
+
+The **Archives** page lists your archives, with search, sorting and a **Shared** or **Private** status. For each archive you can:
+
+- **Open** a read-only view of the archived rundown
+- **Share** it with a read-only link. See [Share an archive](/ontime-cloud/share-links/#share-an-archive)
+- from its menu, **Create stage**, **Download** the project file, or **Delete** it
+
+Select several archives to remove them at once with **Delete selected**. Deleting an archive also deletes its share link.
+
+### Create a stage from an archive
+
+<Steps>
+
+1. On **Archives**, open the archive's menu and choose **Create stage**.
+
+2. Enter a **Stage name** (it defaults to the archive name), an optional password and a timezone.
+
+3. Click **Create stage**.
+
+</Steps>
+
+The new stage starts with the archived project. The archive is not changed. \
+You need a free stage in your plan. If all stages are in use, the menu shows **All stages in use**.
+
+## What share viewers see
+
+Viewers of a rundown or archive share can:
+
+- choose which columns to show, 12h or 24h time, and whether to show seconds
+- refresh on demand, or auto refresh every 1, 5 or 10 minutes
+- export the rundown to PDF
+- switch between rundowns, if the project has more than one
+
+A badge shows how fresh the data is: `Readonly · synced 2 minutes ago` for live shares, `Archive · captured …` for archives.
+
+| Situation | What viewers see |
+| --- | --- |
+| The link has a password | A password prompt. The browser remembers it for 24 hours |
+| The link has expired | "This link has expired", with the expiry date |
+| The link was deleted | **Share unavailable** |
+| The stage is stopped | **Share unavailable**, until you start the stage again |
+| The stage was deleted | Its rundown shares are deleted, and it is removed from overview shares |
+| The stage is briefly unreachable | The last data, with an `Offline · last synced …` badge. It recovers on its own |
+
+## Authenticator app
+
+An authenticator app, such as Google Authenticator, Authy or your password manager, gives you sign-in codes without waiting for an email.
+
+<Steps>
+
+1. Open **Account** and find **Login with authenticator**.
+
+2. Scan the QR code with your app, or enter the **Setup key** manually. **Start over** generates a new code.
+
+3. Enter the 6-digit code from the app and click **Verify code**.
+
+</Steps>
+
+The card shows **Authenticator app connected**. Use the app's codes in the **One-Time Code** tab when you sign in. \
+To add another device, click **Set up another device**.
+
+## Subscription statuses
+
+The **Team subscription** card on **Team** shows the plan, how it is billed and its status:
+
+| Status | Meaning |
+| --- | --- |
+| **Active** | The subscription is running |
+| **Cancelling** | You have cancelled. The team keeps access until the subscription ends |
+| **Action needed** | Billing setup is not finished, or a payment is pending or has failed. An Owner can fix it with **Manage Subscription** |
+| **No subscription** | Stages cannot be created or started |
+
+### When a payment fails
+
+The team keeps access while the payment is retried. If it still fails, the team loses access and its stages are stopped. Nothing is deleted. Update your payment details with **Manage Subscription**, then start your stages again.
+
+### When a subscription ends
+
+- **Stages** are stopped, not deleted. Their links, projects and settings are kept.
+- **Archives** are kept. You can still open and download them.
+- **Share links** keep working. Live shares of stopped stages show **Share unavailable** until the stage runs again.
+- You can no longer create, start, upgrade or delete stages, create archives, or create and edit shares.
+
+To come back, subscribe again from **Team** and start your stages.
+
+### Moving to a smaller plan
+
+Plan limits cap what you can add, not what you already have. Existing stages, archives and shares keep working, but you cannot add more of anything that is over the new limit.

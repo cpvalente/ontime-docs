@@ -1,0 +1,163 @@
+---
+title: FAQ and tips
+description: Answers to common Ontime Cloud questions about pricing, plan limits, sharing rundowns online and moving projects from local Ontime, plus quick fixes.
+head:
+  - tag: script
+    attrs:
+      type: application/ld+json
+    content: |
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the difference between Ontime Cloud and self-hosting Ontime?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ontime Cloud runs the server for you and gives each stage a stable HTTPS link. It also adds read-only share links, archives, the Overview and a team dashboard. Running Ontime yourself is free and supports OSC and automation to devices on your local network." }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does Ontime Cloud cost, and is there a free trial?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ontime itself is free and open source. Ontime Cloud is a paid subscription with PRO and STUDIO plans, with no per-seat pricing. There is no free trial, but you can ask for a demo." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I move my project from the desktop app to Ontime Cloud?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Cloud uses the same project file format. Export the project from local Ontime and upload it to a running stage, or download it from Cloud and import it locally." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I share a rundown with someone who has no account?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Create a share link. Viewers open it in any browser without logging in, and only see a read-only rundown or timeline. You can add a password and an expiry." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Ontime Cloud support OSC or Bitfocus Companion?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Bitfocus Companion, the HTTP and WebSocket API and the MCP server work with Cloud: point them at your stage link. OSC, including OSC automation outputs, is not available in Cloud." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I run several rooms or stages at once?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. PRO includes 3 stages and STUDIO includes 10. The Overview shows all your running stages on one timeline, and you can share it with a single link." }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens to my stages if my subscription ends?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Your stages are stopped, not deleted. Archives and share links are kept. Subscribe again and start your stages: they come back on the same links." }
+          }
+        ]
+      }
+---
+
+## Common questions
+
+### What is the difference between Ontime Cloud and self-hosting Ontime?
+
+Ontime Cloud runs the server for you and gives each stage a stable HTTPS link. It also adds read-only share links, archives, the Overview and a team dashboard. Running Ontime yourself is free and supports OSC and automation to devices on your local network. \
+See [Ontime Cloud vs the desktop app and self-hosting](/ontime-cloud/#ontime-cloud-vs-the-desktop-app-and-self-hosting).
+
+### How much does Ontime Cloud cost, and is there a free trial?
+
+Ontime itself is free and open source. Ontime Cloud is a paid subscription with PRO and STUDIO plans, with no per-seat pricing. There is no free trial, but you can [ask for a demo](mailto:mail@getontime.no). \
+See the [pricing page](https://www.getontime.no/pricing) and the [plan limits](/ontime-cloud/team-and-account/#plans).
+
+### Can I move my project from the desktop app to Ontime Cloud?
+
+Yes. Cloud uses the same project file format. Export the project from local Ontime and upload it to a running stage, or download it from Cloud and import it locally. \
+See [Move a project between local and Cloud](/ontime-cloud/features/#move-a-project-between-local-and-cloud).
+
+### How do I share a rundown with someone who has no account?
+
+Create a [share link](/ontime-cloud/share-links/). Viewers open it in any browser without logging in, and only see a read-only rundown or timeline. You can add a password and an expiry.
+
+### Does Ontime Cloud support OSC or Bitfocus Companion?
+
+[Bitfocus Companion](/additional-notes/companion-module/), the [HTTP and WebSocket API](/api/) and the [MCP server](/features/mcp-server/) work with Cloud: point them at your stage link. OSC, including OSC automation outputs, is not available in Cloud.
+
+### Can I run several rooms or stages at once?
+
+Yes. PRO includes 3 stages and STUDIO includes 10. The [Overview](/ontime-cloud/overview/) shows all your running stages on one timeline, and you can share it with a single link.
+
+### What happens to my stages if my subscription ends?
+
+Your stages are stopped, not deleted. Archives and share links are kept. Subscribe again and start your stages: they come back on the same links. \
+See [When a subscription ends](/ontime-cloud/features/#when-a-subscription-ends).
+
+### Does everyone who uses a stage need an account?
+
+No. Only people who manage stages in the dashboard need an [invite](/ontime-cloud/team-and-account/#who-needs-an-invite). Operators can open the stage link, and viewers can use a share link.
+
+### Is my show backed up?
+
+Create an [archive](/ontime-cloud/features/#archives) before big changes, between show days or after the event. Archives stay in Cloud even if you delete the stage. You can also [download the project](/ontime-cloud/features/#download-a-project) at any time.
+
+### Can I get a custom domain?
+
+STUDIO customers can ask for extensions such as custom domains or vanity URLs. See [Plans](/ontime-cloud/team-and-account/#plans).
+
+## Quick tips
+
+- **Send the stage link early.** The link stays the same through stop and start, so you can send it out before the show.
+- **Stop stages you are not using.** This prevents unwanted access or changes. The link and project are kept.
+- **Give viewers a share link, not the stage link.** The stage link opens the editor. A share link is read-only, and you can revoke it.
+- **Archive before you edit an approved rundown.** Share the archive for sign-off and keep working on the live stage.
+- **Upgrade between shows.** Stages never update on their own, so [upgrade](/ontime-cloud/features/#upgrade-the-ontime-version) when you have time to check the new version.
+- **Set up an authenticator app.** Then you never wait for a sign-in email. See [Authenticator app](/ontime-cloud/features/#authenticator-app).
+
+## Quick fixes
+
+### "Subscription required" or "Active subscription required"
+
+If you just completed checkout, wait a few seconds and reload the page. \
+Otherwise, check the **Team subscription** card in **Team**. If it shows **Action needed**, an Owner can fix the payment with **Manage Subscription**. See [Subscription statuses](/ontime-cloud/features/#subscription-statuses).
+
+### My stages were stopped
+
+Stages are stopped when a subscription ends or a payment fails for good. Nothing is deleted. Once the subscription is active again, click **Start** on each stage.
+
+### I cannot create a stage or an archive
+
+All the stages or archives in your plan are in use. Stopped stages count too. Delete one you no longer need, or move to a [bigger plan](/ontime-cloud/team-and-account/#plans). \
+Creating an archive also needs the stage to be running.
+
+### The stage link does not open
+
+- Check that the stage is running.
+- If the stage has a password, make sure people have it.
+- If the stage was deleted, its link no longer works. A new stage gets a new link.
+
+### Uploading a project fails
+
+The file must be an Ontime project in `.json` format, not empty, and 2 MB or smaller. The stage must be running.
+
+### Upgrade version is disabled
+
+Stop the stage first. If it shows **Already on latest version**, there is nothing to upgrade.
+
+### I forgot my password, or the sign-in email does not arrive
+
+Use the **One-Time Code** tab and click **Send to email**, then set a new password on the **Account** page. \
+If the email does not arrive, check your spam folder and the address you signed up with. You can resend after a short wait.
+
+### An invite cannot be accepted
+
+An account can only be in one team. If the email already belongs to another team, ask the Owner to invite a different address. If the invite was revoked, ask for a new one.
+
+### I cannot delete my account
+
+If you are an Owner and the team has an active subscription, cancel it first with **Team** > **Manage Subscription**.
+
+### A share link does not work
+
+- **Share unavailable**: the stage may be stopped, or the share, stage or archive was deleted.
+- **This link has expired**: create a new share, or [edit the link](/ontime-cloud/share-links/#change-or-revoke-a-share-link) to change its expiry.
+- **Old data**: live shares update about once a minute. An `Offline · last synced …` badge means the stage was briefly unreachable. The view recovers on its own.
+
+## Get help
+
+The **Support** page in the dashboard links to the documentation, video tutorials and the community. \
+To contact us about your account or setup, click **Contact support** or email [support@getontime.no](mailto:support@getontime.no).
+
+- [Discord](https://discord.com/invite/eje3CSUEXm)
+- [GitHub issues](https://github.com/cpvalente/ontime/issues), for bugs in Ontime
+- [Reddit](https://www.reddit.com/r/ontimeapp)

@@ -1,0 +1,119 @@
+---
+title: Share links
+description: Share a read-only rundown or timeline link with crew, clients and talent. No login needed, with an optional password and expiry. Sharing in Ontime Cloud.
+---
+
+import { Card, CardGrid, Steps } from "@astrojs/starlight/components";
+
+Give crew, clients, talent or a lobby screen a **read-only link** to your show. \
+They follow along in any browser, without an Ontime account and without access to your stage.
+
+{/* ![A shared live rundown, as viewers see it](../../../assets/ontime-cloud/share-viewer-stage.png) */}
+
+<CardGrid>
+  <Card title="Read-only" icon="seti:lock">
+    Viewers can follow the show but never change it.
+  </Card>
+  <Card title="No login" icon="approve-check">
+    Guests open the link in any browser. Nobody needs to sign up.
+  </Card>
+  <Card title="Optional password" icon="seti:pipeline">
+    Each link can have its own password, separate from the stage password.
+  </Card>
+  <Card title="Optional expiry" icon="seti:clock">
+    Live links can stop working after 1, 7 or 30 days, or never expire.
+  </Card>
+</CardGrid>
+
+## Choose the right share
+
+| You want to… | Use |
+| --- | --- |
+| Let crew follow the running order on their phones | Rundown share |
+| Show a client how the show is tracking | Rundown share |
+| Put the whole event on a lobby or green room screen | Overview share |
+| Give a producer one link for every room | Overview share |
+| Send a client the final rundown for sign-off | Archive share |
+| Keep a rundown available after you stop or delete the stage | Archive share |
+
+- **Rundown** and **Overview** shares are **live**: they follow the show as it runs, and need the stage to be running.
+- **Archive** shares are **frozen**: they show an [archive](/ontime-cloud/features/#archives) exactly as it was captured, and keep working after the stage is stopped or deleted.
+
+:::tip[Combine them]
+Capture an archive before you edit a rundown someone has approved. \
+Share the archive for reference, and keep a live share for the people who need to see changes as they happen.
+:::
+
+## Share a rundown
+
+<Steps>
+
+1. Start the stage you want to share.
+
+2. Open the stage's **More actions** menu and choose **Create rundown share**. \
+   Or go to **Shares**, open the **Rundowns** tab and click **Create Stage Rundown Share**.
+
+3. Give the link a **Share name**. It defaults to the stage title.
+
+4. Optionally, choose a **Link expiry** and tick **Require password**.
+
+5. Click **Create share** and copy the link.
+
+</Steps>
+
+Stages with at least one rundown share show a **Shared** badge on the dashboard.
+
+## Share a timeline of several stages
+
+An overview share is a live, read-only copy of the [Overview](/ontime-cloud/overview/): several running stages side by side, with a wall clock.
+
+<Steps>
+
+1. Start the stages you want to show.
+
+2. Go to **Shares**, open the **Overview** tab and click **Create Overview Share**. \
+   Or, on the [Overview page](/ontime-cloud/overview/), pick your stages and click **Share this view**.
+
+3. Choose which stages to include. Leave all unticked to include every running stage, including stages you start later.
+
+4. Name the link, optionally set an expiry and a password, then create the share and copy the link.
+
+</Steps>
+
+## Share an archive
+
+<Steps>
+
+1. If you do not have one yet, create an archive: with the stage running, open **More actions** and choose **Create archive**.
+
+2. Go to **Archives** and click **Share** on the archive.
+
+3. Optionally, tick **Require password** and enter a password.
+
+4. Click **Create share**. The link is copied to your clipboard.
+
+</Steps>
+
+Each archive has one link, with no expiry.
+
+## Change or revoke a share link
+
+Manage every link from the **Shares** page. It has a tab for each type: **Overview**, **Rundowns** and **Archives**.
+
+{/* ![The Shares page, with rundown shares and their links](../../../assets/ontime-cloud/share-list.png) */}
+
+- **Rename** a live link, or change its password and expiry.
+- **Change which stages** an overview share includes. The link stays the same.
+- **Delete** a live link to revoke it straight away.
+- For an archive, choose **Edit share** in its menu on **Archives**. **Reset link** gives it a new link, and **Stop sharing** removes it.
+
+Remember to send the password along with a protected link. See [What viewers see](/ontime-cloud/features/#what-share-viewers-see) for expired, deleted and offline links.
+
+:::note[Live, but not instant]
+Live shares update about once a minute. Use them to follow a running order, not as a replacement for second-by-second views like the [Operator](/interface/production/operator/) or a [stage timer](/interface/automated/stage-timer/).
+:::
+
+## Next steps
+
+- [Follow every room](/ontime-cloud/overview/) on one timeline.
+- See how many share links your [plan](/ontime-cloud/team-and-account/#plans) includes.
