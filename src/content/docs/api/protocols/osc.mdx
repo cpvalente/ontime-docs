@@ -1,266 +1,78 @@
 ---
 title: OSC API
-description: OSC API reference for controlling Ontime timers, playback, rundowns, and live production automation.
+description: "Control Ontime over OSC from show control software and consoles: start, load and stop events, change event fields, set messages and run auxiliary timers."
 ---
 
-The OSC and WebSocket APIs allow for low latency communication to Ontime server.
+Control Ontime with OSC messages from show control software, lighting and sound consoles. \
+Turn OSC input on in `Editor` -> `Settings` -> `Automation`. By default, Ontime listens on UDP port `8888`.
 
-
-:::note[Using OSC]
-To use the OSC API, you will need to configure the feature in `Editor` -> `Settings` -> `Automation`. By default, Ontime listens for OSC on UDP port `8888`.
-
-Due to the nature of the protocol, for getting feedback from OSC you will need to configure a feedback loop in both Ontime and your other software/devices.
-
-You can monitor the messages received using the **Network log** in  `Editor` -> `Network` -> `Event log`.
-:::
-
-## Change event
 ```bash
-/ontime/change/<event-id>/<field> <new-value>
+/ontime/<action> <argument>
+# eg. /ontime/start/next
 ```
 
-The change endpoint allows changing some of the properties of a given event (below). \
-The request should contain a patch of the event to be changed, along with the ID of the event to change.
+- Some actions take an argument, such as a cue or a duration. Others take none.
+- OSC is one way. To get feedback, send data back from Ontime with [automation outputs](/api/automation/).
+- Check what Ontime receives in `Editor` -> `Settings` -> `Network` -> `Event log`.
+- OSC is not available on Ontime Cloud.
 
-You can change any field in an event using this endpoint. See below a description of expected values.
+## Playback
 
-| Property      | Value type                                                                                                |
-| :------------ | :-------------------------------------------------------------------------------------------------------- |
-| `title`       | string                                                                                                    |
-| `note`        | string                                                                                                    |
-| `cue`         | string (value should be kept under 8 characters)                                                          |
-| `skip`        | boolean                                                                                                   |
-| `colour`      | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color)) |
-| `custom`      | target the specific custom field with `custom:<fieldname>`                                                |
-| `timeWarning` | number (in milliseconds)                                                                                       |
-| `timeDanger`  | number (in milliseconds)                                                                                       |
-| `endAction`   | string (none / load-next / play-next)                                                              |
-| `timerType`   | string (count-down / count-up / clock / none)                                                             |
-| `duration`    | number (in milliseconds)                                                                                       |
-| `timeStart`   | number (in milliseconds)                                                                                       |
-| `timeEnd`     | number (in milliseconds)                                                                                       |
+| Action | Address and argument |
+| :--- | :--- |
+| Start the loaded event | `/ontime/start` |
+| Start the next event | `/ontime/start/next` |
+| Start the previous event | `/ontime/start/previous` |
+| Start an event by position (from 1) | `/ontime/start/index <position>` |
+| Start an event by ID | `/ontime/start/id <event-id>` |
+| Start an event by cue | `/ontime/start/cue <cue>` |
+| Load the next event | `/ontime/load/next` |
+| Load the previous event | `/ontime/load/previous` |
+| Load an event by position (from 1) | `/ontime/load/index <position>` |
+| Load an event by ID | `/ontime/load/id <event-id>` |
+| Load an event by cue | `/ontime/load/cue <cue>` |
+| Pause | `/ontime/pause` |
+| Stop | `/ontime/stop` |
+| Reload the current event | `/ontime/reload` |
+| Start [Roll mode](/quick-tips/roll/) | `/ontime/roll` |
+| Add time to the running event | `/ontime/addtime/add <milliseconds>` |
+| Remove time from the running event | `/ontime/addtime/remove <milliseconds>` |
 
-:::caution
-Changing the properties `skip` `endAction` `duration` `timeStart` `timeEnd` \
-cause the rundown to be recalculated and writing to them is therefore throttled
-:::
+You can add or remove up to one hour at a time.
 
-### Example: change title of event
-**OSC Message**
+## Change an event
+
+Put the field in the address and the new value in the argument. See the [fields you can change](/api/data/event-data/#fields-you-can-change-over-the-api).
+
 ```bash
-/ontime/change/<event-id>/title <new-value>
-```
-
-### Example: change a custom field
-The custom field must exist in the project to be accepted by the API. \
-See more on [custom fields](/features/custom-fields)
-
-**OSC Message**
-```bash
+/ontime/change/<event-id>/title <new-title>
 /ontime/change/<event-id>/custom:<field-name> <new-value>
 ```
 
-## Message
-The following endpoints allow controlling the messages Ontime sends to the stage timer view. \
-The payload response is the current state of the message data.
+## Messages
 
-### Example: change the secondary message text
+Control the messages on the [stage timer](/interface/automated/stage-timer/) view.
 
-**OSC Message**
-```bash
-# Note that this will set the text, however setting its visibility is a separate operation.
-# See below
-/ontime/message/secondary <new-text>
-```
+| Action | Address and argument |
+| :--- | :--- |
+| Set the [secondary message](/features/secondary-message/) | `/ontime/message/secondary <text>` |
+| Set the timer message | `/ontime/message/timer/text <text>` |
+| Show or hide the timer message | `/ontime/message/timer/visible true` or `false` |
+| Make the timer message blink | `/ontime/message/timer/blink true` or `false` |
+| Black out all stage timer screens | `/ontime/message/timer/blackout true` or `false` |
+| Choose what shows in the secondary field | `/ontime/message/timer/secondarySource <source>` |
 
-### Example: secondary source in the stage timer view
-**OSC Message**
-```bash title="Show auxiliary timer as secondary field"
-/ontime/message/timer/secondarySource 'aux'
-```
+`<source>` is `secondary` for the secondary message, or `aux1`, `aux2` or `aux3` for an auxiliary timer. Any other value, such as `off`, hides the secondary field.
 
-**OSC Message**
-```bash title="Show secondary message as secondary field"
-/ontime/message/timer/secondarySource 'secondary'
-```
+## Auxiliary timers
 
-**OSC Message**
-```bash title="Hide secondary field"
-# Note: The secondary source can be `aux` or `secondary`, any other value will assign the property to null (ie: off)
-/ontime/message/timer/secondarySource 'off'
-```
+Ontime has three [auxiliary timers](/features/aux-timer/), numbered `1` to `3`. They run separately from the rundown.
 
-### Example: blackout timer screens
-You can remotely blackout every screen that is in the stage timer view.
-
-**OSC Message**
-```bash title="Blackout timer screen"
-/ontime/message/timer/blackout true
-```
-
-**OSC Message**
-```bash title="Disable timer screen blackout"
-/ontime/message/timer/blackout false
-```
-
-
-## Playback
-The following endpoints allow controlling the Ontime's playback.
-
-## Start event
-
-### Start loaded event
-**OSC Message**
-```bash
-/ontime/start
-```
-
-### Start event at index
-**OSC Message**
-```bash
-/ontime/start/index <event-index>
-```
-
-### Start event with ID
-**OSC Message**
-```bash
-/ontime/start/id <event-id>
-```
-
-### Start event with cue
-**OSC Message**
-```bash
-/ontime/start/cue <event-cue>
-```
-
-### Start next event
-**OSC Message**
-```bash
-/ontime/start/next
-```
-
-### Start previous event
-**OSC Message**
-```bash
-/ontime/start/previous
-```
-
-## Pause running timer
-**OSC Message**
-```bash
-/ontime/pause
-```
-
-## Load event
-
-### Load event at index
-**OSC Message**
-```bash
-/ontime/load/index <event-index>
-```
-
-### Load event with ID
-**OSC Message**
-```bash
-/ontime/load/id <event-id>
-```
-
-
-### Load event with cue
-**OSC Message**
-```bash
-/ontime/load/cue <event-cue>
-```
-
-### Load next event
-**OSC Message**
-```bash
-/ontime/load/next
-```
-
-### Load previous event
-**OSC Message**
-```bash
-/ontime/load/previous
-```
-
-## Reload current event
-**OSC Message**
-```bash
-/ontime/reload
-```
-
-## Stop playback
-**OSC Message**
-```bash
-/ontime/stop
-```
-
-## Activate Roll mode
-**OSC Message**
-```bash
-/ontime/roll
-```
-
-## User added time
-### Add time
-**OSC Message**
-```bash
-/ontime/addtime/add <value-in-milliseconds>
-```
-
-### Remove time
-**OSC Message**
-```bash
-/ontime/addtime/remove <value-in-milliseconds>
-```
-
-## Auxiliary timer
-
-Ontime provides an [auxiliary timer](/features/aux-timer) which does not affect the current playback. \
-This can be controlled using the API as shown below
-
-### Set auxiliary timer duration
-**OSC Message**
-```bash
-/ontime/auxtimer/1/duration <value-in-milliseconds>
-```
-
-### Set auxiliary timer direction
-Auxiliary timer can count up or count down.
-
-#### Set auxiliary timer to count up
-**OSC Message**
-```bash
-/ontime/auxtimer/1/direction count-up
-```
-
-#### Set auxiliary timer to count down
-**OSC Message**
-```bash
-/ontime/auxtimer/1/direction count-down
-```
-
-### Start auxiliary timer
-**OSC Message**
-```bash
-/ontime/auxtimer/1/start
-```
-
-### Pause auxiliary timer
-**OSC Message**
-```bash
-/ontime/auxtimer/1/pause
-```
-
-### Stop auxiliary timer
-**OSC Message**
-```bash
-/ontime/auxtimer/1/stop
-```
-
-### Add / remove time to auxiliary timer
-**OSC Message**
-```bash
-/ontime/auxtimer/1/addtime <value-in-milliseconds>
-```
+| Action | Address and argument |
+| :--- | :--- |
+| Start | `/ontime/auxtimer/1/start` |
+| Pause | `/ontime/auxtimer/1/pause` |
+| Stop | `/ontime/auxtimer/1/stop` |
+| Set the duration | `/ontime/auxtimer/1/duration <milliseconds>` |
+| Count up or down | `/ontime/auxtimer/1/direction count-up` or `count-down` |
+| Add time (negative to remove) | `/ontime/auxtimer/1/addtime <milliseconds>` |

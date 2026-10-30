@@ -3,37 +3,29 @@ title: Runtime data
 description: Reference for Ontime's live timer, rundown, playback, offset, message, and event state data exposed to integrations.
 ---
 
-Ontime broadcasts its state over WebSockets.\
-This allows for integrations to sync to the state of the application.
+Runtime data is the live state of Ontime: the clock, timers, playback, messages and the current events. \
+Use it in [automation outputs](/api/automation/#put-ontime-data-in-a-message), or read it over the [HTTP](/api/protocols/http/#read-state) and [WebSocket](/api/protocols/websockets/) APIs.
 
-See below a full definition of the data that Ontime holds. \
-This data should be used in conjunction with the [Automation feature](/api/automation#using-variables-in-automation).
+When a WebSocket client connects, Ontime sends the whole object. After that, it sends only the parts that change:
 
-:::tip[Show me the code]
-This documentation can get out of sync as we add new features to Ontime, \
-[see the type definition in the code here](https://github.com/cpvalente/ontime/blob/master/packages/types/src/definitions/runtime/RuntimeStore.type.ts) \
-and the instantiation of the ["empty state" here](https://github.com/cpvalente/ontime/blob/master/apps/client/src/common/stores/runtime.ts)
-:::
-
-:::note
-Ontime broadcasts messages formatted as below. \
-Where the type `Ontime` indicates the type of message, and the payload is a portion of the [Runtime data object](#runtime-data-object)
-
-```ts
-// example broadcast message from Ontime
-{ type: "ontime", payload: "<runtime-data-object>"}
+```json
+{"tag": "runtime-data", "payload": {"timer": { ... }}}
 ```
 
-To keep things efficient, Ontime also broadcasts the individual objects in state as they change. \
-This allows for smaller payloads and granular updates.
-```ts
-// Ontime sends smaller messages to update subsets of the object
-{ type: "ontime-timer", payload: "<runtime-data-object>.timer"}
-{ type: "ontime-offset", payload: "<runtime-data-object>.offset"}
-{ type: "ontime-eventNow", payload: "<runtime-data-object>.eventNow"}
-...
-```
+:::tip[Check the source]
+This page can fall behind new features. See the [type definition](https://github.com/cpvalente/ontime/blob/master/packages/types/src/definitions/runtime/RuntimeStore.type.ts) in the code.
 :::
+
+## Current events
+
+| Field | Contains |
+| :--- | :--- |
+| `eventNow` | The loaded event, or `null` |
+| `eventNext` | The next event, or `null` |
+| `eventFlag` | The next flagged event, or `null` |
+| `groupNow` | The group of the loaded event, or `null` |
+
+Events have the fields described in [event data](/api/data/event-data/).
 
 ## Runtime data object
 :::note

@@ -3,7 +3,7 @@ title: Send OSC from Ontime
 description: Send OSC messages from Ontime automation to control live production tools using rundown and timer data.
 ---
 
-To send an OSC message when something happens, for example when an event starts, create an [automation](/api/automation/#manage-automations) and connect it to a [trigger](/api/automation/#manage-triggers) such as **On Start**. This page explains how Ontime builds the OSC payload.
+To send an OSC message when something happens, for example when an event starts, create an [automation](/api/automation/#create-an-automation) and connect it to a [trigger](/api/automation/#connect-it-to-a-trigger) such as **On Start**. This page explains how Ontime builds the OSC payload.
 
 
 ## OSC Payload examples
@@ -40,7 +40,7 @@ Which would be sent as a single message with the payload
 ```
 
 :::note
-Keep in mind that these rules will also affect [template variables](/api/automation#using-variables-in-automation).
+Keep in mind that these rules will also affect [template variables](/api/automation/#put-ontime-data-in-a-message).
 
 We advise wrapping template variables that you want to remain as strings in quotes to avoid unintended payloads of strings being split by their spaces or interpreted as numbers.
 :::
