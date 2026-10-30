@@ -1,46 +1,29 @@
 ---
-title: Ontime Rundown
+title: Rundown
 description: Learn how Ontime rundowns organize live event schedules, cues, timer events, groups, milestones, delays, and shared production data.
 ---
 
 import { YouTube } from "@astro-community/astro-embed-youtube";
 
-Ontime allows users to provide a Rundown (or schedule) of events. \
-The app then infers a sequence of timers from this schedule and can advise show runners / stage managers / operators on deviations to schedule.
+A rundown is your show's running order, with timings. Ontime turns it into timers, and tells the team when the show drifts from the plan.
 
-:::note[What is a rundown?]
-On Ontime's context, "Rundown" is a typical broadcast term for a schedule, ie: an ordered list of content and their timing.
+You build the rundown in the [Editor](/interface/production/app-editor/), which opens when you start Ontime.
 
-It is used for pre-planning (ensuring we have the right amount of content to fit the allocated time) and, in Ontime's case, leveraged at runtime to keep the show schedule on track.
-:::
+## What goes in a rundown
 
-## Creating rundowns in Ontime
-
-The primary interface for creating rundowns is the [Editor](/interface/production/app-editor/) view, which is presented when you start Ontime.
-
-The Editor will later provide runtime control over the rundown, but for planning time you will have the tooling here to quickly generate rundowns allowing for operations such as reordering, cloning, skipping events...
-
-## Timers and metadata entries
-
-Ontime offers two main types of entries to populate your rundown.
-
-**Timer events** and **metadata events**. In short:
-
-**Timer events** create timers that Ontime can generate countdowns to \
-**Metadata events** allow detailing the rundown with data that does not generate timers
+| Entry | What it is for | Example | Has a timer |
+| --- | --- | --- | --- |
+| **Event** | A segment of the show | A speaker, a video, a song | Yes |
+| **Group** | Related entries kept together | All speakers in a panel, Act 1 | Totals of its events |
+| **Milestone** | A note for the operator | Fireworks standby | No |
+| **Delay** | A schedule change for the team | Doors open 10 minutes late | No |
 
 ### Events
 
 ![Rundown event](../../../assets/screenshots/editor/rundown/docs_event.png)
 
-TLDR; Events are individual show segments: a speaker presentation, video playback, or musical performance.
-
-Events are rundown entries which can generate timers. \
-Ontime can play an event and generate the relevant confidence monitor / stage timer views.
-
-We can also leverage the total duration of events to provide information on the rundown and group total duration and schedule.
-
-See more information on [our quick tips for time entry](/quick-tips/smart-time-entry/).
+Events generate the timers shown in the stage timer and other views. Their durations add up to the group and rundown totals. \
+See [smart time entry](/quick-tips/smart-time-entry/) to type times quickly.
 
 <YouTube id="aIvRbApvplo" title="Ontime Tutorials: Working with Events" />
 
@@ -48,53 +31,35 @@ See more information on [our quick tips for time entry](/quick-tips/smart-time-e
 
 ![Rundown event](../../../assets/screenshots/editor/rundown/docs_group.png)
 
-TLDR; Groups help organize related content: all speakers in a panel, or all scenes in Act 1.
-
-Groups are a metadata event that allows grouping several entries. \
-Groups entries do not have their own schedule but inherit the schedule from the contents.
-
-You can leverage groups to segment your rundown and to allow quick move and clone operations on a list of entries.
-
-Ontime can also create extra metadata timers such as planned and expected times to group end.
+A group takes its schedule from the entries inside it. Use groups to move or clone several entries at once, and to count down to the end of a section.
 
 ### Milestones
 
 ![Rundown event](../../../assets/screenshots/editor/rundown/docs_milestone.png)
 
-TLDR; Milestones add operator notes: give fireworks standby, check change-over progress.
-
-Milestones are note entries in the rundown.
-
-These allow inserting operator notes or data into the rundown notes. \
-Milestones do not have a schedule and do not show up in the schedule views (ie: backstage).
+Milestones are notes for the operator. They have no schedule, and do not show in schedule views such as Backstage.
 
 :::tip[I just want some stage timers]
 Ontime also works for simple stage-timer setups. \
 Create a list of events with the timers you need (for example, 1 min, 5 min, and 10 min), and use groups, milestones, offsets, and metadata when they help your production.
 :::
 
-## Delays and delay flows
+### Delays
 
 ![Rundown event](../../../assets/screenshots/editor/rundown/docs_delay.png)
 
-The delay entry is part of Ontime's delay management system.
+A delay tells the team about a schedule change, without changing the plan. Delays show in all views. See [managing delays](/quick-tips/managing-delays/).
 
-In Ontime, delays entries can be used to communicate schedule changes to your team.\
-Delays act as an overlay over the schedule are clearly indicated in all views. \
-[Read more](/quick-tips/managing-delays/).
+## Share the rundown with your team
 
-## Sharing the rundown
+Each person opens the view for their role in a browser:
 
-As the show runner / Ontime operator, we expect that you will be at home in the [Editor](/interface/production/app-editor/) view.
+- the [Cuesheet](/interface/production/cuesheet/) for departments to follow and add their own data
+- the [Operator](/interface/production/operator/) view for operators and stage managers
+- [stage timers and other displays](/interface/) for presenters and signage
 
-However, Ontime is more useful as a collaboration tool for your team.
+See [network and security](/additional-notes/network-and-security/) to open Ontime on other devices.
 
-The [Cuesheet](/interface/production/cuesheet/) and [Operator](/interface/production/operator/) views are made for realtime collaboration with your team. \
-Once you have created the rundown, you can share a link to Ontime to allow others to see the rundown and contribute with their department data.
+## Export or print the rundown
 
-### Exporting
-
-If instead you are looking to export the rundown, either to print or archive, please consider using the [Excel export](/quick-tips/import-export/) or the [Google Sheet](/features/import-spreadsheet-gsheet/) features.
-
-Ontime does not currently have a in-app printing feature.\
-The best way to achieve this is by exporting the rundown to an Excel file and styling and printing as you need.
+Ontime has no print button. [Export the rundown to Excel](/quick-tips/import-export/) or [Google Sheets](/features/import-spreadsheet-gsheet/), then style and print it there.

@@ -1,6 +1,6 @@
 ---
-title: Headless Ontime
-description: Run Ontime on a headless computer or server for production networks, self-hosted timers, and browser-based views.
+title: Self-host with Docker or NPM
+description: Self-host Ontime with Docker or NPM on a server, Raspberry Pi or headless machine, for venues and persistent production installations.
 ---
 
 You can leverage the headless distributions to run Ontime in a computer without GUI. \
@@ -31,7 +31,7 @@ ontime
 
 Or install and run Ontime (the installation here is temporary for the duration of the session)
 ```bash
-npx install @getontime/cli
+npx @getontime/cli
 ```
 
 Once running, the app will be available in any device on the same network over (default port 4001)
@@ -81,13 +81,13 @@ services:
 
 * `4001:4001/tcp` binds local port 4001 to the same container port. Port 4001 is the default for the UI and is necessary to expose the app. 
 * `8888:8888/udp` binds the localhost port 8888 (default for OSC input into the app) to the same in the container, so that it can receive data from the host machine targeted to the loopback interface.
-* `8888:8888/udp` binds the localhost port 9999 (default for OSC output from the app) to the same in the container, this allows Ontime to send data out of the container.
+* `9999:9999/udp` binds the localhost port 9999 (default for OSC output from the app) to the same in the container, this allows Ontime to send data out of the container.
 * `"./ontime-data:/data/"` expose the internal container data directory.
 * `TZ=Asia/Singapore` overrides the container timezone.
 
 The variations in the network setup will widely depend on your setup.
 
-### Docker Frequently Asked Questions 🚨
+### Docker troubleshooting
 
 #### Ontime default port
 Ontime serves its web pages on port 4001. 

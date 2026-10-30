@@ -5,48 +5,39 @@ description: Overview of Ontime's editor, operator, cuesheet, stage timer, backs
 
 import { YouTube } from "@astro-community/astro-embed-youtube";
 
+Every view is a page in the browser. Give each person the view for their role.
+
+## Which view for which person
+
+| View | For | Path |
+| --- | --- | --- |
+| [Editor](/interface/production/app-editor/) | The show runner, to build and run the rundown | `/editor` |
+| [Cuesheet](/interface/production/cuesheet/) | Departments, to follow and add their data | `/cuesheet` |
+| [Operator](/interface/production/operator/) | Operators and stage managers | `/op` |
+| [Stage timer](/interface/automated/stage-timer/) | Presenters and talent | `/timer` |
+| [Countdown](/interface/automated/countdown/) | Anyone waiting for a specific event, like a break | `/countdown` |
+| [Backstage](/interface/automated/backstage/) | Crew backstage | `/backstage` |
+| [Timeline](/interface/automated/timeline/) | Producers and signage | `/timeline` |
+| [Studio clock](/interface/automated/studio-clock/) | Broadcast studios | `/studio` |
+| [Project info](/interface/automated/project/) | Crew who need contacts and project details | `/info` |
+
+The Editor, Cuesheet and Operator are interactive. The others are displays for screens nobody touches during the show.
+
+## Open a view
+
+Add the path to the address of Ontime:
+
+```
+Local:  http://<ip-address>:<port>/timer     eg. http://192.168.10.1:4001/timer
+Cloud:  https://cloud.getontime.no/<stage>/timer
+```
+
+See [network and security](/additional-notes/network-and-security/) to make Ontime reachable on your network.
+
+Views save their settings in the URL, so you can bookmark or share a configured view. See [configuring views](/quick-tips/configuring-views/), and [URL presets](/features/url-presets/) for short links.
+
+## Video tour
+
 ![Ontime](../../../assets/images/ontime-4-all.png)
 
 <YouTube id="rgbQZZDhrjY" title="Ontime Tutorials: Overview" />
-
-## Available views
-
-Ontime offers different interfaces to consume and extend rundown data, these interfaces are designed to support different tasks:
-
-- [Production views](#production-views): interactive views where users can edit the rundown and add information, focusing on detailed and collaborative work
-- [Automated views](#automated-views): non-interactive displays that present key parts of the rundown in a clear, accessible way to support quick reference and coordination during the show.
-
-Any device with a browser in the same network can access Ontime's views by reaching to the IP address of the device where Ontime is running and its port. eg.
-```
-http://<ip-address:port>/editor -> http://192.168.10.1:4001>/editor
-```
-
-:::note
-All views are configurable, allowing users to customise the behaviour and data of each interface. \
-The configuration for automated views is saved in the URL for easy bookmarking and sharing.
-
-[Read more](/quick-tips/configuring-views)
-:::
-
-### Production views
-
-These refer to views which allow for data entry and are typically used by directors, show runners and operators.
-
-| URL                                             | See the docs                               |
-| :---------------------------------------------- | :----------------------------------------- |
-| `https://cloud.getontime.no/my-stage/editor`    | [Editor](/interface/production/app-editor) |
-| `https://cloud.getontime.no/my-stage/cuesheet`  | [Cuesheet](/interface/production/cuesheet) |
-| `https://cloud.getontime.no/my-stage/op`        | [Operator](/interface/production/operator) |
-
-### Automated views
-
-Automated views are non-interactive interfaces focusing on displaying the rundown data at different levels of detail. \
-These views are meant for unattended (signage) screens without user interaction after setup.
-
-| URL                                              | See the docs                                        |
-| :----------------------------------------------- | :-------------------------------------------------- |
-| `https://cloud.getontime.no/my-stage/timer`      | [Timer](/interface/automated/stage-timer)           |
-| `https://cloud.getontime.no/my-stage/timeline`   | [Timeline](/interface/automated/timeline)           |
-| `https://cloud.getontime.no/my-stage/backstage`  | [Backstage View](/interface/automated/backstage)    |
-| `https://cloud.getontime.no/my-stage/countdown`  | [Countdown](/interface/automated/countdown)         |
-| `https://cloud.getontime.no/my-stage/studio`     | [Studio Clock](/interface/automated/studio-clock)   |

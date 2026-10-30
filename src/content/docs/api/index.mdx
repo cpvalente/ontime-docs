@@ -1,35 +1,42 @@
 ---
-title: Ontime APIs
-description: Overview of Ontime APIs for feedback, control, automation, runtime data, project data, HTTP, WebSocket, and OSC integrations.
+title: Integrations and API
+description: Connect Ontime to Bitfocus Companion, vMix, scripts and AI agents with the HTTP, WebSocket and OSC APIs and automation outputs.
 ---
 
-Ontime distinguishes data into two main types
+Connect Ontime to the rest of your production. Pick the route that fits your setup:
 
-#### Project data
-This is data kept with the project that is persisted across app shutdown, it includes your settings and rundown. \
-The persisted data changes less often and is transmitted over HTTP
-
-#### Runtime data
-This is data that results from your interaction with the app, it includes timers and playback state. \
-The runtime data changes potentially very often. This is transmitted over WebSocket, but can be also consumed and modified over any of the supported protocols (OSC, WebSocket and HTTP).
-
-## Get project data
-Please follow the link to the documentation on the HTTP endpoints that provide access to the project data.
-
-## Control Ontime
-The OSC, Websocket and HTTP API allow for low latency communication to Ontime. \
-The APIs for the difference protocols are mostly feature compatible, so it is up to you to choose the most convenient protocol.
-
-You can find the documentation for the individual protocols by following the links
-- [OSC](/api/protocols/osc)
-- [WebSockets](/api/protocols/websockets)
-- [HTTP](/api/protocols/http)
+| You want to… | Use |
+| --- | --- |
+| Control Ontime from a Stream Deck or other hardware | [Bitfocus Companion](/additional-notes/companion-module/) |
+| Connect Ontime to show control software | [Chataigne](/additional-notes/chataigne-module/) |
+| Control Ontime from vMix | [vMix](/quick-tips/integrate-with-vmix/) |
+| Show Ontime views in OBS, vMix or a media server | [Render views in other apps](/quick-tips/render-elsewhere/) |
+| Control or read Ontime from your own scripts | The [HTTP](/api/protocols/http/), [WebSocket](/api/protocols/websockets/) or [OSC](/api/protocols/osc/) API |
+| Send Ontime data to other tools when something happens | [Automation outputs](/api/automation/) |
+| Let an AI assistant read and edit your rundown | The [MCP server](/features/mcp-server/) |
 
 :::note[Ontime Cloud]
-Cloud stages support the HTTP and WebSocket APIs. OSC is not currently available in Cloud. \
+Cloud stages support Companion, the HTTP and WebSocket APIs and the MCP server. OSC is not currently available in Cloud. \
 See [when to run Ontime yourself](/ontime-cloud/#when-to-run-ontime-yourself).
 :::
 
-## Control from Ontime
-You can also leverage the **automation feature** to distribute the runtime data from Ontime or control other software. \
-More information is available [in the documentation for the automation feature](/api/automation/).
+## How Ontime data is organised
+
+Ontime distinguishes two types of data:
+
+- **[Project data](/api/data/project-data/)** is kept with the project and persists when the app shuts down. It includes your settings and rundown, changes less often, and is transmitted over HTTP.
+- **[Runtime data](/api/data/runtime-data/)** results from your interaction with the app. It includes timers and playback state, changes often, and is transmitted over WebSocket. You can also read and change it over OSC and HTTP.
+
+The [event data](/api/data/event-data/) page describes the fields of each event in the rundown.
+
+## Control Ontime
+
+The OSC, WebSocket and HTTP APIs allow low-latency communication with Ontime. \
+They are mostly feature compatible, so choose the protocol that is most convenient for you.
+
+To poll the current state, get a snapshot of the runtime data over [HTTP](/api/protocols/http/#get-ontime-runtime-state) or [WebSocket](/api/protocols/websockets/#get-ontime-runtime-state).
+
+## Control other tools from Ontime
+
+Use [automation outputs](/api/automation/) to send runtime data from Ontime or to control other software over OSC or HTTP. \
+See [Sending OSC](/quick-tips/send-osc/) for how Ontime builds OSC payloads.

@@ -1,6 +1,6 @@
 ---
-title: FAQ
-description: Frequently asked questions about installing and running Ontime
+title: Ontime FAQ
+description: "Answers to common questions about installing and running Ontime: open source and self-hosting, Intel Macs, Linux and Raspberry Pi builds."
 head:
   - tag: script
     attrs:
@@ -12,7 +12,7 @@ head:
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Can I run Ontime in old Intel Apple devices",
+            "name": "Can I run Ontime on an Intel Mac?",
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Yes. Ontime has separate distributions for Apple Silicon and Intel (x64) processors. Download links can be found on the Ontime download page at https://www.getontime.no/download."
@@ -20,7 +20,7 @@ head:
           },
           {
             "@type": "Question",
-            "name": "Which Linux version do I need",
+            "name": "Which Linux or Raspberry Pi build do I need?",
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Ontime distributes two Linux packages depending on your architecture: a 64-bit AppImage for normal PCs and desktops, and an Arm 64-bit AppImage for Raspberry Pi 4 or newer."
@@ -28,7 +28,7 @@ head:
           },
           {
             "@type": "Question",
-            "name": "Is Ontime open source and self-hostable",
+            "name": "Is Ontime open source and self-hostable?",
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Yes. Ontime is fully open source and self-hostable. Self-hosted and Cloud deployments run the same Ontime app and use the same project format. Ontime Cloud adds hosting features of its own, such as read-only shares, project archives and a multi-stage overview."
@@ -42,18 +42,22 @@ head:
 For questions about Cloud stages, teams, subscriptions, and hosted access, see the [Ontime Cloud FAQ](/ontime-cloud/faq/).
 :::
 
-## Is Ontime open source and self-hostable
+:::note[Something went wrong?]
+If Ontime crashed or refused to load a project, see [crashes and corrupted data](/additional-notes/crashes-and-corrupted-data/).
+:::
+
+## Is Ontime open source and self-hostable?
 Yes. Ontime is fully open source and self-hostable. Self-hosted and Cloud deployments run the same Ontime app and use the same project format.
 
 [Ontime Cloud](/ontime-cloud/) adds hosting features of its own, which are not part of the self-hosted app: read-only shares, project archives and a multi-stage overview. See [why use Ontime Cloud](/ontime-cloud/#why-use-ontime-cloud).
 
 You can move project data between Cloud, local, and self-hosted deployments, so your data stays yours.
 
-## Can I run Ontime in old Intel Apple devices
-Yes! Ontime has separate distributions for Intel Silicon and Apple Intel (x64) processors. Make sure to double-check you are downloading the correct version \
+## Can I run Ontime on an Intel Mac?
+Yes. Ontime has separate builds for Apple Silicon and Intel (x64) Macs. Make sure you download the right one. \
 Download links can be found in [the download page](https://www.getontime.no/download), or get the [Apple Silicon](https://www.getontime.no/download/macos-arm64) or [Intel](https://www.getontime.no/download/macos-x64) build directly.
 
-## Which Linux version do I need
+## Which Linux or Raspberry Pi build do I need?
 Ontime distributes two Linux packages depending on your architecture.
 - Are you on a **normal PC / desktop**, download the [64-bit AppImage](https://www.getontime.no/download/linux-x64)
 - Are you on a **Raspberry Pi 4 or newer**, download the [Arm 64-bit AppImage](https://www.getontime.no/download/linux-arm64)

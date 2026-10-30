@@ -12,12 +12,12 @@ Adapting from [this vMix forum post](https://forums.vmix.com/posts/t7079-http-co
 
 ```vb
 ' This code creates a GET request to Ontime for starting an event with id 4b044
-Dim client = WebRequest.Create("http://<localhost:4001>/api/start/id/<4b044>")
+Dim client = WebRequest.Create("http://192.168.1.10:4001/api/start/id/4b044")
 Dim response = client.GetResponse()
 ```
 
 :::note
-If copying this code, remember to change `<localhost:4001>` to the IP address of the machine running Ontime and `<event-id>` to the relevant ID. You can find the ID in the Ontime interface.
+If copying this code, remember to change `192.168.1.10:4001` to the IP address and port of the machine running Ontime, and `4b044` to the ID of your event. You can find the ID in the Ontime interface.
 
 More information on the endpoints available in the [documentation for the HTTP API](/api/protocols/http).
 :::

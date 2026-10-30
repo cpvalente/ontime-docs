@@ -1,33 +1,14 @@
 ---
 title: Getting started
-description: Build your first Ontime rundown in five minutes, then choose local, self-hosted, or Cloud deployment.
+description: Install Ontime, build your first rundown, and choose between the desktop app, self-hosting with Docker and Ontime Cloud.
 ---
 
-import { LinkCard, CardGrid } from "@astrojs/starlight/components";
+import { LinkCard, Steps } from "@astrojs/starlight/components";
 import { YouTube } from "@astro-community/astro-embed-youtube";
-
-## Build your first rundown in five minutes
-
-Start with a rundown on screen: add a few events, group related segments, and set their durations. Ontime uses that plan for cues, schedules, and timers when the show starts.
-
-Ontime is free and open source, and self-hostable. Run it on your machine or production network first; Cloud is available when you do not want to manage the infrastructure yourself.
-
-<CardGrid>
-  <LinkCard
-    title="Learn more about Ontime"
-    href="/ontime/"
-    description="Explore what Ontime can do for your production"
-  />
-  <LinkCard
-    title="How a rundown works"
-    href="/concepts/rundown/"
-    description="Understand events, groups, milestones, and timers"
-  />
-</CardGrid>
 
 ## Installing Ontime
 
-Ontime is available as a desktop app for Windows, macOS, and Linux, or as a Docker image you can self-host on your own server.
+Ontime is available as a desktop app for Windows, macOS and Linux, including Raspberry Pi. You can also [self-host it with Docker](/quick-tips/headless-ontime/).
 
 Download the latest release from the [Ontime download page](https://www.getontime.no/download) and run the installer for your platform. \
 If your operating system warns you about an unsigned app, see our [notes on unsigned apps](/additional-notes/unsigned-app/).
@@ -40,32 +21,34 @@ If your operating system warns you about an unsigned app, see our [notes on unsi
   description="Get the desktop app for Windows, macOS, or Linux"
 />
 
+## Build your first rundown
+
+<Steps>
+
+1. Open Ontime. The app opens the **Editor**, or go to `http://localhost:4001/editor` in a browser.
+
+2. In the rundown, choose **Add Event**. Give it a title and a duration. Add a few more.
+
+3. Press **Start**, or the Space bar, to run the first event. Press **Next** to move on.
+
+</Steps>
+
+Learn more in [how a rundown works](/concepts/rundown/).
+
 ## Choose where to run Ontime
 
-You can move project data between local, self-hosted, and Cloud workflows.
+| | Best for | How to start |
+| --- | --- | --- |
+| **Desktop app** | Rehearsals, touring shows and show-site operation on a local network | [Download Ontime](https://www.getontime.no/download) |
+| **Docker or self-hosted** | Venues, servers and media machines managed by your team | [Self-host with Docker](/quick-tips/headless-ontime/) |
+| **Ontime Cloud** | Remote preparation and hosted access, without managing infrastructure | [Ontime Cloud](/ontime-cloud/) |
 
-**Desktop or local network** is useful for rehearsals, touring shows, and show-site operation.
+All three use the same project format, so you can [move a project](/quick-tips/import-export/) between them at any time.
 
-**Docker or self-hosted** is useful for venues, servers, and media machines managed by your team.
+## Next steps
 
-**Ontime Cloud** is an alternative for remote preparation and hosted access when you do not want to manage infrastructure.
+- [Make your network ready](/additional-notes/network-and-security/) so other devices can open Ontime views.
+- [Import your existing rundown](/features/import-spreadsheet/) from Excel or Google Sheets.
+- [Pick the views](/interface/) for your operators, presenters and crew.
 
-## Use Ontime Cloud when hosted access helps
-
-Ontime Cloud runs Ontime online without installing or managing infrastructure yourself. \
-It uses the same Ontime project format as local deployments, so your data is yours and remains portable between Cloud, local, and self-hosted versions.
-
-It is useful when you want to collaborate without setting up a network, or need Ontime available before your production network exists.
-
-<CardGrid>
-  <LinkCard
-    title="Ontime Cloud"
-    href="/ontime-cloud/"
-    description="What Cloud adds, and what it does not support"
-  />
-  <LinkCard
-    title="Get started with Cloud"
-    href="/ontime-cloud/#get-started"
-    description="Sign up and start your first Cloud stage"
-  />
-</CardGrid>
+Have a question? Check the [Ontime FAQ](/ontime/faq/).

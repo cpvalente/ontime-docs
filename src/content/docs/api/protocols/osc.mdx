@@ -7,7 +7,7 @@ The OSC and WebSocket APIs allow for low latency communication to Ontime server.
 
 
 :::note[Using OSC]
-To use the OSC API, you will need to configure the feature in `Editor` -> `Settings` -> `Automation`.
+To use the OSC API, you will need to configure the feature in `Editor` -> `Settings` -> `Automation`. By default, Ontime listens for OSC on UDP port `8888`.
 
 Due to the nature of the protocol, for getting feedback from OSC you will need to configure a feedback loop in both Ontime and your other software/devices.
 
@@ -28,7 +28,8 @@ You can change any field in an event using this endpoint. See below a descriptio
 | :------------ | :-------------------------------------------------------------------------------------------------------- |
 | `title`       | string                                                                                                    |
 | `note`        | string                                                                                                    |
-| `cue`         | string (value should be kept under 8 characters)                                                          || `skip`        | boolean                                                                                                   |
+| `cue`         | string (value should be kept under 8 characters)                                                          |
+| `skip`        | boolean                                                                                                   |
 | `colour`      | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color)) |
 | `custom`      | target the specific custom field with `custom:<fieldname>`                                                |
 | `timeWarning` | number (in milliseconds)                                                                                       |
