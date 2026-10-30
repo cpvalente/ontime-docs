@@ -1,0 +1,105 @@
+---
+title: Stages
+description: Create, start, stop and delete Ontime Cloud stages. Each stage is a hosted Ontime server with its own link, password and timezone for your show.
+---
+
+import { Steps } from "@astrojs/starlight/components";
+
+A stage is a full Ontime instance, hosted for you. Each stage has its own project, link, password and timezone. \
+The link stays the same when you stop and start the stage, so you can send it out before the show and shut the stage down between sessions.
+
+You manage stages from the **Stages** page of the dashboard. Every member of your team can manage stages.
+
+![The Stages page in the Ontime Cloud dashboard, with stage cards and the Create Stage button](../../../assets/ontime-cloud/dashboard-stages.png)
+
+## The life of a stage
+
+| Step | What happens |
+| --- | --- |
+| **Create** | Reserves a permanent link and starts the stage on the latest Ontime version |
+| **Run** | Open the stage and run your show, as you would with local Ontime |
+| **Stop** | Takes the stage offline. The link and project are kept |
+| **Start** | Brings the stage back on the same link, with the project as you left it |
+| **Delete** | Permanently removes the stage, its project and its share links |
+
+## Create a stage
+
+<Steps>
+
+1. On **Stages**, click **Create Stage**.
+
+2. Fill in the form:
+   - **Stage name**: how the stage appears in the dashboard
+   - **Password (optional)**: if set, people need it to open the stage
+   - **Timezone**: pick one from the list, or choose **Enter manually** and type an IANA timezone such as `Europe/Oslo`
+
+3. Click **Create stage**.
+
+</Steps>
+
+The stage starts straight away. When it is ready, the card shows a **Running** badge and the stage link under **Quick Access**. \
+To start from a saved show, [upload a project](/ontime-cloud/features/#upload-a-project-to-a-stage) or [create a stage from an archive](/ontime-cloud/features/#create-a-stage-from-an-archive).
+
+If **Create Stage** is disabled, all the stages in your [plan](/ontime-cloud/team-and-account/#plans) are in use. Stopped stages count too.
+
+## Run your show
+
+On a running stage card:
+
+- **Open Ontime** opens the stage in a new tab. Build your rundown and share [views](/interface/) with your crew, as you would locally.
+- **View live rundown**, under **Quick Access**, opens a read-only rundown inside the dashboard.
+- **More actions** has the project tools: download or upload the project, and create an archive.
+
+{/* ![The live rundown of a running stage in the Ontime Cloud dashboard](../../../assets/ontime-cloud/dashboard-live-rundown.png) */}
+
+Connect [Bitfocus Companion](/additional-notes/companion-module/), the [API](/api/) or the [MCP server](/features/mcp-server/) to the stage link instead of a local address.
+
+## Set a stage password
+
+The stage link is public. Anyone who has it can open the stage, including the editor.
+
+- Set a **stage password** to protect the whole stage. To change or remove it, stop the stage and [edit its settings](/ontime-cloud/features/#stage-settings).
+- For people who only need to follow the show, send a [read-only share link](/ontime-cloud/share-links/) instead of the stage link.
+
+See [Sharing flows](/concepts/sharing-flows/) for how access works in Ontime.
+
+## Stop and start a stage
+
+<Steps>
+
+1. On the running stage, click **Stop**, then confirm with **Stop stage**.
+
+2. When you need it again, click **Start**.
+
+</Steps>
+
+A stopped stage is offline for everyone, including viewers of its [live share links](/ontime-cloud/share-links/). \
+Stop stages when you are not using them, to prevent unwanted access or changes.
+
+## Save versions of your show
+
+Create an **archive** before a rehearsal, between show days or after the event. An archive is a snapshot of the stage's project that stays in Cloud even after you delete the stage.
+
+With the stage running, open **More actions** and choose **Create archive**. \
+You can open, download, [share](/ontime-cloud/share-links/#share-an-archive) or start a new stage from an archive. See [Archives](/ontime-cloud/features/#archives).
+
+## Delete a stage
+
+Only stopped stages can be deleted.
+
+<Steps>
+
+1. Stop the stage.
+
+2. Click **Delete**, then confirm with **Delete stage**.
+
+</Steps>
+
+Deleting is permanent. It removes the stage, its project and its share links, and releases its link. Archives you captured from the stage are kept. \
+To keep a copy, [download the project](/ontime-cloud/features/#download-a-project) or create an archive first.
+
+## Next steps
+
+- [Share a read-only link](/ontime-cloud/share-links/) with crew, clients and talent.
+- [Follow several stages](/ontime-cloud/overview/) on one timeline.
+- [Upgrade a stage](/ontime-cloud/features/#upgrade-the-ontime-version) to the latest Ontime version.

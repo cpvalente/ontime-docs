@@ -1,84 +1,64 @@
 ---
-title: ✨Ontime Cloud✨
-description: Ontime Cloud is the hosted version of Ontime for teams that need online rundown, stage timer, and production timing workflows without self-hosting.
+title: Ontime Cloud
+description: Hosted Ontime. Run your rundown and countdown timers online with no server to manage. Compare Ontime Cloud with the desktop app and self-hosting.
 ---
 
-import { LinkCard } from "@astrojs/starlight/components";
+import { Steps } from "@astrojs/starlight/components";
 
-:::tip[Schedule a demo]
-If you have questions about workflows, we're happy to schedule a demo and give you a hands-on walkthrough. \
-[Get in touch!](mailto:mail@getontime.no)
+Ontime Cloud is Ontime, hosted for you. \
+Start a stage from the dashboard, send one link, and run your show from any browser. You have no server to install and no network to configure.
+
+![The Stages page in the Ontime Cloud dashboard, with a running and a stopped stage](../../../assets/ontime-cloud/dashboard-stages.png)
+
+## Why use Ontime Cloud
+
+- **Stages without servers.** Each stage is a full Ontime instance with its own HTTPS link. The link stays the same when you stop and start the stage, so you can send it out days before the show.
+- **Share safely with anyone.** Give crew, clients and talent a read-only link to the rundown. They need no login and never reach the editor.
+- **See every room at once.** The Overview shows all your running stages on one timeline.
+- **Built for teams.** Invite as many people as you need, with no per-seat pricing, and keep archives of every version of the show.
+
+## Ontime Cloud vs the desktop app and self-hosting
+
+| | Desktop app | Self-hosted (Docker) | Ontime Cloud |
+| --- | --- | --- | --- |
+| Cost | Free, open source | Free, open source | Paid subscription |
+| Who runs the server | Your computer | You | Ontime |
+| Access from outside the venue | You set up the network | You set up the network | A stable HTTPS link per stage |
+| Project format | Ontime `.json` | Same | Same, [move projects](/ontime-cloud/features/#move-a-project-between-local-and-cloud) at any time |
+| Companion, HTTP and WebSocket API, MCP server | Yes | Yes | Yes, using the stage link |
+| OSC, including automation outputs | Yes | Yes | No |
+| Automation to devices on your local network | Yes | Yes | No |
+| Read-only share links, archives, Overview | No | No | Yes |
+| Team dashboard and roles | No | No | Yes |
+
+### When to run Ontime yourself
+
+Cloud stages run on the internet, not on your production network. Use the [desktop app or self-host with Docker](/ontime/getting-started/) when you need:
+
+- **OSC**, including OSC automation outputs. In Cloud, use the [HTTP or WebSocket API](/api/) instead.
+- [Automation](/api/automation/) outputs that reach devices only available on your local network.
+- A show that keeps running when the venue has no internet connection.
+
+## Pricing and demo
+
+There is no free trial. See [plans and pricing](https://www.getontime.no/pricing), or [ask us for a demo](mailto:mail@getontime.no) and we will walk you through your workflow.
+
+## Get started
+
+<Steps>
+
+1. **Subscribe.** On the [pricing page](https://www.getontime.no/pricing), choose **Sign up to PRO**, enter your email and a password, and pay by card. You land on the dashboard.
+
+2. **Create a stage.** On **Stages**, click **Create Stage**, give it a name, an optional password and a timezone, then click **Create stage**. It starts straight away.
+
+3. **Open it.** Click **Open Ontime** to open the stage in a new tab. From here, Ontime works the same as a local install. To start from an existing show, [upload a project file](/ontime-cloud/features/#upload-a-project-to-a-stage).
+
+4. **Bring in your team.** [Invite the people](/ontime-cloud/team-and-account/#invite-someone) who manage stages with you, and [send a share link](/ontime-cloud/share-links/) to everyone who only needs to follow along.
+
+</Steps>
+
+:::note
+It can take a moment for the payment to be confirmed. If the dashboard still says **Subscription required** right after checkout, wait a few seconds and reload the page.
 :::
 
-## Why Ontime Cloud
-
-Ontime Cloud is the fastest way to run Ontime online.
-
-It allows users to rely on Ontime anytime: \
-In pre-production phases and when setting up a network infrastructure is not viable.
-
-Ontime remains fully open-source and self-hostable. \
-Your data remains portable and you can move between Cloud and local versions.
-
-Cloud stages also keep the integrations you already use: connect [Bitfocus Companion](/additional-notes/companion-module/) or the [HTTP/WebSocket API](/api/) to a Cloud stage the same way you would a local install.
-
-## Subscription tiers
-
-Ontime Cloud is available in two plans, designed to support different user needs.
-
-### Ontime Cloud PRO
-
-Ontime Cloud PRO is the default Cloud plan for individuals and small teams.
-
-It provides a hosted Ontime environment with a fixed number of stages, no limits on collaborators, and no per-seat pricing. The plan is designed to be flexible and suitable for short-term or recurring use.
-
-PRO is typically a good fit if you want:
-
-- to run Ontime online without setup
-- to collaborate with your team without managing infrastructure
-- predictable usage without long-term commitment
-
-:::tip[Discount eligibility]
-If you're an educational institution, non-profit, or facing financial constraints, feel free to reach out.  
-[Get in touch!](mailto:mail@getontime.no)
-:::
-
-### Ontime Cloud STUDIO
-
-Ontime Cloud Studio is intended for teams manage several projects and need **more stages and sharing flows**.
-
-Studio is useful for organisations running multiple shows, rooms, or venues who prefer not to manage their own hosting infrastructure. \
-On top of all the usual cloud features you also get features build specifically for busy studios:
-
-- flows with archiving old projects
-- sharing of live, read-only views which keep your stage safe in production
-- more stages!
-
-In addition, Studio customers may request **optional Cloud extensions**, such as:
-
-- custom domains
-- vanity URLs
-- special routing or deployment adjustments
-
-These extensions are scoped per request and priced separately from the Studio subscription.
-
-Studio pricing depends on usage requirements and any optional extensions.
-
-## Getting started
-
-To start using Ontime Cloud, visit our website and follow the signup flow.  
-You can choose a plan during signup and switch later if your needs change.
-
-If you have questions or want to discuss Studio, feel free to get in touch.
-
-<LinkCard
-  title="Ontime's website"
-  href="https://www.getontime.no"
-  description="Sign up to start using Ontime Cloud"
-/>
-
-<LinkCard
-  title="Contact us"
-  href="mailto:mail@getontime.no"
-  description="Get in touch!"
-/>
+Next: learn how to [create and run stages](/ontime-cloud/stages/).
