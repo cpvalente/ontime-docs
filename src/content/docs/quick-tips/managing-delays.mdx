@@ -3,127 +3,53 @@ title: Managing delays
 description: Manage delays in a live Ontime rundown with added time, scheduled delays, expected times and offsets, and keep the whole team informed.
 ---
 
-In live environments, things don’t always go exactly as scheduled. Events may start late, run long, or require timing adjustments. \
-Ontime provides tools to communicate and manage these delays during production.
+Shows run late. Ontime gives you four tools to handle it and keep the team informed:
 
-The key features for delay management are: 
-- [Added time](#added-time) 
-- [Expected time](#expected-time) 
-- [Scheduled delays](#scheduled-delays)
-- [Offsets](#offset)
+| Tool | Use it when | Changes the schedule? |
+| :--- | :--- | :--- |
+| [Added time](#added-time) | The current event needs more or less time | No |
+| [Scheduled delay](#scheduled-delays) | You want to tell everyone the rest of the show moves | No, until you apply it |
+| [Expected time](#expected-time) | You want to know when upcoming events will really start | No, Ontime calculates it |
+| [Offset](#offset) | You want to know how far ahead or behind you are | No, Ontime calculates it |
 
-![Link and lock times](../../../assets/screenshots/features/rundown__delay-management.png)
+![Delay tools in the rundown](../../../assets/screenshots/features/rundown__delay-management.png)
 
 ## Added time
 
-You can manually add or remove time from the currently running event, either from the editor view or via the API.
-
-This is the simplest form of delay management
-`Added time` adjusts the `offset` and `expected end` values, letting you extend or compress the active event without altering the rundown schedule.
-
-## Expected time
-
-`Expected time` combines `scheduled delays` and `offsets` to communicate the accumulated timing shifts during a show. \
-i.e. based on the current trajectory, when are we expected to start any given event.
+Add or remove time from the running event, from the Editor or [the API](/api/protocols/http/#playback). \
+It changes the event's expected end and the offset, but not the rundown schedule.
 
 ## Scheduled delays
 
-`Scheduled delays` represent intentional timing adjustments in the rundown.
+A scheduled delay tells the team that everything after it moves, for example "doors open 10 minutes late". \
+It sits on top of the schedule, so the original times stay visible. Every view shows it.
 
-Unlike added time, `scheduled delays` are layered over the schedule without changing it. \
-This allows the original timing to remain intact while clearly communicating a change to your team.
+- A delay carries on through the rundown until a gap in the schedule is big enough to absorb it.
+- When you are sure, **apply** the delay to make it part of the schedule. Ontime then stops treating it as a deviation.
 
-You can apply a `scheduled delay` permanently, making it part of the schedule. \
-Once applied, Ontime no longer treats it as a schedule deviation.
+## Expected time
 
-:::note[Delay propagation]
-`Scheduled delays` automatically propagate through the rundown. \
-A delay will continue affecting downstream events until it finds a schedule gap large enough to absorb its value.
-:::
+Expected times show when each upcoming event will really start, based on the current offset and scheduled delays.
 
 ## Offset
 
-The `offset` indicates how far the current runtime has drifted from the original schedule and our capacity to finish the rundown on time.
+The offset is how far the show has drifted from the schedule. It is negative when you run late and positive when you run early. \
+Choose how Ontime calculates it with the **Absolute** and **Relative** toggle in the rundown header.
 
-Offsets can be positive (running early) or negative (running late).
+| Mode | Compares | Use it for |
+| :--- | :--- | :--- |
+| **Absolute** (default) | The current time with the scheduled times | Shows with a fixed start time |
+| **Relative** | Elapsed time with the time since the rundown actually started | Rehearsals, recordings, and rundowns that start at `00:00:00` |
 
-:::note[In combination with count to end timers]
-`Count to end` timers always count down to their scheduled end time, regardless of when they start. \
-Their duration is dynamic, calculated from its `actual start` and `scheduled end`.
+In absolute mode, a rundown that starts at `00:00:00` is read as midnight, so it shows a large offset straight away. Relative mode avoids this.
 
-This makes them ideal for events with hard deadlines such as show start or crew cut off.
-:::
+### Example
 
-### Absolute mode
+The rundown is scheduled to start at 09:00, with Event A from 09:00 to 10:00. You start it at 09:10.
 
-Absolute mode is the default mode for `offset` calculation in Ontime.
+- In absolute mode, the offset is `-00:10:00`, and the expected end is 10:10.
+- If Event A is set to **Count to End**, it still ends at 10:00, so the offset stays `00:00:00`. If it runs past 10:00, the overtime becomes the offset.
 
-It compares the current wall clock time to the rundown scheduled to show how far ahead or behind we are running.
-
-#### Examples of Absolute offset calculation
-
-:::tip[We start late and there are no gaps to recover]
-In this case, the `offset` value will show a 10 minute `-00:10:00` deviation.
-
-```
-| Runtime                       | Result offset                 |
-| ----------------------------- | ----------------------------- |
-| Time Now: 09:10               | Scheduled start: 09:00        |
-| Event A start time: 09:10     | Scheduled end: 10:00          |
-| Rundown:                      | Actual start: 09:10           |
-| - Event A 9:00 -> 10:00       | Expected end: 10:10           |
-| - Event B 10:00 -> 11:00      | Offset: -00:10:00             |
-```
-
-:::
-
-:::tip[We started late, but the event is count-to-end]
-`Count to end` events always finish at their scheduled end, so no `offset` is generated ...
-
-```
-| Runtime                       | Result offset                 |
-| ----------------------------- | ----------------------------- |
-| Time Now: 09:10               | Scheduled start: 09:00        |
-| Event A start time: 09:10     | Scheduled end: 10:00          |
-| Rundown:                      | Actual start: 09:10           |
-| - Event A                     | Expected end: 10:00           |
-|   schedule: 9:00 -> 10:00     | Offset: 00:00:00              |
-|   type: count-to-end          |                               |
-| - Event B                     |                               |
-|   schedule: 9:00 -> 10:00     |                               |
-|   type: count-down            |                               |
-```
-
-... if a `count to end` event goes overtime, it generates an `offset` equal to this value.
-
-```
-| Runtime                       | Result offset                 |
-| ----------------------------- | ----------------------------- |
-| Time Now: 10:10               | Scheduled start: 09:00        |
-| Event A start time: 09:10     | Scheduled end: 10:00          |
-| Rundown:                      | Actual start: 09:10           |
-| - Event A                     | Expected end: 10:10           |
-|   schedule: 9:00 -> 10:00     | Offset: -00:10:00             |
-|   type: time-to-end           |                               |
-| - Event B                     |                               |
-|   schedule: 9:00 -> 10:00     |                               |
-|   type: count-down            |                               |
-```
-
-:::
-
-### Relative mode
-
-Relative mode calculates `offset` based on when the rundown actually started, ignoring the rundown scheduled start.
-
-This mode is useful when the exact start time is not relevant (eg: during rehearsals, recordings, or pre-show prep) but we still want to keep track of time drifts during the runtime.
-
-:::tip[Starting from 00:00:00]
-Some users will want to start their rundown at `00:00:00`. Either to represent a midnight show start or to indicate that the wall clock schedule is not relevant.
-
-In **absolute mode**, Ontime treats `00:00:00` as a literal midnight reference. \
-This causes an immediate `offset` based on the difference between the current time and midnight.
-
-Relative mode normalises all `offset` calculations to the actual start time of the rundown. \
-This allows `00:00:00` to be a neutral baseline and avoid producing an initial `offset`.
+:::tip[Hard deadlines]
+**Count to End** timers, set in the event editor, always count down to their scheduled end, whenever they start. Use them for fixed deadlines such as a broadcast start or a crew cut-off.
 :::

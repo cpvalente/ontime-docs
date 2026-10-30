@@ -3,125 +3,85 @@ title: Self-host with Docker or NPM
 description: Self-host Ontime with Docker or NPM on a server, Raspberry Pi or headless machine, for venues and persistent production installations.
 ---
 
-You can leverage the headless distributions to run Ontime in a computer without GUI. \
-This could be in a local machine part of the venue's installation, a small Raspberry Pi or even a server running in the cloud.
+import { Steps } from "@astrojs/starlight/components";
 
-Headless installs are the most lightweight and versatile ways to distribute and install Ontime.
+Run Ontime without a desktop app, on a server, a venue machine or a Raspberry Pi. \
+Once it runs, open `http://<ip-address>:4001/editor` from any device on the network.
 
-## Using NPM
+## Run Ontime with Docker
 
-### Getting started
+<Steps>
 
-#### Prerequisites
-You will need to have installed the correct version of __node.js__.\
-Please check [the app engines declaration](https://github.com/cpvalente/ontime/blob/master/package.json) for the correct version.
+1. [Install Docker](https://docs.docker.com/engine/install/).
 
-#### Running Ontime
-To get Ontime running, all you need to do is install it in your system using your package manager of choice:
+2. Save this as `compose.yaml`, and set `TZ` to your [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones):
 
-Install globally in your system 
+   ```yaml
+   services:
+     ontime:
+       container_name: ontime
+       image: getontime/ontime:latest
+       ports:
+         - "4001:4001/tcp"   # the web app and APIs
+         - "8888:8888/udp"   # OSC input
+         - "9999:9999/udp"   # OSC output
+       volumes:
+         - "./ontime-data:/data/"
+       environment:
+         - TZ=Europe/Oslo
+       restart: unless-stopped
+   ```
+
+3. Start it:
+
+   ```bash
+   docker compose up -d
+   ```
+
+</Steps>
+
+The image is [getontime/ontime on Docker Hub](https://hub.docker.com/r/getontime/ontime).
+
+### Ports
+
+- `4001` serves the app. To use plain `http://<ip-address>/editor` without a port, map it to port 80: `"80:4001/tcp"`.
+- `8888` and `9999` are the default OSC input and output ports. Remove them if you don't use OSC.
+
+### Data
+
+The example stores everything in `./ontime-data`. To keep the parts separate, map them one by one:
+
+```yaml
+    volumes:
+      - "./ontime-projects:/data/projects/"   # project files
+      - "./ontime-styles:/data/styles/"       # custom CSS
+      - "./ontime-external:/data/external/"   # files you serve through Ontime
+```
+
+### Timezone
+
+Containers run in UTC unless you set `TZ`. Ontime's clock and schedule follow this timezone.
+
+## Run Ontime with NPM
+
+You need the [Node.js version listed by Ontime](https://github.com/cpvalente/ontime/blob/master/package.json).
+
 ```bash
+# install, then run
 npm install -g @getontime/cli
-```
-
-... and run using the installed script
-```bash
 ontime
-```
 
-Or install and run Ontime (the installation here is temporary for the duration of the session)
-```bash
+# or run once without installing
 npx @getontime/cli
 ```
 
-Once running, the app will be available in any device on the same network over (default port 4001)
+## Troubleshooting
 
-## Using Docker
+### I can see the app but no timers start
 
-### Getting started
+Ontime sends timer data over WebSockets. Behind a reverse proxy, you need to allow WebSocket connections. \
+See the guides for [NGINX](https://nginx.org/en/docs/http/websocket.html) and [Synology](https://mariushosting.com/synology-some-docker-containers-need-websocket/).
 
-Install Docker on your machine. \
-Please refer to [Docker](https://docs.docker.com/engine/install/debian/) or Raspberry Pi guides for this step
+### The clock shows the wrong time
 
-Once Docker is installed, pull the Ontime [image from Dockerhub](https://hub.docker.com/r/getontime/ontime) using the command:
-
-```bash
-docker pull getontime/ontime
-```
-
-You can find an example of docker-compose in the Docker repository to help you get started. \
-To start Ontime with the example docker compose file use the command:
-
-```bash
-docker-compose up -d
-```
-
-
-### Notes on Docker-compose
-
-Considering the example docker-compose below
-
-```yaml
-version: "3"
-
-services:
-  ontime:
-    container_name: ontime
-    image: getontime/ontime:latest
-    ports:
-      - "4001:4001/tcp"
-      - "8888:8888/udp"
-      - "9999:9999/udp"
-    volumes:
-      - "./ontime-data:/data/"
-    environment:
-      - TZ=Asia/Singapore
-    restart: unless-stopped
-```
-
-* `4001:4001/tcp` binds local port 4001 to the same container port. Port 4001 is the default for the UI and is necessary to expose the app. 
-* `8888:8888/udp` binds the localhost port 8888 (default for OSC input into the app) to the same in the container, so that it can receive data from the host machine targeted to the loopback interface.
-* `9999:9999/udp` binds the localhost port 9999 (default for OSC output from the app) to the same in the container, this allows Ontime to send data out of the container.
-* `"./ontime-data:/data/"` expose the internal container data directory.
-* `TZ=Asia/Singapore` overrides the container timezone.
-
-The variations in the network setup will widely depend on your setup.
-
-### Docker troubleshooting
-
-#### Ontime default port
-Ontime serves its web pages on port 4001. 
-In the docker compose example `4001:4001/tcp` exposes this port to the outside so it can be accessed at `http://<ip-address>:4001`. 
-Instead, you could use `80:4001/tcp` to expose the internal container port 4001 to the outside port 80 (the default for http).
-That means your URLs would be slightly simpler since you wouldnt need to provide a port, (eg: `http://<ip-address>/editor` instead og `http://<ip-address>:4001/editor`)
-
-### Volumes
-The app interacts with some directories that the user can interact with.
-In a docker instance, we need to expose this manually to the container host.
-Namely:
-- `/data/projects/` contains all of Ontime's project files
-- `/data/styles/` contains the user provided CSS Override
-- `/data/external/` is a placeholder directory that users can ues to distribute data through Ontime 
-
-You can bind a single host directory to `/data/` for Ontime to store all its files in (as in the example docker-compose, above), or expose the individual parts to host directories:
-
-```
-    volumes:
-      - "./ontime-projects:/data/projects/"
-      - "./ontime-styles:/data/styles/"
-      - "./ontime-external:/data/external/"
-```
-
-#### Setting the time in the container
-Docker containers default to UTC timezone, which you can modify using the `TZ` environment variable.
-
-Setting time in a Docker container is not an operation specific to Ontime. \
-See as an example the instruction in the [following blog post](https://confluence.atlassian.com/kb/how-to-set-the-timezone-for-docker-container-976780914.html), which also contains a list of timezones to use in Docker.
-
-#### I can see the UI but no timers will start
-
-Ontime uses WebSockets to transport the time data from the server to the UI. \
-It can be the case that you are leveraging the Docker image to run Ontime in a cloud server or a server behind a reverse proxy.
-
-In those cases, it is common that the WebSocket transport needs some additional configuration in the server side. \
-See documentation for [NGINX](https://nginx.org/en/docs/http/websocket.html) and [this example guide for Synology](https://mariushosting.com/synology-some-docker-containers-need-websocket/).
+Set `TZ` in `compose.yaml` to your timezone, then restart the container.
