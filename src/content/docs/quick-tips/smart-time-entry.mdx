@@ -5,45 +5,34 @@ description: Use Ontime smart time entry to define event durations, start times,
 
 ## Event times
 
-Events in Ontime have three distinct time fields: `Start time`, `End time` and `Duration`.
+Events have three time fields: `Start time`, `End time` and `Duration`. Any two define the third, since `Duration = End time - Start time`.
 
-The start of an event, can be linked to the [previous event end](#link-start).
-
-In addition, it is reasonable that only two of these are necessary, ie: we can infer that `Duration = Start time + End time`.\
-Ontime allows the user to define the [time strategy](#time-strategy) for calculating event schedules.
-
-With these features combined, every time there is a change in your schedule, Ontime can propagate the changes to all future events.
+[Link an event's start](#link-start) to the previous event, and choose which field stays fixed with the [time strategy](#time-strategy). When the schedule changes, Ontime then updates all the events that follow.
 
 ![Link and lock times](../../../assets/screenshots/features/rundown__lock-times.png)
 
 ### Link start
 The start of an event can be linked to the end of the previous event.
 
-You can achieve this by activating the Link start feature with the lock button next to the `Start time` field (*See note 1 in screenshot*). \
-If this feature is enabled enabled, Ontime will keep the event start time in sync with the previous event End time.
+Turn it on with the link button next to the `Start time` field (*note 1 in the screenshot*). Ontime then keeps the start time in sync with the previous event's end time.
 
-Please note that this is a schedule feature. The start of the event is not automated.
+This only changes the schedule. It does not start the event automatically.
 
 :::note[Automate rundown progress]
-You can automate the rundown playback progress by using the `End Action` options if the event: \
+To move through the rundown automatically, set the event's `End Action`: \
 `None (default)` `Load Next` `Play Next`
 :::
 
 ### Time strategy
-Having established that we only need two time data points to describe an event schedule, Ontime provides a concept for **Time strategy**.
-
-In short, this allows users to define which time field is significant for the schedule and should be locked / maintained. \
-By default, Ontime defines the `Duration` to be the locked time, this default can be changed in `Editor` -> `Project settings` ->  `Rundown defaults`. 
-
-In your rundown, you can define this per event, by activating the lock next to the input field (*See illustration note 2 for locking end, note 3 for locking duration*).
+The time strategy decides which field stays fixed when the schedule changes: the `Duration` or the `End time`. \
+By default, Ontime keeps the `Duration`. Change the default in `Editor` -> `Settings` -> `Project settings` -> `Rundown defaults`, or set it per event with the lock next to the field (*note 2 locks the end, note 3 locks the duration*).
 
 Considering the rundown from the above screenshot, what would happen if the End time of the first event (Albania) changed?
 - If the event below (Latvia) has a **locked duration**, the End time will be pushed forward to maintain the event duration.
 - If the event below were to have **locked End time** (as we do in Lithuania), the duration would be reduced to maintain the event end schedule. 
 
 ## Time entry shortcuts
-Ontime allows shortcuts to speed and simplify the time entry. \
-These shortcuts are available in all the time inputs.
+Type times quickly with these shortcuts. They work in every time field.
 
 | Entry                                   | Result                                                  | Note                                                                                                                                     |
 | :-------------------------------------- | :------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------- |
