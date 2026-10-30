@@ -24,6 +24,9 @@ export default defineConfig({
     "/ontime-cloud/manage-account/": "/ontime-cloud/team-and-account/",
     "/ontime-cloud/troubleshooting/": "/ontime-cloud/faq/",
     "/ontime-cloud/cloud-faq/": "/ontime-cloud/faq/",
+    "/ontime/": "/",
+    "/quick-tips/poll-ontime/": "/api/protocols/http/",
+    "/quick-tips/count-to-anything/": "/interface/automated/countdown/",
   },
   integrations: [
     starlight({
@@ -145,8 +148,86 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Ontime",
-          items: [{ autogenerate: { directory: "ontime" } }],
+          label: "Start here",
+          items: [
+            "ontime/getting-started",
+            "quick-tips/headless-ontime",
+            "additional-notes/network-and-security",
+            "additional-notes/unsigned-app",
+            "ontime/faq",
+          ],
+        },
+        {
+          label: "Build the rundown",
+          items: [
+            "concepts/rundown",
+            "concepts/timers",
+            "quick-tips/smart-time-entry",
+            "features/custom-fields",
+            "quick-tips/managing-delays",
+            "quick-tips/import-export",
+            "features/import-spreadsheet",
+            "features/import-spreadsheet-gsheet",
+          ],
+        },
+        {
+          label: "Run the show",
+          items: [
+            "interface/production/app-editor",
+            "interface/production/operator",
+            "interface/production/cuesheet",
+            "quick-tips/roll",
+            "features/aux-timer",
+            "features/secondary-message",
+            "features/url-presets",
+            "quick-tips/remote-client-management",
+          ],
+        },
+        {
+          label: "Displays and sharing",
+          items: [
+            "interface",
+            "interface/automated/stage-timer",
+            "interface/automated/countdown",
+            "interface/automated/backstage",
+            "interface/automated/timeline",
+            "interface/automated/studio-clock",
+            "interface/automated/project",
+            "quick-tips/configuring-views",
+            "features/custom-styling",
+            "quick-tips/custom-background",
+            "features/custom-views",
+            "quick-tips/render-elsewhere",
+            "concepts/sharing-flows",
+          ],
+        },
+        {
+          label: "Integrations and API",
+          items: [
+            { label: "Choose an integration", link: "/api/" },
+            "additional-notes/companion-module",
+            "additional-notes/chataigne-module",
+            "quick-tips/integrate-with-vmix",
+            "features/mcp-server",
+            "api/automation",
+            "quick-tips/send-osc",
+            {
+              label: "Data",
+              items: [
+                "api/data/event-data",
+                "api/data/project-data",
+                "api/data/runtime-data",
+              ],
+            },
+            {
+              label: "Protocols",
+              items: [
+                "api/protocols/http",
+                "api/protocols/websockets",
+                "api/protocols/osc",
+              ],
+            },
+          ],
         },
         {
           label: "Ontime Cloud",
@@ -164,88 +245,18 @@ export default defineConfig({
           ],
         },
         {
-          label: "How Ontime works",
+          label: "Help",
           items: [
-            { label: "Ontime Rundown", link: "/concepts/rundown/" },
-            { label: "Ontime Timers", link: "/concepts/timers/" },
-            { label: "Sharing flows", link: "/concepts/sharing-flows/" },
-          ],
-        },
-        {
-          label: "Interface",
-          items: [
-            {
-              label: "Interface overview",
-              link: "/interface/",
-            },
-            {
-              label: "Production views",
-              items: [{ autogenerate: { directory: "interface/production" } }],
-            },
-            {
-              label: "Automated views",
-              items: [{ autogenerate: { directory: "interface/automated" } }],
-            },
-          ],
-        },
-        {
-          label: "Features",
-          items: [{ autogenerate: { directory: "features" } }],
-        },
-        {
-          label: "Feedback and control",
-          items: [
-            {
-              label: "API overview",
-              link: "/api/",
-            },
-            {
-              label: "Data",
-              items: [{ autogenerate: { directory: "api/data" } }],
-            },
-            {
-              label: "Automation",
-              items: [{ autogenerate: { directory: "api/automation" } }],
-            },
-            {
-              label: "Protocol API",
-              items: [{ autogenerate: { directory: "api/protocols" } }],
-            },
-          ],
-        },
-        {
-          label: "Quick tips",
-          items: [{ autogenerate: { directory: "quick-tips" } }],
-        },
-        {
-          label: "Additional notes",
-          items: [{ autogenerate: { directory: "additional-notes" } }],
-        },
-        {
-          label: "External links",
-          items: [
+            "additional-notes/crashes-and-corrupted-data",
+            "ontime/sponsor",
             {
               label: "Ontime website",
               link: "https://www.getontime.no",
-              badge: "Link",
               attrs: { target: "_blank" },
             },
             {
-              label: "Github Repo",
-              link: "https://www.github.com/cpvalente/ontime",
-              badge: "Link",
-              attrs: { target: "_blank" },
-            },
-            {
-              label: "Youtube Channel",
-              link: "https://www.youtube.com/@ontimeapp",
-              badge: "Link",
-              attrs: { target: "_blank" },
-            },
-            {
-              label: "Subreddit",
-              link: "https://www.reddit.com/r/ontimeapp",
-              badge: "Link",
+              label: "Legacy v3 docs",
+              link: "https://v3docs.getontime.no",
               attrs: { target: "_blank" },
             },
           ],
@@ -278,6 +289,8 @@ Useful starting points:
 
 - Ontime for AI assistants: https://docs.getontime.no/ontime/ai-assistants/
 - Getting started: https://docs.getontime.no/ontime/getting-started/
+- Self-host with Docker: https://docs.getontime.no/quick-tips/headless-ontime/
+- Ontime Cloud: https://docs.getontime.no/ontime-cloud/
 - Rundown concepts: https://docs.getontime.no/concepts/rundown/
 - Timer concepts: https://docs.getontime.no/concepts/timers/
 - API overview: https://docs.getontime.no/api/`,

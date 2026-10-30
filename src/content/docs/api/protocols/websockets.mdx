@@ -27,7 +27,7 @@ Message: {"tag": "version"}
 
 **Response**
 ```ts
-{"tag":"version","payload":"4.0.0"}
+{"tag":"version","payload":"4.15.1"}
 ```
 
 ### Get Ontime runtime state
@@ -48,7 +48,8 @@ The response of a poll request is a [runtime data object](/api/data/runtime-data
 
 ## Change event
 ```bash
-<localhost:4001>/api/change/<event-id>/<property>/<value>
+Target: ws://<ip-address>:<port>/ws
+Message: {"tag": "change", "payload": {"<event-id>": {"<property>": <value>}}}
 ```
 
 The change endpoint allows changing some of the properties of a given event (below). \
@@ -365,7 +366,7 @@ Target: ws://<ip-address>:<port>/ws
 Message: {
     "tag": "load", 
     "payload": {
-        "index": "<event-id>"
+        "id": "<event-id>"
     }
 }
 ```
@@ -377,7 +378,7 @@ Target: ws://<ip-address>:<port>/ws
 Message: {
     "tag": "load", 
     "payload": {
-        "index": "<event-cue>"
+        "cue": "<event-cue>"
     }
 }
 ```
@@ -483,7 +484,7 @@ Message: {
     "tag": "auxtimer",
     "payload": {
         "1": {
-            "duration": "count-up"
+            "direction": "count-up"
         }
     }
 }
@@ -497,7 +498,7 @@ Message: {
     "tag": "auxtimer",
     "payload": {
         "1": {
-            "duration": "count-down"
+            "direction": "count-down"
         }
     }
 }
