@@ -1,555 +1,108 @@
 ---
 title: WebSockets API
-description: WebSocket API reference for receiving Ontime runtime updates and controlling live production timing data.
+description: "Control Ontime and receive live runtime updates over WebSocket: playback, event changes, stage timer messages and auxiliary timers, with JSON messages."
 ---
 
-The OSC and WebSocket APIs allow for low latency communication to Ontime server. 
+Ontime's own views use the WebSocket API, so it is always on. It runs at the same address and port as Ontime:
 
-Since the WebSocket API is used by Ontime, this cannot be configured by the user other than changing its port.
-
-The WebSocket server is at the same IP address and port as the main application at 
 ```bash
 ws://<ip-address>:<port>/ws
+# eg. ws://192.168.1.10:4001/ws
 ```
 
-:::note
-Any WebSocket client that connects to ontime, will receive a snapshot of the application state as defined in the [Runtime data](/api/data/runtime-data).
-:::
+- On Ontime Cloud, use `wss://cloud.getontime.no/<stage>/ws`.
+- When a client connects, Ontime sends a snapshot of the [runtime data](/api/data/runtime-data/), then sends updates as they happen.
+- Every message is JSON with a `tag` (the action) and, for most actions, a `payload`. Replies use the same `tag`.
 
-## State
-
-### Get Ontime version
-**Request** 
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {"tag": "version"}
+```json
+{"tag": "start", "payload": "next"}
 ```
 
-**Response**
-```ts
-{"tag":"version","payload":"4.15.1"}
-```
+## Read state
 
-### Get Ontime runtime state
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {"tag": "poll"}
-```
-
-**Response** \
-The response of a poll request is a [runtime data object](/api/data/runtime-data)
-```ts
-{
-    "tag": "poll", 
-    "payload": <runtime-data>
-}
-```
-
-## Change event
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {"tag": "change", "payload": {"<event-id>": {"<property>": <value>}}}
-```
-
-The change endpoint allows changing some of the properties of a given event (below). \
-The request should contain a patch of the event to be changed, along with the ID of the event to change.
-
-You can change any field in an event using this endpoint. See below a description of expected values.
-
-| Property      | Value type                                                                                                |
-| :------------ | :-------------------------------------------------------------------------------------------------------- |
-| `title`       | string                                                                                                    |
-| `note`        | string                                                                                                    |
-| `cue`         | string (value should be kept under 8 characters)                                                          |
-| `skip`        | boolean                                                                                                   |
-| `colour`      | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color)) |
-| `custom`      | target the specific custom field with `custom:<fieldname>`                                                |
-| `timeWarning` | number (in milliseconds)                                                                                       |
-| `timeDanger`  | number (in milliseconds)                                                                                       |
-| `endAction`   | string (none / load-next / play-next)                                                                     |
-| `timerType`   | string (count-down / count-up / clock / none)                                                             |
-| `duration`    | number (in milliseconds)                                                                                       |
-| `timeStart`   | number (in milliseconds)                                                                                       |
-| `timeEnd`     | number (in milliseconds)                                                                                       |
-
-:::caution
-Changing the properties `skip` `endAction` `duration` `timeStart` `timeEnd` \
-cause the rundown to be recalculated and writing to them is therefore throttled
-:::
-
-### Example: change title of event
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "change", 
-    "payload": {
-        "<event-id>": {
-            "title": "new-text"
-        }
-    }
-}
-```
-
-**Response**
-```ts
-{
-  "tag": "change",
-  "payload": {
-    "<event-id>": {
-      "title": "new-text"
-    }
-  }
-}
-```
-
-### Example: change a custom field
-The custom field must exist in the project to be accepted by the API. \
-See more on [custom fields](/features/custom-fields)
-
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "change", 
-    "payload": {
-        "<event-id>": {
-            "custom:<field-name>": "new-text"
-        }
-    }
-}
-```
-**Response**
-```ts
-{
-  "tag": "change",
-  "payload": {
-    "<event-id>": {
-      "custom:<field-name>": "new-text"
-    }
-  }
-}
-```
-
-## Message
-The following endpoints allow controlling the messages Ontime sends to the timer view. \
-The payload response is the current state of the message data.
-
-### Example: change the secondary message text
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "message", 
-    "payload": {
-        "secondary": "new text"
-    }
-}
-```
-
-**Response**
-```ts
-{
-    "tag":"message",
-    "payload": {
-        "secondary": "new text",
-        "timer": {
-            "text": "",
-            "visible": true,
-            "blink": false,
-            "blackout": false,
-            "secondarySource": null
-        },
-    }
-}
-```
-
-### Example: secondary source in the stage timer view
-**Request**
-```bash title="Show auxiliary timer as secondary field"
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "message", 
-    "payload": {
-        "timer": {
-            "secondarySource": "aux"
-        }
-    }
-}
-```
-
-**Request**
-```bash title="Show secondary message as secondary field"
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "message", 
-    "payload": {
-        "timer": {
-            "secondarySource": "secondary"
-        }
-    }
-}
-```
-
-**Request**
-```bash title="Hide secondary field"
-# Note: The secondary source can be `aux` or `secondary`, any other value will assign the property to null (ie: off)
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "message", 
-    "payload": {
-        "timer": {
-            "secondarySource": null
-        }
-    }
-}
-```
-
-**Response**
-```ts
-{
-    "payload": {
-        "secondary": "new text",
-        "timer": {
-            "text": "",
-            "visible": true,
-            "blink": false,
-            "blackout": false,
-            "secondarySource": "secondary"
-        },
-    }
-}
-```
-
-### Example: blackout stage timer screens
-You can remotely blackout every screen that is in the stage timer view.
-
-**Request**
-```bash title="Blackout timer screen"
-# Note: The secondary source can be `aux` or `secondary`, any other value will assign the property to null (ie: off)
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "message", 
-    "payload": {
-        "timer": {
-            "blackout": true
-        }
-    }
-}
-```
-
-**Request**
-```bash title="Disable timer screen blackout"
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "message", 
-    "payload": {
-        "timer": {
-            "blackout": false
-        }
-    }
-}
-```
-
-**Response**
-```ts
-{
-    "payload": {
-        "secondary": "",
-        "timer": {
-            "text": "",
-            "visible": true,
-            "blink": true,
-            "blackout": false,
-            "secondarySource": null
-        },
-    }
-}
-
-```
+| Message | Reply payload |
+| :--- | :--- |
+| `{"tag": "version"}` | The Ontime version, eg. `"4.15.1"` |
+| `{"tag": "poll"}` | A snapshot of the [runtime data](/api/data/runtime-data/) |
 
 ## Playback
-The following endpoints allow controlling the Ontime's playback. \
-The payload response is the current state of the message data
 
-## Start event
+| Action | Message |
+| :--- | :--- |
+| Start the loaded event | `{"tag": "start"}` |
+| Start the next event | `{"tag": "start", "payload": "next"}` |
+| Start the previous event | `{"tag": "start", "payload": "previous"}` |
+| Start an event by position (from 1) | `{"tag": "start", "payload": {"index": 3}}` |
+| Start an event by ID | `{"tag": "start", "payload": {"id": "<event-id>"}}` |
+| Start an event by cue | `{"tag": "start", "payload": {"cue": "<cue>"}}` |
+| Load an event | `{"tag": "load", ...}`, with the same payloads as `start` |
+| Pause | `{"tag": "pause"}` |
+| Stop | `{"tag": "stop"}` |
+| Reload the current event | `{"tag": "reload"}` |
+| Start [Roll mode](/quick-tips/roll/) | `{"tag": "roll"}` |
+| Add time to the running event | `{"tag": "addtime", "payload": {"add": <milliseconds>}}` |
+| Remove time from the running event | `{"tag": "addtime", "payload": {"remove": <milliseconds>}}` |
 
-### Start loaded event
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {"tag": "start"}
-```
+You can add or remove up to one hour at a time.
 
-### Start event at index
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "start", 
-    "payload": {
-        "index": 1
+## Change an event
+
+Send the event ID with the fields to change. See the [fields you can change](/api/data/event-data/#fields-you-can-change-over-the-api).
+
+```json
+{
+  "tag": "change",
+  "payload": {
+    "<event-id>": {
+      "title": "New title",
+      "custom:<field-name>": "new value"
     }
+  }
 }
 ```
 
-### Start event with ID
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "start", 
-    "payload": {
-        "id": "<event-id>"
-    }
+## Messages
+
+Control the messages on the [stage timer](/interface/automated/stage-timer/) view.
+
+| Action | Message |
+| :--- | :--- |
+| Set the [secondary message](/features/secondary-message/) | `{"tag": "message", "payload": {"secondary": "<text>"}}` |
+| Set the timer message | `{"tag": "message", "payload": {"timer": {"text": "<text>"}}}` |
+| Show or hide the timer message | `{"tag": "message", "payload": {"timer": {"visible": true}}}` |
+| Make the timer message blink | `{"tag": "message", "payload": {"timer": {"blink": true}}}` |
+| Black out all stage timer screens | `{"tag": "message", "payload": {"timer": {"blackout": true}}}` |
+| Choose what shows in the secondary field | `{"tag": "message", "payload": {"timer": {"secondarySource": "<source>"}}}` |
+
+`<source>` is `secondary` for the secondary message, or `aux1`, `aux2` or `aux3` for an auxiliary timer. Any other value, such as `"off"`, hides the secondary field. \
+You can combine several fields in one message.
+
+The reply payload is the current message state:
+
+```json
+{
+  "secondary": "new text",
+  "timer": {
+    "text": "",
+    "visible": true,
+    "blink": false,
+    "blackout": false,
+    "secondarySource": "secondary"
+  }
 }
 ```
 
-### Start event with cue
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "start", 
-    "payload": {
-        "cue": "<event-cue>"
-    }
-}
-```
+## Auxiliary timers
 
-### Start next event
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-  "tag": "start",    
-  "payload": "next"
-}
-```
+Ontime has three [auxiliary timers](/features/aux-timer/), numbered `1` to `3`. They run separately from the rundown.
 
-### Start previous event
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-  "tag": "start",    
-  "payload": "previous"
-}
-```
+| Action | Message |
+| :--- | :--- |
+| Start | `{"tag": "auxtimer", "payload": {"1": "start"}}` |
+| Pause | `{"tag": "auxtimer", "payload": {"1": "pause"}}` |
+| Stop | `{"tag": "auxtimer", "payload": {"1": "stop"}}` |
+| Set the duration | `{"tag": "auxtimer", "payload": {"1": {"duration": <milliseconds>}}}` |
+| Count up or down | `{"tag": "auxtimer", "payload": {"1": {"direction": "count-up"}}}` |
+| Add time (negative to remove) | `{"tag": "auxtimer", "payload": {"1": {"addtime": <milliseconds>}}}` |
 
-## Pause running timer
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: { "tag": "pause" }
-```
-
-## Load event
-
-### Load event at index
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "load", 
-    "payload": {
-        "index": 1
-    }
-}
-```
-
-### Load event with ID
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "load", 
-    "payload": {
-        "id": "<event-id>"
-    }
-}
-```
-
-### Load event with cue
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "load", 
-    "payload": {
-        "cue": "<event-cue>"
-    }
-}
-```
-
-### Load next event
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-  "tag": "load",    
-  "payload": "next"
-}
-```
-
-### Load previous event
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-  "tag": "load",    
-  "payload": "previous"
-}
-```
-
-## Reload current event
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-  "tag": "reload"  
-}
-```
-
-## Stop playback
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-  "tag": "stop"  
-}
-```
-
-## Activate Roll mode
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-  "tag": "roll"  
-}
-```
-
-## User added time
-### Add time
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "addtime",
-    "payload": {
-        "add": <value-in-milliseconds>
-    }
-}
-```
-
-### Remove time
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "addtime",
-    "payload": {
-        "remove": <value-in-milliseconds>
-    }
-}
-```
-
-## Auxiliary timer
-
-Ontime provides an [auxiliary timer](/features/aux-timer) which does not affect the current playback. \
-This can be controlled using the API as shown below
-
-### Set auxiliary timer duration
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "auxtimer",
-    "payload": {
-        "1": {
-            "duration": <value-in-milliseconds>
-        }
-    }
-}
-```
-
-### Set auxiliary timer direction
-Auxiliary timer can count up or count down.
-
-#### Set auxiliary timer to count up
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "auxtimer",
-    "payload": {
-        "1": {
-            "direction": "count-up"
-        }
-    }
-}
-```
-
-#### Set auxiliary timer to count down
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "auxtimer",
-    "payload": {
-        "1": {
-            "direction": "count-down"
-        }
-    }
-}
-```
-
-### Start auxiliary timer
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "auxtimer",
-    "payload": {
-        "1": "start"
-    }
-}
-```
-
-### Pause auxiliary timer
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "auxtimer",
-    "payload": {
-        "1": "pause"
-    }
-}
-```
-
-### Stop auxiliary timer
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "auxtimer",
-    "payload": {
-        "1": "stop"
-    }
-}
-```
-
-### Add / remove time to auxiliary timer
-**Request**
-```bash
-Target: ws://<ip-address>:<port>/ws
-Message: {
-    "tag": "auxtimer",
-    "payload": {
-        "1": {
-            "addtime": <value-in-milliseconds>
-        }
-    }
-}
-```
+The reply payload is the timer's new state.

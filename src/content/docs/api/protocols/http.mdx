@@ -1,453 +1,126 @@
 ---
 title: HTTP API
-description: HTTP API reference for controlling Ontime playback, rundowns, timers, and production data from external tools.
+description: "Control Ontime with simple HTTP GET requests: start, load and stop events, change event fields, set stage timer messages and control auxiliary timers."
 ---
 
-You can control most of the playback functions of Ontime over HTTP protocol. \
-This could be handy for integration with third party software, [including vMix](/quick-tips/integrate-with-vmix).
+Control Ontime with simple **GET** requests, for example from [vMix](/quick-tips/integrate-with-vmix/), a browser or a script.
 
-:::note[Notes on requests]
-All HTTP requests are **GET** requests. Even if not as semantic, this is to facilitate integrations. \
-Please mind the correct configuration for IP and Port will depend on your setup.
-
-Any request which successfully changes the Ontime playback will have a status code in the 200 range.
-:::
-
-:::tip[Show me the code]
-This documentation is generally simplified. In truth, the HTTP API is more complex. \
-As Ontime uses the HTTP API to manage its data, this changes often.
-
-You can follow the code for a more up-to-date reference:
-[Get data from Ontime](https://github.com/cpvalente/ontime/tree/master/apps/server/src/api-data)
-[Control Ontime](https://github.com/cpvalente/ontime/tree/master/apps/server/src/api-integration)
-:::
-
-
-## State
-The following endpoints allow querying Ontime for its current state
-
-### Get Ontime version
-**Request** 
 ```bash
-GET <localhost:4001>/api/version
+GET http://<ip-address>:<port>/api/<action>
+# eg. http://192.168.1.10:4001/api/start/next
 ```
 
-**Response**
-```ts
-{"payload":"4.15.1"}
-```
+- On Ontime Cloud, use your stage link instead of `<ip-address>:<port>`.
+- Encode spaces and special characters in values, eg. `New%20title`.
+- A successful request returns status `202` and `{"payload":"success"}`, unless the tables below say otherwise.
 
-### Get Ontime runtime state
-**Request** 
-```bash
-GET <localhost:4001> /api/poll
-```
+## Read state
 
-**Response** \
-The response of a poll request is a [runtime data object](/api/data/runtime-data)
-```ts
-{"payload": <runtime-data>}
-```
+| Request | Returns |
+| :--- | :--- |
+| `/api/version` | The Ontime version, eg. `{"payload":"4.15.1"}` |
+| `/api/poll` | A snapshot of the [runtime data](/api/data/runtime-data/) |
 
-### Data from Ontime
+To read project data, use these requests (without `/api`):
 
-With the HTTP API, in addition to controlling the application, you can also retrieve its data. \
-There is no expected payload for these GET requests
-
-| Address                                        | Description                                                  |
-| :--------------------------------------------- | :----------------------------------------------------------- |
-| `GET <localhost:4001>/data/automations`        | Get project [automations](/api/automation)                   |
-| `GET <localhost:4001>/data/custom-fields`      | Get registered [custom fields](/features/custom-fields)      |
-| `GET <localhost:4001>/data/db`                 | Get currently loaded project file                            |
-| `GET <localhost:4001>/data/project`            | Get current project data                                     |
-| `GET <localhost:4001>/data/report`             | Get current session report                                   |
-| `GET <localhost:4001>/data/rundowns`           | Get all rundowns in the project                              |
-| `GET <localhost:4001>/data/rundowns/current`   | Get the current rundown                                      |
-| `GET <localhost:4001>/data/session`            | Get current session stats.                                   |
-| `GET <localhost:4001>/data/settings`           | Get current application settings                             |
-| `GET <localhost:4001>/data/url-presets`        | Get currently defined [URL Presets](/features/url-presets)   |
-| `GET <localhost:4001>/data/view-settings`      | Get currently defined settings for views                     |
-
-
-## Change event
-```bash
-GET <localhost:4001>/api/change/<event-id>/<property>/<value>
-```
-
-The change endpoint allows changing some of the properties of a given event (below). \
-The request should contain a patch of the event to be changed, along with the ID of the event to change.
-
-You can change any field in an event using this endpoint. See below a description of expected values.
-
-| Property      | Value type                                                                                                |
-| :------------ | :-------------------------------------------------------------------------------------------------------- |
-| `title`       | string                                                                                                    |
-| `note`        | string                                                                                                    |
-| `cue`         | string (value should be kept under 8 characters)                                                          |
-| `skip`        | boolean                                                                                                   |
-| `colour`      | string (# hex colour or [named css colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color)) |
-| `custom`      | target the specific custom field with `custom:<fieldname>`                                                |
-| `timeWarning` | number (in milliseconds)                                                                                       |
-| `timeDanger`  | number (in milliseconds)                                                                                       |
-| `endAction`   | string (none / load-next / play-next)                                                              |
-| `timerType`   | string (count-down / count-up / clock / none)                                                             |
-| `duration`    | number (in milliseconds)                                                                                       |
-| `timeStart`   | number (in milliseconds)                                                                                       |
-| `timeEnd`     | number (in milliseconds)                                                                                       |
-
-:::caution
-Changing the properties `skip` `endAction` `duration` `timeStart` `timeEnd` \
-cause the rundown to be recalculated and writing to them is therefore throttled
-:::
-
-### Example: change title of event
-**Request**
-```bash
-GET <localhost:4001>/api/change/<my-event-id>?title=new-title
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-### Example: change a custom field
-The custom field must exist in the project to be accepted by the API. \
-See more on [custom fields](/features/custom-fields)
-
-**Request**
-```bash
-GET <localhost:4001>/api/change/<my-event-id>?custom:<field-name>=new-value
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-### Example: change multiple fields
-You can change multiple fields in a single request by using adding on more query parameters. \
-
-**Request**
-```bash
-GET <localhost:4001>/api/change/<my-event-id>?title=new-title&cue=new-cue
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-## Message
-The following endpoints allow controlling the messages Ontime sends to the stage timer view. \
-The payload response is the current state of the message data.
-
-### Example: change the secondary message text
-**Request**
-```bash
-GET <localhost:4001>/api/message/secondary/new text
-```
-
-**Response**
-```ts
-{
-    "payload": {
-        "secondary": "new text",
-        "timer": {
-            "text": "",
-            "visible": true,
-            "blink": false,
-            "blackout": false,
-            "secondarySource": null
-        },
-    }
-}
-```
-
-### Example: secondary source in the stage timer view
-**Request**
-```bash title="Show auxiliary timer as secondary field"
-<localhost:4001>/api/message/timer?secondarySource=aux
-```
-
-**Request**
-```bash title="Show secondary message as secondary field"
-<localhost:4001>/api/message/timer?secondarySource=secondary
-```
-
-**Request**
-```bash title="Hide secondary field"
-# Note: The secondary source can be `aux` or `secondary`, any other value will assign the property to null (ie: off)
-<localhost:4001>/api/message/timer?secondarySource=off
-```
-
-**Response**
-```ts
-{
-    "payload": {
-        "secondary": "new text",
-        "timer": {
-            "text": "",
-            "visible": true,
-            "blink": false,
-            "blackout": false,
-            "secondarySource": "secondary"
-        },
-    }
-}
-```
-
-### Example: blackout timer screens
-You can remotely blackout every screen that is in the stage timer view.
-
-**Request**
-```bash title="Blackout timer screen"
-<localhost:4001>/api/message/timer?blackout=true
-```
-
-**Request**
-```bash title="Disable timer screen blackout"
-GET <localhost:4001>/api/message/timer?blackout=false
-```
-
-**Response**
-```ts
-{
-    "payload": {
-        "secondary": "",
-        "timer": {
-            "text": "",
-            "visible": true,
-            "blink": true,
-            "blackout": false,
-            "secondarySource": null
-        },
-    }
-}
-```
+| Request | Returns |
+| :--- | :--- |
+| `/data/rundowns/current` | The current rundown |
+| `/data/rundowns` | All rundowns in the project |
+| `/data/project` | Project data |
+| `/data/custom-fields` | [Custom fields](/features/custom-fields/) |
+| `/data/settings` | Application settings |
+| `/data/view-settings` | Settings for views |
+| `/data/url-presets` | [URL presets](/features/url-presets/) |
+| `/data/automations` | [Automations](/api/automation/) |
+| `/data/report` | The current session report |
+| `/data/session` | Current session stats |
+| `/data/db` | The whole project file |
 
 ## Playback
-The following endpoints allow controlling the Ontime's playback. \
-The payload response is the current state of the message data
 
-## Start event
+| Action | Request |
+| :--- | :--- |
+| Start the loaded event | `/api/start` |
+| Start the next event | `/api/start/next` |
+| Start the previous event | `/api/start/previous` |
+| Start an event by position (from 1) | `/api/start/index/<position>` |
+| Start an event by ID | `/api/start/id/<event-id>` |
+| Start an event by cue | `/api/start/cue/<cue>` |
+| Load the next event | `/api/load/next` |
+| Load the previous event | `/api/load/previous` |
+| Load an event by position (from 1) | `/api/load/index/<position>` |
+| Load an event by ID | `/api/load/id/<event-id>` |
+| Load an event by cue | `/api/load/cue/<cue>` |
+| Pause | `/api/pause` |
+| Stop | `/api/stop` |
+| Reload the current event | `/api/reload` |
+| Start [Roll mode](/quick-tips/roll/) | `/api/roll` |
+| Add time to the running event | `/api/addtime/add/<milliseconds>` |
+| Remove time from the running event | `/api/addtime/remove/<milliseconds>` |
 
-### Start loaded event
-**Request**
+You can add or remove up to one hour at a time.
+
+## Change an event
+
+Add the fields to change as query parameters. See the [fields you can change](/api/data/event-data/#fields-you-can-change-over-the-api).
+
 ```bash
-GET <localhost:4001>/api/start
-```
-**Response**
-```ts
-{"payload":"success"}
+# Change the title
+GET http://<ip-address>:<port>/api/change/<event-id>?title=Keynote
+
+# Change a custom field
+GET http://<ip-address>:<port>/api/change/<event-id>?custom:<field-name>=new-value
+
+# Change several fields at once
+GET http://<ip-address>:<port>/api/change/<event-id>?title=Keynote&cue=12
 ```
 
-### Start event at index
-**Request**
-```bash
-GET <localhost:4001>/api/start/index/<event-index>
-```
-**Response**
-```ts
-{"payload":"success"}
+## Messages
+
+Control the messages on the [stage timer](/interface/automated/stage-timer/) view.
+
+| Action | Request |
+| :--- | :--- |
+| Set the [secondary message](/features/secondary-message/) | `/api/message/secondary/<text>` |
+| Set the timer message | `/api/message/timer?text=<text>` |
+| Show or hide the timer message | `/api/message/timer?visible=true` or `false` |
+| Make the timer message blink | `/api/message/timer?blink=true` or `false` |
+| Black out all stage timer screens | `/api/message/timer?blackout=true` or `false` |
+| Choose what shows in the secondary field | `/api/message/timer?secondarySource=<source>` |
+
+`<source>` is `secondary` for the secondary message, or `aux1`, `aux2` or `aux3` for an auxiliary timer. Any other value, such as `off`, hides the secondary field.
+
+Message requests return the current message state:
+
+```json
+{
+  "secondary": "new text",
+  "timer": {
+    "text": "",
+    "visible": true,
+    "blink": false,
+    "blackout": false,
+    "secondarySource": "secondary"
+  }
+}
 ```
 
-### Start event with ID
-**Request**
-```bash
-GET <localhost:4001>/api/start/id/<event-id>
-```
-**Response**
-```ts
-{"payload":"success"}
-```
+## Auxiliary timers
 
-### Start event with cue
-**Request**
-```bash
-GET <localhost:4001>/api/start/cue/<event-cue>
-```
-**Response**
-```ts
-{"payload":"success"}
-```
+Ontime has three [auxiliary timers](/features/aux-timer/), numbered `1` to `3`. They run separately from the rundown.
 
-### Start next event
-**Request**
-```bash
-GET <localhost:4001>/api/start/next
-```
-**Response**
-```ts
-{"payload":"success"}
-```
+| Action | Request |
+| :--- | :--- |
+| Start | `/api/auxtimer/1/start` |
+| Pause | `/api/auxtimer/1/pause` |
+| Stop | `/api/auxtimer/1/stop` |
+| Set the duration | `/api/auxtimer/1/duration/<milliseconds>` |
+| Count up or down | `/api/auxtimer/1/direction/count-up` or `count-down` |
+| Add time (use a negative value to remove time) | `/api/auxtimer/1/addtime/<milliseconds>` |
 
-### Start previous event
-**Request**
-```bash
-GET <localhost:4001>/api/start/previous
-```
-**Response**
-```ts
-{"payload":"success"}
-```
+Auxiliary timer requests return the timer's new state.
 
-## Pause running timer
-**Request**
-```bash
-GET <localhost:4001>/api/pause
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-## Load event
-
-### Load event at index
-**Request**
-```bash
-GET <localhost:4001>/api/load/index/<event-index>
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-### Load event with ID
-**Request**
-```bash
-GET <localhost:4001>/api/load/id/<event-id>
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-### Load event with cue
-**Request**
-```bash
-GET <localhost:4001>/api/load/cue/<event-cue>
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-### Load next event
-**Request**
-```bash
-GET <localhost:4001>/api/load/next
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-### Load previous event
-**Request**
-```bash
-GET <localhost:4001>/api/load/previous
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-## Reload current event
-**Request**
-```bash
-GET <localhost:4001>/api/reload
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-## Stop playback
-**Request**
-```bash
-GET <localhost:4001>/api/stop
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-## Activate Roll mode
-**Request**
-```bash
-GET <localhost:4001>/api/roll
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-## User added time
-### Add time
-**Request**
-```bash
-GET <localhost:4001>/api/addtime/add/<value-in-milliseconds>
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-### Remove time
-**Request**
-```bash
-GET <localhost:4001>/api/addtime/remove/<value-in-milliseconds>
-```
-**Response**
-```ts
-{"payload":"success"}
-```
-
-## Auxiliary timer
-
-Ontime provides an [auxiliary timer](/features/aux-timer) which does not affect the current playback. \
-This can be controlled using the API as shown below
-
-### Set auxiliary timer duration
-**Request**
-```bash
-GET <localhost:4001>/api/auxtimer/1/duration/<value-in-milliseconds>
-```
-
-### Set auxiliary timer direction
-Auxiliary timer can count up or count down.
-
-#### Set auxiliary timer to count up
-**Request**
-```bash
-GET <localhost:4001>/api/auxtimer/1/direction/count-up
-```
-
-#### Set auxiliary timer to count down
-**Request**
-```bash
-GET <localhost:4001>/api/auxtimer/1/direction/count-down
-```
-
-### Start auxiliary timer
-**Request**
-```bash
-GET <localhost:4001>/api/auxtimer/1/start
-```
-
-### Pause auxiliary timer
-**Request**
-```bash
-GET <localhost:4001>/api/auxtimer/1/pause
-```
-
-### Stop auxiliary timer
-**Request**
-```bash
-GET <localhost:4001>/api/auxtimer/1/stop
-```
-
-### Add / remove time to auxiliary timer
-**Request**
-```bash
-GET <localhost:4001>/api/auxtimer/1/addtime/<value-in-milliseconds>
-```
+:::tip[Find the source]
+For the full list of requests, see the source for [reading data](https://github.com/cpvalente/ontime/tree/master/apps/server/src/api-data) and [controlling Ontime](https://github.com/cpvalente/ontime/tree/master/apps/server/src/api-integration).
+:::

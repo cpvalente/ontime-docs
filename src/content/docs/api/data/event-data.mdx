@@ -81,3 +81,27 @@ No offset is added unless the event is considered to be in overtime.
 ### Time strategy
 An event timer-strategy informs Ontime on how to calculate changes to timers when events are linked. \
 [Read more.](/quick-tips/smart-time-entry#time-strategy)
+
+## Fields you can change over the API
+
+Use these fields with the `change` action of the [HTTP](/api/protocols/http/#change-an-event), [WebSocket](/api/protocols/websockets/#change-an-event) or [OSC](/api/protocols/osc/#change-an-event) API.
+
+| Field | Value |
+| :--- | :--- |
+| `title` | string |
+| `note` | string |
+| `cue` | string, best kept under 8 characters |
+| `skip` | boolean |
+| `colour` | string: a hex colour or a [named CSS colour](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color) |
+| `custom:<field-name>` | the value of a [custom field](/features/custom-fields/), which must exist in the project |
+| `timeWarning` | number, in milliseconds |
+| `timeDanger` | number, in milliseconds |
+| `endAction` | `none`, `load-next` or `play-next` |
+| `timerType` | `count-down`, `count-up`, `clock` or `none` |
+| `duration` | number, in milliseconds |
+| `timeStart` | number, in milliseconds |
+| `timeEnd` | number, in milliseconds |
+
+:::caution
+Changing `skip`, `endAction`, `duration`, `timeStart` or `timeEnd` recalculates the rundown, so these writes are throttled.
+:::
