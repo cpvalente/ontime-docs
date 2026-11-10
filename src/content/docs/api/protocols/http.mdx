@@ -57,7 +57,7 @@ There is no expected payload for these GET requests
 | Address                                        | Description                                                  |
 | :--------------------------------------------- | :----------------------------------------------------------- |
 | `GET <localhost:4001>/data/automations`        | Get project [automations](/api/automation)                   |
-| `GET <localhost:4001>/data/custom-fields`      | Get registered [custom fields](/features/custom-fields)      |
+| `GET <localhost:4001>/data/custom-fields`      | Get registered [custom fields](/features/custom-fields) and their order |
 | `GET <localhost:4001>/data/db`                 | Get currently loaded project file                            |
 | `GET <localhost:4001>/data/project`            | Get current project data                                     |
 | `GET <localhost:4001>/data/report`             | Get current session report                                   |
@@ -67,6 +67,24 @@ There is no expected payload for these GET requests
 | `GET <localhost:4001>/data/settings`           | Get current application settings                             |
 | `GET <localhost:4001>/data/url-presets`        | Get currently defined [URL Presets](/features/url-presets)   |
 | `GET <localhost:4001>/data/view-settings`      | Get currently defined settings for views                     |
+
+### Example: custom fields
+Custom fields come with the order set in the editor, since the keys of the `fields` object may not keep it.
+
+**Request**
+```bash
+GET <localhost:4001>/data/custom-fields
+```
+**Response**
+```json
+{
+  "fields": {
+    "Song": { "label": "Song", "type": "text", "colour": "#339E4E" },
+    "Artist": { "label": "Artist", "type": "text", "colour": "#3E75E8" }
+  },
+  "order": ["Artist", "Song"]
+}
+```
 
 
 ## Change event
