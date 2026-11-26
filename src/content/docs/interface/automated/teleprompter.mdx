@@ -1,0 +1,96 @@
+---
+title: Teleprompter
+description: Read event scripts from your Ontime rundown on a teleprompter view, follow the show or read continuously, and control it from Companion.
+---
+
+```bash title="Teleprompter"
+https://cloud.getontime.no/my-stage/teleprompter           
+```
+
+The <mark>Teleprompter</mark> view shows the script of your rundown as large, scrolling text for the person on stage. \
+The script lives in the rundown, next to everything else about the show. Each event keeps its own script, so a change to the running order is a change to the script.
+
+![Ontime](../../../../assets/screenshots/views/10-teleprompter.png)
+
+:::note[Completely controllable over Companion]
+Everything the teleprompter does can be controlled from [Bitfocus Companion](/additional-notes/companion-module). \
+Play and pause, change the speed, move between events, nudge the script, switch the reading mode and black out the screens, all from a button or a trigger, no keyboard needed.
+:::
+
+## What you see
+
+- **The script** of the loaded event, broken into lines of the same length on every screen
+- **Event headings** above each script, showing the event title, cue, both, or nothing
+- **A reading marker** which shows where the presenter should be reading, placed at a position you choose
+
+## Setting up the script
+
+The script is read from a field of your rundown. \
+Choose the field in `Editor` -> `Settings` -> `Teleprompter`, this setting is shared by every teleprompter screen in the project:
+
+- **Script field**: where the script is read from. This can be the event note, the title, or any text [custom field](/features/custom-fields)
+- **Line length**: the number of characters in a line. Every screen breaks lines in the same places, so they all stay in sync
+- **Event heading**: what is shown above the script of each event
+
+:::tip
+A dedicated custom field for the script keeps it apart from the production notes in the event note.
+:::
+
+## Roles
+
+The same view can work in three roles, set in the view options with the `Role` option.
+
+| Role                  | What it does                                                                           |
+| :-------------------- | :------------------------------------------------------------------------------------- |
+| **Local** (default)   | Playback stays in this view. Controls on this screen do not affect other screens       |
+| **Controller**        | Controls the shared playback for all screens following it                              |
+| **Remote** (follower) | Follows the shared playback and has no controls. This is the screen for your presenter |
+
+A typical setup is a **Remote** screen in front of the presenter, with the operator working from a **Controller** screen or from [Companion](/additional-notes/companion-module).
+
+## Playback
+
+The teleprompter reads on like a media player, with a play or pause control and a reading speed in lines per minute. \
+It can read in two modes:
+
+- **Event by event**: the teleprompter follows the event loaded in Ontime and stops at the end of each script
+- **Whole script**: the teleprompter reads continuously through the script of every event
+
+On a screen controlling the shared playback, you can also **black out** every following screen. The text disappears while the playback carries on underneath.
+
+### Keyboard shortcuts
+
+Press `?` in the view to see the list of shortcuts.
+
+| Key                 | Action                                            |
+| :------------------ | :------------------------------------------------ |
+| `Space`             | Play / pause                                      |
+| `←` / `→`           | Speed down / up (hold `Shift` for larger steps)   |
+| `M`                 | Switch between event by event and whole script    |
+| `↑` / `↓`           | Scroll a line                                     |
+| `PgUp` / `PgDn`     | Scroll a screen                                   |
+| `Shift` + `↑` / `↓` | Previous / next event                             |
+| `Home`              | Top of the script                                 |
+| `L`                 | Back to the loaded event                          |
+| `B`                 | Black out the following screens (controller only) |
+
+## Customising the view
+
+The reading layout is configured in the view options, to suit the glass or the screen you are reading from:
+
+- **Text width** and **line spacing**
+- **Reading position**, and an option to hide the reading marker
+- **Mirror horizontally** and **mirror vertically**, for teleprompters which reflect the screen
+- **Hide event headings**
+- **Script field**, to read a local screen from a different field than the rest of the project
+- **Show only the loaded event**, in a local screen
+
+:::tip[Sharing your configuration]
+All of the options are saved in the URL, so that you can create a [URL Presets](/features/url-presets/), **bookmark** or simply **share** the URL with all your configurations.
+:::
+
+## Use cases
+
+- **Keynotes and speeches** — the full script in front of the speaker, following the show as events are loaded
+- **Hosts and presenters** — one operator paces the script from a controller screen or a Companion button for as many screens as needed
+- **Multi-screen stages** — several remote screens, with different layouts or mirroring, all reading the same position
